@@ -1,5 +1,7 @@
 """Offline tests for scripts/update.py: python3 -m unittest discover -s tests"""
+import contextlib
 import copy
+import io
 import json
 import os
 import subprocess
@@ -151,7 +153,8 @@ class TestFindProject(unittest.TestCase):
 
     def test_stops_when_nothing_matches(self):
         os.environ.pop("KOBO_ASSET_UID", None)
-        with self.assertRaises(SystemExit):
+        # The error line is swallowed here: in GitHub Actions it would show as a failure annotation on the run.
+        with self.assertRaises(SystemExit), contextlib.redirect_stdout(io.StringIO()):
             update.find_asset_uid(self.cfg, "token", self.fake([{"uid": "aOther", "form": "x"}]))
 
     def test_variable_overrides_the_search(self):
