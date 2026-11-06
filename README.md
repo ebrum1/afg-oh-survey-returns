@@ -2,7 +2,7 @@
 
 **Live page: https://ebrum1.github.io/afg-oh-survey-returns/** (opens with the team password)
 
-This repository publishes a one-page dashboard of the returns to the stakeholder survey of the One Health information platform mapping, collected through KoboToolbox.  It shows how many people have answered, day by day against the cut-off, and who they are: by ministry, sector, level, province, role, gender, way of answering and scenario version.  It also shows the data systems named, the offers of documents and interviews, and checks on the returns.  It exists so that the assessment team can follow the fieldwork without exporting data.
+This repository publishes a one-page dashboard of the returns to the stakeholder survey of the One Health information platform mapping, collected through KoboToolbox.  It shows how many people have answered, day by day, and who they are: by ministry, sector, level, province, role, gender, way of answering and scenario version.  It also shows the data systems named, the offers of documents and interviews, and checks on the returns.  It exists so that the assessment team can follow the fieldwork without exporting data.
 
 The page updates itself every hour from 07:05 to 20:05, Kabul time.  Nobody needs to run anything.
 
@@ -26,8 +26,6 @@ Because the encrypted file can be attacked offline, the password should be long:
 **Leave a test submission out of the count.**  In KoboToolbox, open the project's data table and set the submission's validation status to **Not approved**.  The next update leaves it out, and the page says how many it has left out.
 
 **Count only submissions received after a start date.**  Set `count_from` in `config.json`, for example `"count_from": "2026-11-03T00:00:00+04:30"`.  Leave it as `null` to count everything.
-
-**Move the cut-off.**  Change `close_date` in `config.json`.
 
 **Show progress against targets.**  Add the targets to `config.json`, for example `"targets": {"ministry": {"moph": 40, "mail": 30, "nepa": 6}}`.  The breakdown then shows "n of target" for each listed answer.  Targets work for `ministry`, `main_sector`, `level`, `function`, `employer`, `workplace` and `gender`; the codes are the answer names in the XLSForm.
 
@@ -55,7 +53,7 @@ The page shows a warning when its figures are more than 14 hours old.  GitHub al
 |---|---|
 | `site/index.html` | The page.  Plain HTML, CSS and JavaScript; no external libraries; decryption with the browser's own Web Crypto. |
 | `scripts/update.py` | Reads KoboToolbox, counts, encrypts and writes the data file.  Python standard library plus `cryptography`. |
-| `config.json` | Kobo server, form ID, field names, cut-off, exclusions, scenario labels and optional targets. |
+| `config.json` | Kobo server, form ID, field names, exclusions, scenario labels and optional targets. |
 | `tests/` | Offline tests (`python3 -m unittest discover -s tests`) on synthetic data; `make_fixtures.py` rebuilds that data from the XLSForm. |
 | `.github/workflows/update-dashboard.yml` | The hourly schedule, the publishing check and the Pages deployment. |
 

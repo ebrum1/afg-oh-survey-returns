@@ -278,7 +278,7 @@
           <div class="tile"><div class="tile-label">Last 24 hours</div><div class="tile-value num" id="t-24">&ndash;</div></div>
           <div class="tile"><div class="tile-label">Last 7 days</div><div class="tile-value num" id="t-7">&ndash;</div></div>
           <div class="tile"><div class="tile-label">Latest return</div><div class="tile-value" id="t-last">&ndash;</div></div>
-          <div class="tile"><div class="tile-label" id="t-close-label">Days to the cut-off</div><div class="tile-value" id="t-close">&ndash;</div></div>
+          <div class="tile"><div class="tile-label">First return</div><div class="tile-value" id="t-first">&ndash;</div></div>
         </div>
       </div>
     </section>
@@ -496,14 +496,12 @@
     $("t-7").textContent = n0.format(r.last_7d || 0);
     const tl = $("t-last"); tl.textContent = "";
     if (r.last) { const d = new Date(r.last); tl.append(fmtDay(d), el("small", { text: `at ${fmtTime(d)}` })); } else tl.textContent = "None yet";
-    const tc = $("t-close"); tc.textContent = "";
-    if (D.close_date) {
-      const today = dayKey(new Date(D.generated_at));
-      const days = Math.round((keyDate(D.close_date) - keyDate(today)) / 864e5);
-      if (days > 0) { tc.append(n0.format(days), el("small", { text: `cut-off ${fmtDay(keyDate(D.close_date))}` })); }
-      else if (days === 0) { tc.append("Today", el("small", { text: "last day" })); }
-      else { $("t-close-label").textContent = "Cut-off"; tc.append("Passed", el("small", { text: fmtDay(keyDate(D.close_date)) })); }
-    } else { $("t-close-label").textContent = "Cut-off"; tc.textContent = "Not set"; }
+    const tf = $("t-first"); tf.textContent = "";
+    const first = (D.by_day || []).find((x) => x.n || x.declined);
+    if (first) {
+      const ago = Math.round((keyDate(dayKey(new Date(D.generated_at))) - keyDate(first.day)) / 864e5);
+      tf.append(fmtDay(keyDate(first.day)), el("small", { text: ago <= 0 ? "today" : ago === 1 ? "yesterday" : `${n0.format(ago)} days ago` }));
+    } else tf.textContent = "None yet";
   }
 
   // ---------------------------------------------------------------- blocks of bars
@@ -676,18 +674,16 @@
   function series() {
     const days = (D.by_day || []).filter((x) => x.n || x.declined);
     if (!days.length) return [];
+    // Walk calendar days in Kabul time, from the first return to the build date.
     const per = new Map(days.map((x) => [x.day, x.n]));
-    const first = days[0].day;
     const today = dayKey(new Date(D.generated_at));
-    const last = [today, D.close_date || today].sort()[1];
     const out = []; let total = 0;
-    let cur = new Date(first + "T00:00:00Z");
+    let cur = new Date(days[0].day + "T00:00:00Z");
     for (let g = 0; g < 400; g++) {
       const k = cur.toISOString().slice(0, 10);
-      const add = per.get(k) || 0;
-      if (k <= today) { total += add; out.push({ key: k, date: keyDate(k), add, total, future: false }); }
-      else out.push({ key: k, date: keyDate(k), add: 0, total: null, future: true });
-      if (k >= last) break;
+      const add = per.get(k) || 0; total += add;
+      out.push({ key: k, date: keyDate(k), add, total });
+      if (k >= today) break;
       cur = new Date(cur.getTime() + 864e5);
     }
     return out;
@@ -699,7 +695,7 @@
   }
   function renderChart() {
     const box = $("chart"); box.textContent = "";
-    const all = series(), S = all.filter((s) => !s.future);
+    const S = series(), all = S;
     const tv = $("chart-table").querySelector("div"); tv.textContent = "";
     if (S.length) {
       const t = el("table", { class: "mini" }, el("thead", null, el("tr", null, el("th", { text: "Date" }), el("th", { class: "n", text: "New" }), el("th", { class: "n", text: "Total" }))));
@@ -733,11 +729,6 @@
       const tx = svgEl("text", { x: x(i), y: H - 8, "text-anchor": i === 0 ? "start" : i === N - 1 ? "end" : "middle", class: "tick" });
       tx.textContent = fmtDay(s.date); svg.append(tx);
     });
-    const ci = all.findIndex((s) => s.key === D.close_date);
-    if (ci >= 0) {
-      svg.append(svgEl("line", { x1: x(ci), x2: x(ci), y1: m.t, y2: m.t + ih, style: "stroke:var(--ink-3)", "stroke-width": 1, "stroke-dasharray": "3 3" }));
-      const lab = svgEl("text", { x: x(ci) - 6, y: m.t + 2, "text-anchor": "end", class: "tick" }); lab.textContent = "Cut-off"; svg.append(lab);
-    }
     const pts = S.map((s, i) => `${x(i).toFixed(1)},${y(s.total).toFixed(1)}`);
     svg.append(svgEl("path", { d: `M${x(0)},${y(0)} L${pts.join(" L")} L${x(S.length - 1)},${y(0)} Z`, style: "fill:var(--fill)", opacity: "0.1" }));
     svg.append(svgEl("polyline", { points: pts.join(" "), fill: "none", style: "stroke:var(--fill)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }));
@@ -816,7 +807,7 @@
   function render() {
     if (!D || D.schema !== 1) { $("err").textContent = "The data file is from a newer version of this page.  Please reload."; return; }
     L = D.labels || {}; D.dims = D.dims || {}; D.scenarios = D.scenarios || {};
-    $("lead").textContent = "Who has answered the stakeholder survey so far, and how.  For the assessment team only.";
+    $("lead").textContent = t2("Who has answered the stakeholder survey so far, and how.  For the assessment team only.");
     renderHeader(); renderHero(); renderChart(); renderHow(); renderWho(); renderProvinces();
     renderScenarios(); renderFollow(); renderSystems(); renderChecks(); renderNotes();
     let rt, lastW = $("chart").clientWidth;

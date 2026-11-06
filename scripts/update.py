@@ -454,7 +454,6 @@ def build_status(cfg: dict, form: dict, subs: list[dict], now: datetime) -> tupl
         "generated_at": iso(now),
         "form": {"name": form.get("name"), "uid": form.get("uid"), "label_language": form.get("language")},
         "count_from": iso(count_from),
-        "close_date": cfg.get("close_date"),
         "submissions": {k: tally.get(k, 0) for k in ("received", "counted", "not_approved", "before_start", "no_time",
                                                      "declined", "consent_missing", "respondents")},
         "recent": {
