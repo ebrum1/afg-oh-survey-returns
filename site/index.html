@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Returns of the Afghanistan One Health stakeholder survey, for the assessment team.">
+<meta name="theme-color" content="#F5F6F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1722" media="(prefers-color-scheme: dark)">
+<title>Survey returns – Afghanistan One Health mapping</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314202E'/%3E%3Crect x='7' y='17' width='4' height='8' rx='1' fill='%236FA0DC'/%3E%3Crect x='14' y='11' width='4' height='14' rx='1' fill='%236FA0DC'/%3E%3Crect x='21' y='7' width='4' height='18' rx='1' fill='%236FA0DC'/%3E%3C/svg%3E">
+<style>
+  /* ------------------------------------------------------------------ tokens
+     Ink and paper grounds with one blue for every bar and line.  Fill and text steps were checked for contrast
+     against both surfaces (fill 6.9:1 light, 6.3:1 dark; body text >= 4.8:1). */
+  :root {
+    color-scheme: light;
+    --page: #F5F6F8;
+    --surface: #FFFFFF;
+    --surface-2: #F9FAFB;
+    --ink: #14202E;
+    --ink-2: #475467;
+    --ink-3: #667085;
+    --border: rgba(20, 32, 46, 0.12);
+    --hairline: #E4E7EC;
+    --axis: #C7CDD6;
+    --fill: #2E5B9A;
+    --fill-2: #9DB3D1;
+    --track: #E1E8F2;
+    --good-text: #1F5F9E;
+    --warn-bg: #FBF1DC;
+    --warn-ink: #6B4B00;
+    --flag: #A15C00;
+    --focus: #3284D0;
+    --hover: rgba(20, 32, 46, 0.045);
+    --chip-on-bg: #14202E;
+    --chip-on-ink: #FFFFFF;
+    --shadow: 0 1px 2px rgba(20, 32, 46, 0.05);
+    --font-display: Cambria, Caladea, Georgia, "Times New Roman", serif;
+    --font-body: Arial, "Liberation Sans", Helvetica, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0F1722;
+      --surface: #162130;
+      --surface-2: #1A2738;
+      --ink: #EEF2F7;
+      --ink-2: #AAB6C5;
+      --ink-3: #8C99AA;
+      --border: rgba(238, 242, 247, 0.12);
+      --hairline: #243246;
+      --axis: #3A4A60;
+      --fill: #6FA0DC;
+      --fill-2: #3C5E88;
+      --track: #233A57;
+      --good-text: #8DB8EC;
+      --warn-bg: #2E2A18;
+      --warn-ink: #E0A63C;
+      --flag: #E0A63C;
+      --focus: #6FA8E0;
+      --hover: rgba(238, 242, 247, 0.06);
+      --chip-on-bg: #EEF2F7;
+      --chip-on-ink: #0F1722;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0F1722;
+    --surface: #162130;
+    --surface-2: #1A2738;
+    --ink: #EEF2F7;
+    --ink-2: #AAB6C5;
+    --ink-3: #8C99AA;
+    --border: rgba(238, 242, 247, 0.12);
+    --hairline: #243246;
+    --axis: #3A4A60;
+    --fill: #6FA0DC;
+    --fill-2: #3C5E88;
+    --track: #233A57;
+    --good-text: #8DB8EC;
+    --warn-bg: #2E2A18;
+    --warn-ink: #E0A63C;
+    --flag: #E0A63C;
+    --focus: #6FA8E0;
+    --hover: rgba(238, 242, 247, 0.06);
+    --chip-on-bg: #EEF2F7;
+    --chip-on-ink: #0F1722;
+    --shadow: none;
+  }
+
+  /* ------------------------------------------------------------------ base */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 16px/1.5 var(--font-body); overflow-x: hidden; }
+  a { color: inherit; text-decoration-color: var(--axis); text-underline-offset: 3px; }
+  a:hover { text-decoration-color: currentColor; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .num { font-variant-numeric: tabular-nums; }
+  [hidden] { display: none !important; }
+
+  /* ------------------------------------------------------------------ header */
+  header.top { padding: 36px 0 20px; }
+  .eyebrow { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+  h1 { margin: 0; font: 700 clamp(28px, 4.2vw, 40px)/1.12 var(--font-display); letter-spacing: -0.01em; max-width: 26ch; }
+  .lead { margin: 14px 0 0; font-size: 17px; color: var(--ink-2); max-width: 66ch; }
+  .updated { margin: 16px 0 0; font-size: 14px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .updated strong { color: var(--ink-2); font-weight: 700; }
+  .banner { display: none; margin: 16px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--warn-bg); color: var(--warn-ink); font-size: 15px; align-items: flex-start; gap: 10px; }
+  .banner.show { display: flex; }
+  .banner svg { flex: 0 0 auto; margin-top: 2px; }
+
+  /* ------------------------------------------------------------------ gate */
+  .gate { max-width: 460px; margin: 8px 0 48px; }
+  .gate .card { padding: 22px 20px; }
+  .gate p { margin: 0 0 14px; color: var(--ink-2); }
+  .gate label.pw { display: block; font-size: 13px; font-weight: 700; color: var(--ink-3); margin-bottom: 6px; }
+  .gate input[type="password"] { width: 100%; font: 16px var(--font-body); color: var(--ink); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; height: 44px; }
+  .gate .row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-top: 14px; }
+  .gate .remember { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+  .gate .err { min-height: 1.4em; margin-top: 10px; font-size: 14px; color: var(--flag); }
+  .pri { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--chip-on-bg); background: var(--chip-on-bg); color: var(--chip-on-ink); border-radius: 8px; padding: 9px 20px; font: 700 15px var(--font-body); cursor: pointer; min-width: 110px; }
+  .pri:disabled { opacity: 0.6; cursor: progress; }
+
+  /* ------------------------------------------------------------------ cards */
+  main { padding-bottom: 40px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; box-shadow: var(--shadow); min-width: 0; }
+  @media (min-width: 720px) { .card { padding: 22px 24px; } }
+  .stack > * + * { margin-top: 16px; }
+  h2 { margin: 0 0 4px; font: 700 21px/1.25 var(--font-display); }
+  h3 { margin: 0 0 2px; font: 700 16px/1.3 var(--font-display); }
+  .sub { margin: 0 0 16px; font-size: 14px; color: var(--ink-3); }
+  .grid-2 { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 900px) { .grid-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .grid-2.wide-left { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); } }
+  .blocks { display: grid; gap: 22px 32px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 760px) { .blocks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .block-sub { margin: 0 0 6px; font-size: 13px; color: var(--ink-3); }
+
+  /* ------------------------------------------------------------------ hero */
+  .hero { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); align-items: end; }
+  @media (min-width: 900px) { .hero { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: 32px; } }
+  .hero-fig { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+  .hero-num { font: 700 64px/1 var(--font-body); letter-spacing: -0.02em; }
+  .hero-of { font-size: 18px; color: var(--ink-2); }
+  .hero-note { margin-top: 10px; font-size: 14px; color: var(--ink-3); }
+  .tiles { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 560px) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .tile { border-top: 1px solid var(--hairline); padding-top: 10px; min-width: 0; }
+  .tile-label { font-size: 13px; color: var(--ink-3); line-height: 1.3; }
+  .tile-value { margin-top: 4px; font-size: 26px; font-weight: 700; line-height: 1.15; overflow-wrap: anywhere; }
+  .tile-value small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-3); margin-top: 2px; }
+  @media (max-width: 420px) { .tile-value { font-size: 21px; } }
+
+  /* ------------------------------------------------------------------ meters */
+  .meter { position: relative; height: 8px; border-radius: 4px; background: var(--track); overflow: hidden; }
+  .meter > span { position: absolute; inset: 0 auto 0 0; background: var(--fill); border-radius: inherit; }
+  .meter-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--hairline); }
+  .meter-row:first-of-type { border-top: 0; padding-top: 2px; }
+  .meter-row .meter { grid-column: 1 / -1; height: 6px; }
+  .meter-row .label { font-size: 15px; min-width: 0; overflow-wrap: anywhere; }
+  .meter-row .count { font-size: 14px; color: var(--ink-2); white-space: nowrap; }
+  .meter-row.zero .label { color: var(--ink-3); }
+  .meter-row .count small { color: var(--ink-3); margin-left: 4px; }
+
+  /* ------------------------------------------------------------------ stats */
+  .kpis { display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 16px; }
+  .kpi { border-top: 1px solid var(--hairline); padding-top: 8px; min-width: 0; }
+  .kpi .v { font-size: 24px; font-weight: 700; line-height: 1.2; }
+  .kpi .k { font-size: 13px; color: var(--ink-3); line-height: 1.3; }
+  .flag { color: var(--flag); font-weight: 700; }
+  .ok { color: var(--good-text); font-weight: 700; }
+  .check { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 10px 0; border-top: 1px solid var(--hairline); align-items: baseline; }
+  .check:first-of-type { border-top: 0; padding-top: 0; }
+  .check .what { font-size: 15px; }
+  .check .why { grid-column: 1 / -1; font-size: 13px; color: var(--ink-3); }
+  .check .n { font-size: 15px; white-space: nowrap; }
+
+  /* ------------------------------------------------------------------ chart */
+  .chart-wrap { position: relative; }
+  .chart-wrap svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+  .chart-wrap svg:focus-visible { outline-offset: 4px; }
+  .tick { font: 12px var(--font-body); fill: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 13px; line-height: 1.35; box-shadow: 0 4px 16px rgba(0,0,0,0.12); white-space: nowrap; opacity: 0; transform: translate(-50%, calc(-100% - 12px)); transition: opacity 0.08s; }
+  .tip.show { opacity: 1; }
+  .tip b { font-size: 16px; }
+  .tip .k { display: inline-block; width: 12px; height: 2px; background: var(--fill); vertical-align: middle; margin-right: 6px; }
+  .empty { padding: 28px 12px; text-align: center; color: var(--ink-3); font-size: 15px; }
+  details.tv { margin-top: 12px; font-size: 14px; }
+  details.tv summary { cursor: pointer; color: var(--ink-2); }
+  details.tv table { margin-top: 8px; }
+
+  /* ------------------------------------------------------------------ tables and controls */
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 0.02em; color: var(--ink-3); padding: 8px 10px; border-bottom: 1px solid var(--hairline); }
+  td { padding: 9px 10px; border-bottom: 1px solid var(--hairline); vertical-align: middle; font-size: 15px; }
+  tbody tr:last-child td { border-bottom: 0; }
+  .mini td, .mini th { font-size: 14px; padding: 6px 8px; }
+  td.n, th.n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.bar { width: 40%; }
+  @media (max-width: 560px) { td.bar { width: 30%; } td, th { padding: 8px 6px; } }
+  tr.zero td { color: var(--ink-3); }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end; margin-bottom: 12px; }
+  .field { display: flex; flex-direction: column; gap: 4px; min-width: 180px; }
+  .field label { font-size: 12px; color: var(--ink-3); font-weight: 700; letter-spacing: 0.02em; }
+  .field select { font: 15px var(--font-body); color: var(--ink); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; height: 40px; }
+  .seg { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 1px solid var(--border); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 7px 14px; font: 14px/1.2 var(--font-body); cursor: pointer; }
+  .chip:hover { background: var(--hover); }
+  .chip[aria-pressed="true"] { background: var(--chip-on-bg); color: var(--chip-on-ink); border-color: var(--chip-on-bg); }
+  .note-line { font-size: 14px; color: var(--ink-2); margin: 12px 0 0; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); border-radius: 8px; padding: 7px 12px; font: 14px var(--font-body); cursor: pointer; }
+  .btn:hover { background: var(--hover); }
+  .linkish { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-decoration-color: var(--axis); text-underline-offset: 3px; cursor: pointer; }
+
+  /* ------------------------------------------------------------------ notes */
+  .notes p { margin: 0 0 12px; color: var(--ink-2); max-width: 78ch; }
+  .notes p:last-child { margin-bottom: 0; }
+  .notes h3 { margin: 18px 0 8px; color: var(--ink); }
+  footer { padding: 8px 0 40px; font-size: 13px; color: var(--ink-3); }
+  footer p { margin: 0 0 6px; max-width: 90ch; }
+  .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--chip-on-bg); color: var(--chip-on-ink); padding: 8px 14px; border-radius: 8px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity 0.15s; z-index: 10; }
+  .toast.show { opacity: 1; }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .gate, .controls, .banner, details.tv, .btn, .linkish { display: none !important; }
+    .card { border: 1px solid #ccc; box-shadow: none; break-inside: avoid-page; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Afghanistan &middot; One Health information platform mapping</p>
+    <h1>Stakeholder survey: returns</h1>
+    <p class="lead" id="lead">Who has answered the stakeholder survey so far, and how.&nbsp; For the assessment team.</p>
+    <p class="updated" id="updated" hidden></p>
+    <div class="banner" id="stale" role="status">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 1 21h22L12 2Zm0 5.5 7.5 12.5h-15L12 7.5ZM11 11v4h2v-4h-2Zm0 5v2h2v-2h-2Z"/></svg>
+      <span id="stale-text"></span>
+    </div>
+    <noscript><p class="banner show">This page needs JavaScript to open the figures.</p></noscript>
+  </header>
+
+  <!-- password gate -->
+  <section class="gate" id="gate" aria-labelledby="h-gate">
+    <div class="card">
+      <h2 id="h-gate">Enter the team password</h2>
+      <p>The figures on this page are encrypted.&nbsp; They open in your browser with the password the team was given; the password never leaves this device.</p>
+      <form id="gate-form" autocomplete="on">
+        <input type="text" name="username" value="survey-returns" autocomplete="username" hidden>
+        <label class="pw" for="pw">Password</label>
+        <input id="pw" name="password" type="password" autocomplete="current-password" required>
+        <div class="row">
+          <label class="remember"><input type="checkbox" id="remember" checked> Remember on this device</label>
+          <button class="pri" id="open" type="submit">Open</button>
+        </div>
+        <div class="err" id="err" role="alert"></div>
+      </form>
+    </div>
+  </section>
+
+  <main class="stack" id="app" hidden>
+    <!-- headline -->
+    <section class="card" aria-labelledby="h-head">
+      <h2 id="h-head" class="sr-only">Headline</h2>
+      <div class="hero">
+        <div>
+          <div class="hero-fig"><span class="hero-num num" id="hero-num">&ndash;</span><span class="hero-of" id="hero-of">people have answered the survey</span></div>
+          <div class="hero-note" id="hero-note"></div>
+        </div>
+        <div class="tiles">
+          <div class="tile"><div class="tile-label">Last 24 hours</div><div class="tile-value num" id="t-24">&ndash;</div></div>
+          <div class="tile"><div class="tile-label">Last 7 days</div><div class="tile-value num" id="t-7">&ndash;</div></div>
+          <div class="tile"><div class="tile-label">Latest return</div><div class="tile-value" id="t-last">&ndash;</div></div>
+          <div class="tile"><div class="tile-label" id="t-close-label">Days to the cut-off</div><div class="tile-value" id="t-close">&ndash;</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid-2 wide-left">
+      <section class="card" aria-labelledby="h-time">
+        <h2 id="h-time">Respondents over time</h2>
+        <p class="sub">Total number of people who have answered, by day (Kabul time).</p>
+        <div class="chart-wrap" id="chart"></div>
+        <details class="tv" id="chart-table"><summary>Show these figures as a table</summary><div></div></details>
+      </section>
+      <section class="card" aria-labelledby="h-how">
+        <h2 id="h-how">How they took part</h2>
+        <p class="sub">Respondents by way of answering and by part of the survey.</p>
+        <div id="how"></div>
+      </section>
+    </div>
+
+    <section class="card" aria-labelledby="h-who">
+      <h2 id="h-who">Who has answered</h2>
+      <p class="sub">Respondents by their answers to section B.&nbsp; Options nobody has chosen yet are shown in grey.</p>
+      <div class="blocks" id="who"></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-where">
+      <h2 id="h-where">Where they work</h2>
+      <p class="sub">Respondents by province (B7).&nbsp; Someone who works in two provinces counts in both; national staff are counted once, on their own line.</p>
+      <div class="controls">
+        <div class="field"><label for="f-sector">Main sector</label><select id="f-sector"></select></div>
+        <div class="seg" role="group" aria-label="Order">
+          <button type="button" class="chip" data-order="count" aria-pressed="true">Most respondents first</button>
+          <button type="button" class="chip" data-order="name" aria-pressed="false">A to Z</button>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th scope="col">Province</th><th scope="col" class="n">Respondents</th><th scope="col" class="bar"><span class="sr-only">Share</span></th></tr></thead>
+        <tbody id="prov-rows"></tbody>
+      </table>
+      <p class="note-line" id="prov-none"></p>
+    </section>
+
+    <div class="grid-2">
+      <section class="card" aria-labelledby="h-scen">
+        <h2 id="h-scen">Scenario versions</h2>
+        <p class="sub">Respondents who answered each version of the F0 scenario.&nbsp; Staff who only enter data, and community reporters, see no scenario.</p>
+        <div id="scen"></div>
+      </section>
+      <section class="card" aria-labelledby="h-follow">
+        <h2 id="h-follow">Follow-up</h2>
+        <p class="sub">Offers of documents (D15) and of a follow-up interview (I5).</p>
+        <div id="follow"></div>
+      </section>
+    </div>
+
+    <section class="card" aria-labelledby="h-sys">
+      <h2 id="h-sys">Data systems described</h2>
+      <p class="sub">Systems named in D2, counted once for each respondent who described them.</p>
+      <div class="kpis" id="sys-kpis"></div>
+      <div class="blocks" id="sys"></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-checks">
+      <h2 id="h-checks">Checks on the returns</h2>
+      <p class="sub">Signs that a return may need a look in KoboToolbox.</p>
+      <div class="grid-2" style="gap:24px 32px">
+        <div id="checks"></div>
+        <div>
+          <h3>Form versions</h3>
+          <p class="block-sub">Returns by the version of the form they were filled in on.</p>
+          <div id="versions"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card notes" aria-labelledby="h-notes">
+      <h2 id="h-notes">About these figures</h2>
+      <p>A return counts as soon as it reaches the KoboToolbox server.&nbsp; The page counts people who agreed to take part (A1); those who declined are shown separately.&nbsp; Returns marked &ldquo;Not approved&rdquo; in KoboToolbox, such as tests, are left out<span id="note-from"></span>.</p>
+      <p>There is no list of the people the survey went to, so these are counts of respondents, not a response rate.&nbsp; Several people from one office may answer, and nothing on this page tells them apart.</p>
+      <p id="note-excluded"></p>
+      <h3>What this page does not show</h3>
+      <p>It shows counts only.&nbsp; It holds no names, telephone numbers or email addresses, no comments or other typed text, and none of the answers beyond the profile questions in section B, the systems named in D2 and the two follow-up offers.&nbsp; The findings of the survey come from the analysis, not from this page.</p>
+      <p>Counts in a small group can still point to a person.&nbsp; Please keep the password within the assessment team and do not copy small counts into documents that go outside it.</p>
+      <p><button type="button" class="btn" id="b-csv"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.6l3.3-3.3 1.4 1.4L12 16.4l-5.7-5.7 1.4-1.4 3.3 3.3V3ZM4 18h16v2H4v-2Z"/></svg>Download all counts (CSV)</button></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Compiled automatically from the KoboToolbox returns for the World Bank-led assessment team.&nbsp; Not an official publication of the World Bank, the ministries or the partner agencies.</p>
+    <p id="foot-src"></p>
+    <p id="foot-forget" hidden><button type="button" class="linkish" id="forget">Forget the password on this device</button></p>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  "use strict";
+
+  // ---------------------------------------------------------------- helpers
+  const $ = (id) => document.getElementById(id);
+  const TZ = "Asia/Kabul";
+  const STORE = "afgoh.returns.pw";
+  const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const PARTS = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, year: "numeric", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+  function parts(d) {
+    const o = {};
+    for (const p of PARTS.formatToParts(d)) if (p.type !== "literal") o[p.type] = p.value;
+    return { y: +o.year, m: +o.month, d: +o.day, hh: String(+o.hour % 24).padStart(2, "0"), mm: o.minute.padStart(2, "0") };
+  }
+  const fmtDate = (d) => { const p = parts(d); return `${p.d} ${MON[p.m - 1]} ${p.y}`; };
+  const fmtDay = (d) => { const p = parts(d); return `${p.d} ${MON[p.m - 1]}`; };
+  const fmtTime = (d) => { const p = parts(d); return `${p.hh}:${p.mm}`; };
+  const dayKey = (d) => { const p = parts(d); return `${p.y}-${String(p.m).padStart(2, "0")}-${String(p.d).padStart(2, "0")}`; };
+  const keyDate = (k) => new Date(k + "T12:00:00+04:30");
+  const fileStamp = (d) => { const p = parts(d); return `${String(p.d).padStart(2, "0")}${MON[p.m - 1]}${String(p.y).slice(2)}`; };
+  const n0 = new Intl.NumberFormat("en-GB");
+  const pct = (a, b) => (b ? Math.round((100 * a) / b) : 0);
+  const sum = (o) => Object.values(o || {}).reduce((a, b) => a + b, 0);
+  const WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+  const w = (k) => (k <= 10 ? WORDS[k] : n0.format(k));
+  const plural = (k, one, many) => `${n0.format(k)} ${k === 1 ? one : many}`;
+
+  // Two spaces after a sentence, as in the house style: a no-break space keeps the second one from collapsing.
+  const t2 = (x) => String(x).replace(/([.?!:”"’)])  (?=\S)/g, "$1\u00a0 ");
+  function el(tag, attrs, ...kids) {
+    const e = document.createElement(tag);
+    if (attrs) for (const [k, v] of Object.entries(attrs)) {
+      if (v == null || v === false) continue;
+      if (k === "class") e.className = v;
+      else if (k === "text") e.textContent = t2(v);
+      else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+      else e.setAttribute(k, v === true ? "" : v);
+    }
+    for (const kid of kids.flat()) if (kid != null && kid !== false) e.append(kid.nodeType ? kid : document.createTextNode(t2(kid)));
+    return e;
+  }
+  const svgEl = (tag, attrs) => {
+    const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+    return e;
+  };
+  function meter(a, b, label) {
+    const m = el("div", { class: "meter", role: "img", "aria-label": label || `${a} of ${b}` });
+    const wd = b ? Math.min(100, (100 * a) / b) : 0;
+    m.append(el("span", { style: `width:${a > 0 ? `max(4px, ${wd}%)` : "0"}` }));
+    return m;
+  }
+  function toast(msg) {
+    const t = $("toast"); t.textContent = msg; t.classList.add("show");
+    clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 1800);
+  }
+  // Answer labels come from the form; drop the examples so bars stay readable.
+  const tidy = (s) => String(s || "").replace(/\s+[–-]\s+e\.g\.,?.*$/i, "").replace(/\s*\(e\.g\.,?[^)]*\)/gi, "").replace(/\s*\(specify\)/i, "").trim();
+
+  // ---------------------------------------------------------------- decryption (same scheme as the collar study map)
+  async function decrypt(buf, pw) {
+    const u = new Uint8Array(buf);
+    if (new TextDecoder().decode(u.slice(0, 6)) !== "AFGOH1") throw new Error("this is not the dashboard's data file");
+    const salt = u.slice(6, 22), iv = u.slice(22, 34), ct = u.slice(34);
+    const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
+    const key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: 200000, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+    const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+    return JSON.parse(new TextDecoder().decode(pt));
+  }
+
+  let D = null, L = {}, R = 0;
+  const state = { sector: "", order: "count", all: false };
+
+  async function open(pw, remember, quiet) {
+    const btn = $("open"), err = $("err");
+    err.textContent = ""; btn.disabled = true; btn.textContent = "Opening…";
+    try {
+      if (!window.crypto || !crypto.subtle) throw new Error("this browser cannot decrypt the figures; please use a current browser");
+      const res = await fetch(`data/status.json.enc?t=${Math.floor(Date.now() / 60000)}`, { cache: "no-store" });
+      if (res.status === 404) throw new Error("the figures have not been published yet; please try again after the next hourly update");
+      if (!res.ok) throw new Error(`the figures could not be loaded (HTTP ${res.status}); please try again in a few minutes`);
+      D = await decrypt(await res.arrayBuffer(), pw);
+      if (remember) { try { localStorage.setItem(STORE, pw); } catch (e) {} }
+      $("gate").hidden = true; $("app").hidden = false; $("foot-forget").hidden = false;
+      render();
+    } catch (e) {
+      if (e && e.name === "OperationError") {
+        err.textContent = quiet ? "The saved password no longer opens the figures.  Please enter the current one." : "That password did not open the figures.";
+        try { localStorage.removeItem(STORE); } catch (x) {}
+      } else err.textContent = `Could not open the figures: ${e.message}.`;
+      $("pw").focus();
+    }
+    btn.disabled = false; btn.textContent = "Open";
+  }
+
+  // ---------------------------------------------------------------- header + hero
+  function renderHeader() {
+    const gen = new Date(D.generated_at);
+    const up = $("updated"); up.textContent = ""; up.hidden = false;
+    up.append(el("span", null, "Updated ", el("strong", { text: `${fmtDate(gen)}, ${fmtTime(gen)}` }), " Kabul time"),
+      el("span", { text: "Updates every hour, 07:00–20:00" }));
+    const ageH = (Date.now() - gen.getTime()) / 36e5;
+    if (ageH > 14) {
+      $("stale-text").textContent = `These figures were last updated ${fmtDate(gen)} at ${fmtTime(gen)}.  The automatic update may have stopped, so recent returns may be missing.`;
+      $("stale").classList.add("show");
+    }
+    $("foot-src").textContent = D.form && D.form.name ? `Source: KoboToolbox project "${D.form.name}".` : "";
+  }
+
+  function renderHero() {
+    const s = D.submissions || {}, r = D.recent || {};
+    R = s.respondents || 0;
+    $("hero-num").textContent = n0.format(R);
+    $("hero-of").textContent = R === 1 ? "person has answered the survey" : "people have answered the survey";
+    const bits = [];
+    if (s.declined) bits.push(`${plural(s.declined, "person", "people")} declined at the consent question`);
+    if (D.paths && D.paths.community) bits.push(`${n0.format(D.paths.community)} answered the community section with an interviewer`);
+    $("hero-note").textContent = bits.length ? `${bits.join("; ")}.` : "";
+    $("t-24").textContent = n0.format(r.last_24h || 0);
+    $("t-7").textContent = n0.format(r.last_7d || 0);
+    const tl = $("t-last"); tl.textContent = "";
+    if (r.last) { const d = new Date(r.last); tl.append(fmtDay(d), el("small", { text: `at ${fmtTime(d)}` })); } else tl.textContent = "None yet";
+    const tc = $("t-close"); tc.textContent = "";
+    if (D.close_date) {
+      const today = dayKey(new Date(D.generated_at));
+      const days = Math.round((keyDate(D.close_date) - keyDate(today)) / 864e5);
+      if (days > 0) { tc.append(n0.format(days), el("small", { text: `cut-off ${fmtDay(keyDate(D.close_date))}` })); }
+      else if (days === 0) { tc.append("Today", el("small", { text: "last day" })); }
+      else { $("t-close-label").textContent = "Cut-off"; tc.append("Passed", el("small", { text: fmtDay(keyDate(D.close_date)) })); }
+    } else { $("t-close-label").textContent = "Cut-off"; tc.textContent = "Not set"; }
+  }
+
+  // ---------------------------------------------------------------- blocks of bars
+  function block(title, counts, labels, opts = {}) {
+    const box = el("div");
+    const total = opts.total != null ? opts.total : sum(counts);
+    if (title) box.append(el("h3", { text: title }));
+    if (opts.sub) box.append(el("p", { class: "block-sub", text: opts.sub }));
+    const keys = [];
+    const order = Object.keys(labels || {});
+    if (opts.sort === "form") keys.push(...order);
+    else keys.push(...order.slice().sort((a, b) => (counts[b] || 0) - (counts[a] || 0) || order.indexOf(a) - order.indexOf(b)));
+    for (const k of Object.keys(counts || {})) if (!keys.includes(k)) keys.push(k);
+    const target = opts.targets || null;
+    const max = Math.max(1, ...keys.map((k) => counts[k] || 0));
+    let shown = 0;
+    for (const k of keys) {
+      const n = counts[k] || 0;
+      if (!n && opts.hideZero) continue;
+      if (opts.limit && shown >= opts.limit) break;
+      shown++;
+      const name = k === "_blank" ? "Not answered" : k === "_none" ? "No ministry" : tidy((labels || {})[k]) || k;
+      const t = target && target[k];
+      const count = t ? el("span", { class: "count num" }, `${n0.format(n)} of ${n0.format(t)}`, el("small", { text: `${pct(n, t)}%` }))
+        : el("span", { class: "count num" }, n0.format(n), total && !opts.noPct ? el("small", { text: `${pct(n, total)}%` }) : null);
+      box.append(el("div", { class: "meter-row" + (n ? "" : " zero") }, el("span", { class: "label", text: name }), count,
+        meter(n, t || (opts.relative === false ? total : max), `${name}: ${n}${t ? ` of a target of ${t}` : total ? ` of ${total}` : ""}`)));
+    }
+    return box;
+  }
+
+  function renderHow() {
+    const box = $("how"); box.textContent = "";
+    box.append(block("Way of answering", D.dims.mode || {}, L.mode, { sort: "form", relative: false }));
+    const pathLabels = { main: "Main survey (sections C to I)", community: "Community section (J), with an interviewer" };
+    const p = el("div", { style: "margin-top:20px" });
+    p.append(block("Part of the survey", D.paths || {}, pathLabels, { sort: "form", relative: false }));
+    box.append(p);
+  }
+
+  function renderWho() {
+    const box = $("who"); box.textContent = "";
+    const T = D.targets || {};
+    const ministryCounts = Object.assign({}, D.dims.ministry || {});
+    box.append(
+      block("Ministry or authority", ministryCounts, L.ministry, { sub: `B3, asked of government staff (${plural(sum(ministryCounts), "respondent", "respondents")}).`, targets: T.ministry }),
+      block("Main sector", D.dims.main_sector || {}, L.main_sector, { sub: "B4 and B5: the sector of their main work.", targets: T.main_sector }),
+      block("Level of work", D.dims.level || {}, L.level, { sort: "form", sub: "B6.", targets: T.level }),
+      block("Role", D.dims.function || {}, L.function, { sub: "B8: their main work on disease information.", targets: T.function }),
+      block("Employer", D.dims.employer || {}, L.employer, { sub: "B2.", hideZero: false, targets: T.employer }),
+      block("Workplace", D.dims.workplace || {}, L.workplace, { sub: "B1.", targets: T.workplace }),
+      block("Gender", D.dims.gender || {}, L.gender, { sort: "form", sub: "B9.", relative: false, targets: T.gender }),
+      womenByMinistry());
+  }
+
+  function womenByMinistry() {
+    const box = el("div");
+    box.append(el("h3", { text: "Women, by ministry or authority" }), el("p", { class: "block-sub", text: "Women among the respondents from each ministry or authority (B3 and B9)." }));
+    const mg = D.ministry_gender || {};
+    const keys = Object.keys(mg).sort((a, b) => sum(mg[b]) - sum(mg[a]));
+    if (!keys.length) { box.append(el("p", { class: "block-sub", text: "No respondents yet." })); return box; }
+    for (const k of keys) {
+      const all = sum(mg[k]), women = mg[k].woman || 0;
+      const name = k === "_none" ? "Not in a ministry" : tidy(L.ministry[k]) || k;
+      box.append(el("div", { class: "meter-row" + (women ? "" : " zero") }, el("span", { class: "label", text: name }),
+        el("span", { class: "count num" }, `${n0.format(women)} of ${n0.format(all)}`, el("small", { text: `${pct(women, all)}%` })),
+        meter(women, all, `${name}: ${women} women of ${all} respondents`)));
+    }
+    return box;
+  }
+
+  // ---------------------------------------------------------------- provinces
+  function renderProvinces() {
+    const sel = $("f-sector");
+    if (!sel.options.length) {
+      sel.append(el("option", { value: "", text: "All sectors" }));
+      for (const [k, v] of Object.entries(L.main_sector || {})) sel.append(el("option", { value: k, text: tidy(v) }));
+      sel.addEventListener("change", () => { state.sector = sel.value; renderProvinces(); });
+      for (const b of document.querySelectorAll(".chip[data-order]")) b.addEventListener("click", () => { state.order = b.dataset.order; renderProvinces(); });
+    }
+    for (const b of document.querySelectorAll(".chip[data-order]")) b.setAttribute("aria-pressed", String(b.dataset.order === state.order));
+    const PS = D.province_sector || {};
+    const countOf = (k) => (state.sector ? (PS[k] || {})[state.sector] || 0 : (D.provinces || {})[k] || 0);
+    const names = L.provinces || {};
+    let keys = Object.keys(names);
+    if (state.order === "name") keys.sort((a, b) => names[a].localeCompare(names[b], "en-GB"));
+    else keys.sort((a, b) => countOf(b) - countOf(a) || names[a].localeCompare(names[b], "en-GB"));
+    const max = Math.max(1, ...keys.map(countOf), countOf("_national"));
+    const tb = $("prov-rows"); tb.textContent = "";
+    const row = (label, n, extra) => el("tr", { class: n ? "" : "zero" }, el("td", null, label, extra || null), el("td", { class: "n", text: n0.format(n) }), el("td", { class: "bar" }, meter(n, max, `${label}: ${n}`)));
+    tb.append(row("National level", countOf("_national"), el("span", { class: "sr-only", text: " (no province)" })));
+    for (const k of keys) if (state.all || countOf(k)) tb.append(row(names[k], countOf(k)));
+    if (!state.sector && (D.provinces || {})._blank) tb.append(row("Province not given", D.provinces._blank));
+    const none = keys.filter((k) => !countOf(k)).map((k) => names[k]).sort((a, b) => a.localeCompare(b, "en-GB"));
+    const what = state.sector ? ` in ${tidy(L.main_sector[state.sector]).toLowerCase()}` : "";
+    const pn = $("prov-none"); pn.textContent = "";
+    pn.append(none.length === keys.length ? `No respondent${what} has named a province yet.`
+      : none.length ? `No respondent${what} yet in ${none.length === 1 ? "one province" : `${w(none.length)} provinces`}: ${none.join(", ")}.` : `Every province has at least one respondent${what}.`);
+    if (none.length) pn.append("  ", el("button", { type: "button", class: "linkish", text: state.all ? "Hide them in the table" : "Show them in the table", onclick: () => { state.all = !state.all; renderProvinces(); } }));
+  }
+
+  // ---------------------------------------------------------------- scenarios, follow-up, systems
+  function renderScenarios() {
+    const box = $("scen"); box.textContent = "";
+    const total = sum(D.scenarios);
+    box.append(block("", D.scenarios || {}, L.scen, { sort: "form", total }));
+    const thin = Object.keys(L.scen || {}).filter((k) => (D.scenarios[k] || 0) < 5).map((k) => tidy(L.scen[k]).split(" – ")[0].toLowerCase());
+    if (total && thin.length) box.append(el("p", { class: "note-line", text: `Fewer than five respondents so far for: ${thin.join("; ")}.` }));
+  }
+
+  function renderFollow() {
+    const box = $("follow"); box.textContent = "";
+    const f = D.followup || {};
+    box.append(block("Follow-up interview", f.interview || {}, L.interview, { sort: "form", relative: false, sub: "I5, asked at the end of the main survey." }));
+    const d = el("div", { style: "margin-top:20px" });
+    d.append(block("Documents offered", f.share_docs || {}, L.share_docs, { sort: "form", relative: false, sub: "D15, asked of those who described a system." }));
+    box.append(d);
+  }
+
+  function renderSystems() {
+    const S = D.systems || {};
+    const kp = $("sys-kpis"); kp.textContent = "";
+    const distinct = Object.keys(S.named || {}).filter((k) => k !== "other").length;
+    for (const [v, k] of [[S.respondents || 0, "respondents described at least one system"], [S.described || 0, "systems described in all"], [distinct, `of the ${Object.keys(L.sys_name || {}).filter((x) => x !== "other").length} listed systems named so far`]])
+      kp.append(el("div", { class: "kpi" }, el("div", { class: "v num", text: n0.format(v) }), el("div", { class: "k", text: k })));
+    const box = $("sys"); box.textContent = "";
+    const named = S.named || {};
+    const top = block("Systems named most often", named, L.sys_name, { hideZero: true, limit: 12, noPct: true, sub: S.other ? `Including ${plural(S.other, "system", "systems")} described under "Other".` : "" });
+    const rest = Object.keys(L.sys_name || {}).filter((k) => !named[k] && k !== "other").map((k) => tidy(L.sys_name[k]));
+    const right = el("div");
+    right.append(block("Number of systems each respondent uses", S.n_systems || {}, L.n_systems, { sort: "form", relative: false, sub: "D1, main survey." }));
+    if (rest.length) right.append(el("h3", { style: "margin-top:20px", text: "Listed systems nobody has named yet" }), el("p", { class: "block-sub", text: rest.join("; ") + "." }));
+    if (Object.keys(named).length > 12) {
+      const all = el("details", { class: "tv" }, el("summary", { text: `Show all ${Object.keys(named).length} systems named` }));
+      all.append(block("", named, L.sys_name, { hideZero: true, noPct: true }));
+      top.append(all);
+    }
+    box.append(top, right);
+  }
+
+  // ---------------------------------------------------------------- checks
+  function renderChecks() {
+    const Q = D.quality || {}, s = D.submissions || {};
+    const box = $("checks"); box.textContent = "";
+    const dm = (Q.duration_minutes || {}).main || {}, dc = (Q.duration_minutes || {}).community || {};
+    const fmtMin = (x) => (x == null ? "–" : `${n0.format(Math.round(x))} min`);
+    const item = (what, n, why, flag) => el("div", { class: "check" }, el("span", { class: "what", text: what }), el("span", { class: "n num " + (flag ? (n ? "flag" : "ok") : ""), text: typeof n === "number" ? n0.format(n) : n }), why ? el("span", { class: "why", text: why }) : null);
+    box.append(
+      item("Time taken, main survey", dm.n ? `${fmtMin(dm.median)} median` : "–", dm.n ? `Half took between ${fmtMin(dm.p25)} and ${fmtMin(dm.p75)} (${plural(dm.n, "return", "returns")}).  The plan was about 25 minutes online and 35 with an interviewer.` : "From the start and end times the form records."),
+      item("Time taken, community section", dc.n ? `${fmtMin(dc.median)} median` : "–", dc.n ? `Half took between ${fmtMin(dc.p25)} and ${fmtMin(dc.p75)}.  The plan was about 12 minutes.` : ""),
+      item(`Main survey finished in under ${n0.format(Q.quick_minutes || 10)} minutes`, Q.quick || 0, "Too fast to have read the questions; worth a look before analysis.", true),
+      item("Community workplace, but another role", Q.community_workplace_other_role || 0, "B1 says “in the community” but B8 is not the community role: possibly a community health worker who took the main survey online.", true),
+      item("No usable start or end time", Q.no_duration || 0, "", true),
+      item("Not approved in KoboToolbox (left out)", s.not_approved || 0, "Set a return's validation status to Not approved to leave it out, for example a test.", false));
+    const vbox = $("versions"); vbox.textContent = "";
+    const V = Q.versions || [];
+    if (!V.length) { vbox.append(el("p", { class: "block-sub", text: "No returns yet." })); return; }
+    const t = el("table", { class: "mini" }, el("thead", null, el("tr", null, el("th", { text: "Version deployed" }), el("th", { class: "n", text: "Returns" }))));
+    const tb = el("tbody");
+    for (const v of V) {
+      const when = v.deployed ? `${fmtDate(new Date(v.deployed))}, ${fmtTime(new Date(v.deployed))}` : `Version ${String(v.uid).slice(0, 8)}`;
+      tb.append(el("tr", null, el("td", null, when, v.current ? el("span", { class: "ok", text: "  current" }) : null), el("td", { class: "n", text: n0.format(v.n) })));
+    }
+    t.append(tb); vbox.append(t);
+    const old = V.filter((v) => !v.current).reduce((a, v) => a + v.n, 0);
+    if (old && V.some((v) => v.current)) vbox.append(el("p", { class: "note-line", text: `${plural(old, "return was", "returns were")} filled in on an earlier version.  That is expected for returns sent before the latest deployment; later ones point to a phone that has not updated its form.` }));
+  }
+
+  // ---------------------------------------------------------------- chart
+  function series() {
+    const days = (D.by_day || []).filter((x) => x.n || x.declined);
+    if (!days.length) return [];
+    const per = new Map(days.map((x) => [x.day, x.n]));
+    const first = days[0].day;
+    const today = dayKey(new Date(D.generated_at));
+    const last = [today, D.close_date || today].sort()[1];
+    const out = []; let total = 0;
+    let cur = new Date(first + "T00:00:00Z");
+    for (let g = 0; g < 400; g++) {
+      const k = cur.toISOString().slice(0, 10);
+      const add = per.get(k) || 0;
+      if (k <= today) { total += add; out.push({ key: k, date: keyDate(k), add, total, future: false }); }
+      else out.push({ key: k, date: keyDate(k), add: 0, total: null, future: true });
+      if (k >= last) break;
+      cur = new Date(cur.getTime() + 864e5);
+    }
+    return out;
+  }
+  function niceMax(v) {
+    if (v <= 5) return 5;
+    const p = Math.pow(10, Math.floor(Math.log10(v))), m = v / p;
+    return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p;
+  }
+  function renderChart() {
+    const box = $("chart"); box.textContent = "";
+    const all = series(), S = all.filter((s) => !s.future);
+    const tv = $("chart-table").querySelector("div"); tv.textContent = "";
+    if (S.length) {
+      const t = el("table", { class: "mini" }, el("thead", null, el("tr", null, el("th", { text: "Date" }), el("th", { class: "n", text: "New" }), el("th", { class: "n", text: "Total" }))));
+      const tb = el("tbody");
+      for (const s of S) tb.append(el("tr", null, el("td", { text: fmtDate(s.date) }), el("td", { class: "n", text: s.add }), el("td", { class: "n", text: s.total })));
+      t.append(tb); tv.append(t);
+    }
+    $("chart-table").hidden = !S.length;
+    if (S.length < 2) {
+      box.append(el("div", { class: "empty", text: S.length ? "The chart appears once returns have arrived on two or more days." : "No returns yet.  The chart appears once returns arrive." }));
+      return;
+    }
+    const W = Math.max(280, box.clientWidth || 560), H = W < 480 ? 220 : 250;
+    const m = { l: 36, r: 18, t: 18, b: 30 };
+    const iw = W - m.l - m.r, ih = H - m.t - m.b;
+    const N = all.length;
+    const ymax = niceMax(S[S.length - 1].total);
+    const x = (i) => m.l + (N === 1 ? iw / 2 : (i * iw) / (N - 1));
+    const y = (v) => m.t + ih - (v / ymax) * ih;
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: "img", tabindex: "0",
+      "aria-label": `Line chart.  Respondents rose from ${S[0].total} on ${fmtDate(S[0].date)} to ${S[S.length - 1].total} on ${fmtDate(S[S.length - 1].date)}.  Use the left and right arrow keys to read each day.` });
+    for (let i = 0; i <= 4; i++) {
+      const v = (ymax * i) / 4, yy = y(v);
+      svg.append(svgEl("line", { x1: m.l, x2: W - m.r, y1: yy, y2: yy, style: `stroke:${i === 0 ? "var(--axis)" : "var(--hairline)"}`, "stroke-width": 1, "shape-rendering": "crispEdges" }));
+      const tx = svgEl("text", { x: m.l - 8, y: yy + 4, "text-anchor": "end", class: "tick" }); tx.textContent = n0.format(Math.round(v * 10) / 10); svg.append(tx);
+    }
+    const every = Math.max(1, Math.ceil(N / Math.max(2, Math.floor(iw / 80))));
+    all.forEach((s, i) => {
+      if (i % every && i !== N - 1) return;
+      if (i !== N - 1 && N - 1 - i < every * 0.6) return;
+      const tx = svgEl("text", { x: x(i), y: H - 8, "text-anchor": i === 0 ? "start" : i === N - 1 ? "end" : "middle", class: "tick" });
+      tx.textContent = fmtDay(s.date); svg.append(tx);
+    });
+    const ci = all.findIndex((s) => s.key === D.close_date);
+    if (ci >= 0) {
+      svg.append(svgEl("line", { x1: x(ci), x2: x(ci), y1: m.t, y2: m.t + ih, style: "stroke:var(--ink-3)", "stroke-width": 1, "stroke-dasharray": "3 3" }));
+      const lab = svgEl("text", { x: x(ci) - 6, y: m.t + 2, "text-anchor": "end", class: "tick" }); lab.textContent = "Cut-off"; svg.append(lab);
+    }
+    const pts = S.map((s, i) => `${x(i).toFixed(1)},${y(s.total).toFixed(1)}`);
+    svg.append(svgEl("path", { d: `M${x(0)},${y(0)} L${pts.join(" L")} L${x(S.length - 1)},${y(0)} Z`, style: "fill:var(--fill)", opacity: "0.1" }));
+    svg.append(svgEl("polyline", { points: pts.join(" "), fill: "none", style: "stroke:var(--fill)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+    const li = S.length - 1;
+    svg.append(svgEl("circle", { cx: x(li), cy: y(S[li].total), r: 4.5, style: "fill:var(--fill);stroke:var(--surface)", "stroke-width": 2 }));
+    const endLbl = svgEl("text", { x: x(li) + (li < N - 3 ? 8 : -8), y: y(S[li].total) - 10, "text-anchor": li < N - 3 ? "start" : "end", class: "tick", style: "fill:var(--ink);font-weight:700" });
+    endLbl.textContent = n0.format(S[li].total); svg.append(endLbl);
+    const cross = svgEl("line", { y1: m.t, y2: m.t + ih, style: "stroke:var(--axis)", "stroke-width": 1, visibility: "hidden" });
+    const dot = svgEl("circle", { r: 5, style: "fill:var(--fill);stroke:var(--surface)", "stroke-width": 2, visibility: "hidden" });
+    const hit = svgEl("rect", { x: m.l - 10, y: 0, width: iw + 20, height: H, fill: "transparent" });
+    svg.append(cross, dot, hit);
+    const tip = el("div", { class: "tip", role: "presentation" });
+    box.append(svg, tip);
+    let cur = -1;
+    function show(i) {
+      cur = Math.max(0, Math.min(S.length - 1, i));
+      const s = S[cur], cx = x(cur), cy = y(s.total);
+      cross.setAttribute("x1", cx); cross.setAttribute("x2", cx); cross.setAttribute("visibility", "visible");
+      dot.setAttribute("cx", cx); dot.setAttribute("cy", cy); dot.setAttribute("visibility", "visible");
+      tip.textContent = "";
+      tip.append(el("div", null, el("span", { class: "k" }), el("b", { text: n0.format(s.total) }), " respondents in total"),
+        el("div", { style: "color:var(--ink-3)", text: `${fmtDate(s.date)}  ·  ${s.add ? "+" + s.add : "none"} that day` }));
+      const scale = box.clientWidth / W;
+      tip.style.left = `${Math.min(Math.max(cx * scale, 90), box.clientWidth - 90)}px`;
+      tip.style.top = `${cy * scale}px`;
+      tip.classList.add("show");
+    }
+    function hide() { cross.setAttribute("visibility", "hidden"); dot.setAttribute("visibility", "hidden"); tip.classList.remove("show"); }
+    hit.addEventListener("pointermove", (e) => {
+      const r = svg.getBoundingClientRect(), px = ((e.clientX - r.left) / r.width) * W;
+      show(Math.round(((px - m.l) / iw) * (N - 1)));
+    });
+    hit.addEventListener("pointerleave", hide);
+    svg.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); show((cur < 0 ? S.length - 1 : cur) + (e.key === "ArrowRight" ? 1 : -1)); }
+      if (e.key === "Escape") hide();
+    });
+    svg.addEventListener("focus", () => show(S.length - 1));
+    svg.addEventListener("blur", hide);
+  }
+
+  // ---------------------------------------------------------------- notes and CSV
+  function renderNotes() {
+    const s = D.submissions || {};
+    $("note-from").textContent = D.count_from ? `, and so are returns received before ${fmtDate(new Date(D.count_from))}` : "";
+    const ex = [];
+    if (s.not_approved) ex.push(`${plural(s.not_approved, "return is", "returns are")} marked "Not approved" and left out.`);
+    if (s.before_start) ex.push(`${plural(s.before_start, "return was", "returns were")} received before the counting start date and ${s.before_start === 1 ? "is" : "are"} left out.`);
+    if (s.consent_missing) ex.push(`${plural(s.consent_missing, "return has", "returns have")} no answer to the consent question and ${s.consent_missing === 1 ? "is" : "are"} not counted as respondents.`);
+    $("note-excluded").textContent = ex.length ? ex.join("  ") : "No returns are currently left out.";
+  }
+  function csvCell(v) { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; }
+  function downloadCsv() {
+    const rows = [["Section", "Code", "Item", "Count"]];
+    const add = (section, counts, labels) => { for (const [k, v] of Object.entries(counts || {})) rows.push([section, k, tidy((labels || {})[k]) || k, v]); };
+    const s = D.submissions || {};
+    rows.push(["Totals", "respondents", "Respondents", s.respondents || 0], ["Totals", "declined", "Declined consent", s.declined || 0], ["Totals", "not_approved", "Not approved (left out)", s.not_approved || 0]);
+    for (const d of D.by_day || []) rows.push(["By day (Kabul)", d.day, d.day, d.n]);
+    const dimNames = { mode: "Way of answering", ministry: "Ministry or authority", main_sector: "Main sector", level: "Level", function: "Role", employer: "Employer", workplace: "Workplace", gender: "Gender" };
+    for (const [k, name] of Object.entries(dimNames)) add(name, D.dims[k], L[k]);
+    add("Part of the survey", D.paths, { main: "Main survey", community: "Community section" });
+    add("Province", D.provinces, Object.assign({ _national: "National level", _blank: "Province not given" }, L.provinces));
+    add("Scenario version", D.scenarios, L.scen);
+    add("Systems named", (D.systems || {}).named, L.sys_name);
+    add("Follow-up interview", (D.followup || {}).interview, L.interview);
+    add("Documents offered", (D.followup || {}).share_docs, L.share_docs);
+    const gen = new Date(D.generated_at);
+    const blob = new Blob(["﻿" + rows.map((r) => r.map(csvCell).join(",")).join("\r\n")], { type: "text/csv;charset=utf-8" });
+    const a = el("a", { href: URL.createObjectURL(blob), download: `AFG OH survey returns counts ${fileStamp(gen)}.csv` });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    toast("Counts downloaded");
+  }
+
+  // ---------------------------------------------------------------- render + wiring
+  function render() {
+    if (!D || D.schema !== 1) { $("err").textContent = "The data file is from a newer version of this page.  Please reload."; return; }
+    L = D.labels || {}; D.dims = D.dims || {}; D.scenarios = D.scenarios || {};
+    $("lead").textContent = "Who has answered the stakeholder survey so far, and how.  For the assessment team only.";
+    renderHeader(); renderHero(); renderChart(); renderHow(); renderWho(); renderProvinces();
+    renderScenarios(); renderFollow(); renderSystems(); renderChecks(); renderNotes();
+    let rt, lastW = $("chart").clientWidth;
+    new ResizeObserver(() => { const wd = $("chart").clientWidth; if (Math.abs(wd - lastW) < 8) return; lastW = wd; clearTimeout(rt); rt = setTimeout(renderChart, 80); }).observe($("chart"));
+  }
+
+  $("gate-form").addEventListener("submit", (e) => { e.preventDefault(); const pw = $("pw").value; if (pw) open(pw, $("remember").checked, false); });
+  $("forget").addEventListener("click", () => { try { localStorage.removeItem(STORE); } catch (e) {} location.reload(); });
+  $("b-csv").addEventListener("click", downloadCsv);
+  let saved = null; try { saved = localStorage.getItem(STORE); } catch (e) {}
+  if (saved) open(saved, true, true); else $("pw").focus();
+})();
+</script>
+</body>
+</html>

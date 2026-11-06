@@ -1,0 +1,7193 @@
+{
+ "uid": "aFixtureAfgOhSurvey00000",
+ "name": "Afghanistan OH data mapping survey v5 (fixture)",
+ "asset_type": "survey",
+ "has_deployment": true,
+ "deployment__active": true,
+ "deployed_version_id": "vRev5fixtureBBBBBBBBBB",
+ "deployed_versions": {
+  "count": 2,
+  "results": [
+   {
+    "uid": "vRev5fixtureBBBBBBBBBB",
+    "date_deployed": "2026-11-06T22:10:00.000000Z"
+   },
+   {
+    "uid": "vRev4fixtureAAAAAAAAAA",
+    "date_deployed": "2026-11-02T04:00:00.000000Z"
+   }
+  ]
+ },
+ "content": {
+  "schema": "1",
+  "survey": [
+   {
+    "name": "start",
+    "$kuid": "k0000",
+    "type": "start",
+    "$xpath": "start",
+    "$autoname": "start"
+   },
+   {
+    "name": "end",
+    "$kuid": "k0001",
+    "type": "end",
+    "$xpath": "end",
+    "$autoname": "end"
+   },
+   {
+    "name": "intro",
+    "$kuid": "k0002",
+    "type": "note",
+    "$xpath": "intro",
+    "$autoname": "intro"
+   },
+   {
+    "name": "consent",
+    "$kuid": "k0003",
+    "type": "select_one",
+    "select_from_list_name": "yesno",
+    "$xpath": "consent",
+    "$autoname": "consent"
+   },
+   {
+    "name": "mode",
+    "$kuid": "k0004",
+    "type": "select_one",
+    "select_from_list_name": "mode",
+    "$xpath": "mode",
+    "$autoname": "mode"
+   },
+   {
+    "name": "channel",
+    "$kuid": "k0005",
+    "type": "select_one",
+    "select_from_list_name": "channel",
+    "$xpath": "channel",
+    "$autoname": "channel"
+   },
+   {
+    "name": "sec_b",
+    "$kuid": "k0006",
+    "type": "begin_group",
+    "$xpath": "sec_b",
+    "$autoname": "sec_b"
+   },
+   {
+    "name": "about_note",
+    "$kuid": "k0007",
+    "type": "note",
+    "$xpath": "sec_b/about_note",
+    "$autoname": "about_note"
+   },
+   {
+    "name": "workplace",
+    "$kuid": "k0008",
+    "type": "select_one",
+    "select_from_list_name": "workplace",
+    "$xpath": "sec_b/workplace",
+    "$autoname": "workplace"
+   },
+   {
+    "name": "employer",
+    "$kuid": "k0009",
+    "type": "select_one",
+    "select_from_list_name": "employer",
+    "$xpath": "sec_b/employer",
+    "$autoname": "employer"
+   },
+   {
+    "name": "ministry",
+    "$kuid": "k0010",
+    "type": "select_one",
+    "select_from_list_name": "ministry",
+    "$xpath": "sec_b/ministry",
+    "$autoname": "ministry"
+   },
+   {
+    "name": "sectors",
+    "$kuid": "k0011",
+    "type": "select_multiple",
+    "select_from_list_name": "sector",
+    "$xpath": "sec_b/sectors",
+    "$autoname": "sectors"
+   },
+   {
+    "name": "sector_main",
+    "$kuid": "k0012",
+    "type": "select_one",
+    "select_from_list_name": "sector",
+    "$xpath": "sec_b/sector_main",
+    "$autoname": "sector_main"
+   },
+   {
+    "name": "level",
+    "$kuid": "k0013",
+    "type": "select_one",
+    "select_from_list_name": "level",
+    "$xpath": "sec_b/level",
+    "$autoname": "level"
+   },
+   {
+    "name": "provinces",
+    "$kuid": "k0014",
+    "type": "select_multiple",
+    "select_from_list_name": "province",
+    "$xpath": "sec_b/provinces",
+    "$autoname": "provinces"
+   },
+   {
+    "name": "function",
+    "$kuid": "k0015",
+    "type": "select_one",
+    "select_from_list_name": "function",
+    "$xpath": "sec_b/function",
+    "$autoname": "function"
+   },
+   {
+    "name": "gender",
+    "$kuid": "k0016",
+    "type": "select_one",
+    "select_from_list_name": "gender",
+    "$xpath": "sec_b/gender",
+    "$autoname": "gender"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0017"
+   },
+   {
+    "name": "main_sector",
+    "$kuid": "k0018",
+    "type": "calculate",
+    "$xpath": "main_sector",
+    "$autoname": "main_sector",
+    "calculation": "if(count-selected(${sectors}) = 1, ${sectors}, ${sector_main})"
+   },
+   {
+    "name": "main_path",
+    "$kuid": "k0019",
+    "type": "calculate",
+    "$xpath": "main_path",
+    "$autoname": "main_path",
+    "calculation": "if(${consent} = 'yes' and ${function} != '' and ${function} != 'community', 1, 0)"
+   },
+   {
+    "name": "f0_path",
+    "$kuid": "k0020",
+    "type": "calculate",
+    "$xpath": "f0_path",
+    "$autoname": "f0_path",
+    "calculation": "if(${main_path} = 1 and (${function} = 'report' or ${function} = 'run' or ${function} = 'direct' or ${function} = 'other') and ${main_sector} != 'data', 1, 0)"
+   },
+   {
+    "name": "scen",
+    "$kuid": "k0021",
+    "type": "calculate",
+    "$xpath": "scen",
+    "$autoname": "scen",
+    "calculation": "if(${main_sector} = 'lab', if(${ministry} = 'mail', 'lab_mail', 'lab_other'), if(${main_sector} = 'poe', 'poe', if(${main_sector} = 'animal' or ${main_sector} = 'food', 'animal', if(${main_sector} = 'wildlife' or ${main_sector} = 'env' or ${main_sector} = 'wash', 'env', 'human'))))"
+   },
+   {
+    "name": "ask_ah",
+    "$kuid": "k0022",
+    "type": "calculate",
+    "$xpath": "ask_ah",
+    "$autoname": "ask_ah",
+    "calculation": "if((${scen} = 'human' or ${scen} = 'poe' or ${scen} = 'lab_other' or ${scen} = 'env'), 1, 0)"
+   },
+   {
+    "name": "ask_ph",
+    "$kuid": "k0023",
+    "type": "calculate",
+    "$xpath": "ask_ph",
+    "$autoname": "ask_ph",
+    "calculation": "if((${scen} = 'animal' or ${scen} = 'lab_mail' or ${scen} = 'env'), 1, 0)"
+   },
+   {
+    "name": "det_side",
+    "$kuid": "k0024",
+    "type": "calculate",
+    "$xpath": "det_side",
+    "$autoname": "det_side",
+    "calculation": "if(${main_sector} = 'human' or ${main_sector} = 'poe', 'h', if(${main_sector} = 'animal' or ${main_sector} = 'wildlife', 'a', if(${main_sector} = 'lab', if(${ministry} = 'mail', 'a', 'h'), '')))"
+   },
+   {
+    "name": "cap",
+    "$kuid": "k0025",
+    "type": "calculate",
+    "$xpath": "cap",
+    "$autoname": "cap",
+    "calculation": "if(${function} = 'run', 3, 2)"
+   },
+   {
+    "name": "sec_j",
+    "$kuid": "k0026",
+    "type": "begin_group",
+    "$xpath": "sec_j",
+    "$autoname": "sec_j"
+   },
+   {
+    "name": "com_intro",
+    "$kuid": "k0027",
+    "type": "note",
+    "$xpath": "sec_j/com_intro",
+    "$autoname": "com_intro"
+   },
+   {
+    "name": "com_report",
+    "$kuid": "k0028",
+    "type": "select_multiple",
+    "select_from_list_name": "com_report",
+    "$xpath": "sec_j/com_report",
+    "$autoname": "com_report"
+   },
+   {
+    "name": "com_to",
+    "$kuid": "k0029",
+    "type": "select_multiple",
+    "select_from_list_name": "com_to",
+    "$xpath": "sec_j/com_to",
+    "$autoname": "com_to"
+   },
+   {
+    "name": "com_how",
+    "$kuid": "k0030",
+    "type": "select_multiple",
+    "select_from_list_name": "com_how",
+    "$xpath": "sec_j/com_how",
+    "$autoname": "com_how"
+   },
+   {
+    "name": "com_social",
+    "$kuid": "k0031",
+    "type": "select_multiple",
+    "select_from_list_name": "com_social",
+    "$xpath": "sec_j/com_social",
+    "$autoname": "com_social"
+   },
+   {
+    "name": "com_speed",
+    "$kuid": "k0032",
+    "type": "select_one",
+    "select_from_list_name": "com_speed",
+    "$xpath": "sec_j/com_speed",
+    "$autoname": "com_speed"
+   },
+   {
+    "name": "com_vet",
+    "$kuid": "k0033",
+    "type": "select_one",
+    "select_from_list_name": "yes_no_dk",
+    "$xpath": "sec_j/com_vet",
+    "$autoname": "com_vet"
+   },
+   {
+    "name": "com_feedback",
+    "$kuid": "k0034",
+    "type": "select_one",
+    "select_from_list_name": "freq6",
+    "$xpath": "sec_j/com_feedback",
+    "$autoname": "com_feedback"
+   },
+   {
+    "name": "com_zero",
+    "$kuid": "k0035",
+    "type": "select_one",
+    "select_from_list_name": "asn_dk",
+    "$xpath": "sec_j/com_zero",
+    "$autoname": "com_zero"
+   },
+   {
+    "name": "com_reward",
+    "$kuid": "k0036",
+    "type": "select_multiple",
+    "select_from_list_name": "com_reward",
+    "$xpath": "sec_j/com_reward",
+    "$autoname": "com_reward"
+   },
+   {
+    "name": "com_barriers",
+    "$kuid": "k0037",
+    "type": "select_multiple",
+    "select_from_list_name": "com_barriers",
+    "$xpath": "sec_j/com_barriers",
+    "$autoname": "com_barriers"
+   },
+   {
+    "name": "com_trouble",
+    "$kuid": "k0038",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_j/com_trouble",
+    "$autoname": "com_trouble"
+   },
+   {
+    "name": "com_change",
+    "$kuid": "k0039",
+    "type": "text",
+    "$xpath": "sec_j/com_change",
+    "$autoname": "com_change"
+   },
+   {
+    "name": "com_comments",
+    "$kuid": "k0040",
+    "type": "text",
+    "$xpath": "sec_j/com_comments",
+    "$autoname": "com_comments"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0041"
+   },
+   {
+    "name": "sec_c",
+    "$kuid": "k0042",
+    "type": "begin_group",
+    "$xpath": "sec_c",
+    "$autoname": "sec_c"
+   },
+   {
+    "name": "decisions",
+    "$kuid": "k0043",
+    "type": "select_multiple",
+    "select_from_list_name": "decisions",
+    "$xpath": "sec_c/decisions",
+    "$autoname": "decisions"
+   },
+   {
+    "name": "any_dec",
+    "$kuid": "k0044",
+    "type": "calculate",
+    "$xpath": "sec_c/any_dec",
+    "$autoname": "any_dec",
+    "calculation": "if(count-selected(${decisions}) > 0 and not(selected(${decisions}, 'none')), 1, 0)"
+   },
+   {
+    "name": "dec_main",
+    "$kuid": "k0045",
+    "type": "select_one",
+    "select_from_list_name": "decisions",
+    "$xpath": "sec_c/dec_main",
+    "$autoname": "dec_main"
+   },
+   {
+    "name": "info_timely",
+    "$kuid": "k0046",
+    "type": "select_one",
+    "select_from_list_name": "freq6",
+    "$xpath": "sec_c/info_timely",
+    "$autoname": "info_timely"
+   },
+   {
+    "name": "info_gaps",
+    "$kuid": "k0047",
+    "type": "select_multiple",
+    "select_from_list_name": "info_gaps",
+    "$xpath": "sec_c/info_gaps",
+    "$autoname": "info_gaps"
+   },
+   {
+    "name": "lab_time",
+    "$kuid": "k0048",
+    "type": "select_one",
+    "select_from_list_name": "lab_time",
+    "$xpath": "sec_c/lab_time",
+    "$autoname": "lab_time"
+   },
+   {
+    "name": "clim_review",
+    "$kuid": "k0049",
+    "type": "select_one",
+    "select_from_list_name": "clim_review",
+    "$xpath": "sec_c/clim_review",
+    "$autoname": "clim_review"
+   },
+   {
+    "name": "clim_trigger",
+    "$kuid": "k0050",
+    "type": "select_one",
+    "select_from_list_name": "clim_trigger",
+    "$xpath": "sec_c/clim_trigger",
+    "$autoname": "clim_trigger"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0051"
+   },
+   {
+    "name": "sec_d",
+    "$kuid": "k0052",
+    "type": "begin_group",
+    "$xpath": "sec_d",
+    "$autoname": "sec_d"
+   },
+   {
+    "name": "sys_intro",
+    "$kuid": "k0053",
+    "type": "note",
+    "$xpath": "sec_d/sys_intro",
+    "$autoname": "sys_intro"
+   },
+   {
+    "name": "n_systems",
+    "$kuid": "k0054",
+    "type": "select_one",
+    "select_from_list_name": "n_systems",
+    "$xpath": "sec_d/n_systems",
+    "$autoname": "n_systems"
+   },
+   {
+    "name": "n_sys",
+    "$kuid": "k0055",
+    "type": "calculate",
+    "$xpath": "sec_d/n_sys",
+    "$autoname": "n_sys",
+    "calculation": "if(${n_systems} = '', 0, number(${n_systems}))"
+   },
+   {
+    "name": "n_rep",
+    "$kuid": "k0056",
+    "type": "calculate",
+    "$xpath": "sec_d/n_rep",
+    "$autoname": "n_rep",
+    "calculation": "if(${n_sys} > ${cap}, ${cap}, ${n_sys})"
+   },
+   {
+    "name": "systems",
+    "$kuid": "k0057",
+    "type": "begin_repeat",
+    "$xpath": "sec_d/systems",
+    "$autoname": "systems"
+   },
+   {
+    "name": "pos",
+    "$kuid": "k0058",
+    "type": "calculate",
+    "$xpath": "sec_d/systems/pos",
+    "$autoname": "pos",
+    "calculation": "position(..)"
+   },
+   {
+    "name": "sys_name",
+    "$kuid": "k0059",
+    "type": "select_one",
+    "select_from_list_name": "sources",
+    "$xpath": "sec_d/systems/sys_name",
+    "$autoname": "sys_name"
+   },
+   {
+    "name": "sys_name_other",
+    "$kuid": "k0060",
+    "type": "text",
+    "$xpath": "sec_d/systems/sys_name_other",
+    "$autoname": "sys_name_other"
+   },
+   {
+    "name": "sys_display",
+    "$kuid": "k0061",
+    "type": "calculate",
+    "$xpath": "sec_d/systems/sys_display",
+    "$autoname": "sys_display",
+    "calculation": "if(${sys_name} = 'other', ${sys_name_other}, jr:choice-name(${sys_name}, '${sys_name}'))"
+   },
+   {
+    "name": "sys_label",
+    "$kuid": "k0062",
+    "type": "text",
+    "$xpath": "sec_d/systems/sys_label",
+    "$autoname": "sys_label"
+   },
+   {
+    "name": "sys_role",
+    "$kuid": "k0063",
+    "type": "select_multiple",
+    "select_from_list_name": "sys_role",
+    "$xpath": "sec_d/systems/sys_role",
+    "$autoname": "sys_role"
+   },
+   {
+    "name": "sys_status",
+    "$kuid": "k0064",
+    "type": "select_one",
+    "select_from_list_name": "sys_status",
+    "$xpath": "sec_d/systems/sys_status",
+    "$autoname": "sys_status"
+   },
+   {
+    "name": "sys_runs",
+    "$kuid": "k0065",
+    "type": "select_multiple",
+    "select_from_list_name": "orgs",
+    "$xpath": "sec_d/systems/sys_runs",
+    "$autoname": "sys_runs"
+   },
+   {
+    "name": "sys_format",
+    "$kuid": "k0066",
+    "type": "select_multiple",
+    "select_from_list_name": "sys_format",
+    "$xpath": "sec_d/systems/sys_format",
+    "$autoname": "sys_format"
+   },
+   {
+    "name": "sys_freq",
+    "$kuid": "k0067",
+    "type": "select_one",
+    "select_from_list_name": "sys_freq",
+    "$xpath": "sec_d/systems/sys_freq",
+    "$autoname": "sys_freq"
+   },
+   {
+    "name": "sys_content",
+    "$kuid": "k0068",
+    "type": "select_multiple",
+    "select_from_list_name": "sys_content",
+    "$xpath": "sec_d/systems/sys_content",
+    "$autoname": "sys_content"
+   },
+   {
+    "name": "sys_access",
+    "$kuid": "k0069",
+    "type": "select_multiple",
+    "select_from_list_name": "sys_access",
+    "$xpath": "sec_d/systems/sys_access",
+    "$autoname": "sys_access"
+   },
+   {
+    "name": "sys_use",
+    "$kuid": "k0070",
+    "type": "select_multiple",
+    "select_from_list_name": "sys_use",
+    "$xpath": "sec_d/systems/sys_use",
+    "$autoname": "sys_use"
+   },
+   {
+    "name": "sys_problems",
+    "$kuid": "k0071",
+    "type": "select_multiple",
+    "select_from_list_name": "sys_problems",
+    "$xpath": "sec_d/systems/sys_problems",
+    "$autoname": "sys_problems"
+   },
+   {
+    "type": "end_repeat",
+    "$kuid": "k0072"
+   },
+   {
+    "name": "sys_others",
+    "$kuid": "k0073",
+    "type": "text",
+    "$xpath": "sec_d/sys_others",
+    "$autoname": "sys_others"
+   },
+   {
+    "name": "share_docs",
+    "$kuid": "k0074",
+    "type": "select_one",
+    "select_from_list_name": "share_docs",
+    "$xpath": "sec_d/share_docs",
+    "$autoname": "share_docs"
+   },
+   {
+    "name": "doc_1",
+    "$kuid": "k0075",
+    "type": "file",
+    "$xpath": "sec_d/doc_1",
+    "$autoname": "doc_1"
+   },
+   {
+    "name": "doc_2",
+    "$kuid": "k0076",
+    "type": "file",
+    "$xpath": "sec_d/doc_2",
+    "$autoname": "doc_2"
+   },
+   {
+    "name": "doc_3",
+    "$kuid": "k0077",
+    "type": "file",
+    "$xpath": "sec_d/doc_3",
+    "$autoname": "doc_3"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0078"
+   },
+   {
+    "name": "sec_e",
+    "$kuid": "k0079",
+    "type": "begin_group",
+    "$xpath": "sec_e",
+    "$autoname": "sec_e"
+   },
+   {
+    "name": "hazards",
+    "$kuid": "k0080",
+    "type": "select_multiple",
+    "select_from_list_name": "hazards",
+    "$xpath": "sec_e/hazards",
+    "$autoname": "hazards"
+   },
+   {
+    "name": "casedef",
+    "$kuid": "k0081",
+    "type": "begin_group",
+    "$xpath": "sec_e/casedef",
+    "$autoname": "casedef"
+   },
+   {
+    "name": "casedef_cchf",
+    "$kuid": "k0082",
+    "type": "select_one",
+    "select_from_list_name": "casedef",
+    "$xpath": "sec_e/casedef/casedef_cchf",
+    "$autoname": "casedef_cchf"
+   },
+   {
+    "name": "casedef_ai",
+    "$kuid": "k0083",
+    "type": "select_one",
+    "select_from_list_name": "casedef",
+    "$xpath": "sec_e/casedef/casedef_ai",
+    "$autoname": "casedef_ai"
+   },
+   {
+    "name": "casedef_bruc",
+    "$kuid": "k0084",
+    "type": "select_one",
+    "select_from_list_name": "casedef",
+    "$xpath": "sec_e/casedef/casedef_bruc",
+    "$autoname": "casedef_bruc"
+   },
+   {
+    "name": "casedef_rabies",
+    "$kuid": "k0085",
+    "type": "select_one",
+    "select_from_list_name": "casedef",
+    "$xpath": "sec_e/casedef/casedef_rabies",
+    "$autoname": "casedef_rabies"
+   },
+   {
+    "name": "casedef_anthrax",
+    "$kuid": "k0086",
+    "type": "select_one",
+    "select_from_list_name": "casedef",
+    "$xpath": "sec_e/casedef/casedef_anthrax",
+    "$autoname": "casedef_anthrax"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0087"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0088"
+   },
+   {
+    "name": "sec_f",
+    "$kuid": "k0089",
+    "type": "begin_group",
+    "$xpath": "sec_f",
+    "$autoname": "sec_f"
+   },
+   {
+    "name": "scen_page",
+    "$kuid": "k0090",
+    "type": "begin_group",
+    "$xpath": "sec_f/scen_page",
+    "$autoname": "scen_page"
+   },
+   {
+    "name": "scen_human",
+    "$kuid": "k0091",
+    "type": "note",
+    "$xpath": "sec_f/scen_page/scen_human",
+    "$autoname": "scen_human"
+   },
+   {
+    "name": "scen_poe",
+    "$kuid": "k0092",
+    "type": "note",
+    "$xpath": "sec_f/scen_page/scen_poe",
+    "$autoname": "scen_poe"
+   },
+   {
+    "name": "scen_animal",
+    "$kuid": "k0093",
+    "type": "note",
+    "$xpath": "sec_f/scen_page/scen_animal",
+    "$autoname": "scen_animal"
+   },
+   {
+    "name": "scen_env",
+    "$kuid": "k0094",
+    "type": "note",
+    "$xpath": "sec_f/scen_page/scen_env",
+    "$autoname": "scen_env"
+   },
+   {
+    "name": "scen_lab_mail",
+    "$kuid": "k0095",
+    "type": "note",
+    "$xpath": "sec_f/scen_page/scen_lab_mail",
+    "$autoname": "scen_lab_mail"
+   },
+   {
+    "name": "scen_lab_other",
+    "$kuid": "k0096",
+    "type": "note",
+    "$xpath": "sec_f/scen_page/scen_lab_other",
+    "$autoname": "scen_lab_other"
+   },
+   {
+    "name": "scen_inform",
+    "$kuid": "k0097",
+    "type": "select_multiple",
+    "select_from_list_name": "inform_whom",
+    "$xpath": "sec_f/scen_page/scen_inform",
+    "$autoname": "scen_inform"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0098"
+   },
+   {
+    "name": "scen_speed_ah",
+    "$kuid": "k0099",
+    "type": "select_one",
+    "select_from_list_name": "speed",
+    "$xpath": "sec_f/scen_speed_ah",
+    "$autoname": "scen_speed_ah"
+   },
+   {
+    "name": "scen_speed_ph",
+    "$kuid": "k0100",
+    "type": "select_one",
+    "select_from_list_name": "speed",
+    "$xpath": "sec_f/scen_speed_ph",
+    "$autoname": "scen_speed_ph"
+   },
+   {
+    "name": "scen_reverse_ah",
+    "$kuid": "k0101",
+    "type": "select_one",
+    "select_from_list_name": "speed",
+    "$xpath": "sec_f/scen_reverse_ah",
+    "$autoname": "scen_reverse_ah"
+   },
+   {
+    "name": "scen_reverse_ph",
+    "$kuid": "k0102",
+    "type": "select_one",
+    "select_from_list_name": "speed",
+    "$xpath": "sec_f/scen_reverse_ph",
+    "$autoname": "scen_reverse_ph"
+   },
+   {
+    "name": "scen_channel",
+    "$kuid": "k0103",
+    "type": "select_multiple",
+    "select_from_list_name": "travel",
+    "$xpath": "sec_f/scen_channel",
+    "$autoname": "scen_channel"
+   },
+   {
+    "name": "scen_sop",
+    "$kuid": "k0104",
+    "type": "select_one",
+    "select_from_list_name": "sop",
+    "$xpath": "sec_f/scen_sop",
+    "$autoname": "scen_sop"
+   },
+   {
+    "name": "scen_approval",
+    "$kuid": "k0105",
+    "type": "select_multiple",
+    "select_from_list_name": "approval",
+    "$xpath": "sec_f/scen_approval",
+    "$autoname": "scen_approval"
+   },
+   {
+    "name": "wild_signal",
+    "$kuid": "k0106",
+    "type": "select_one",
+    "select_from_list_name": "wild_signal",
+    "$xpath": "sec_f/wild_signal",
+    "$autoname": "wild_signal"
+   },
+   {
+    "name": "env_link",
+    "$kuid": "k0107",
+    "type": "select_multiple",
+    "select_from_list_name": "env_link",
+    "$xpath": "sec_f/env_link",
+    "$autoname": "env_link"
+   },
+   {
+    "name": "event_12m",
+    "$kuid": "k0108",
+    "type": "select_one",
+    "select_from_list_name": "yes_no_dk",
+    "$xpath": "sec_f/event_12m",
+    "$autoname": "event_12m"
+   },
+   {
+    "name": "event",
+    "$kuid": "k0109",
+    "type": "begin_group",
+    "$xpath": "sec_f/event",
+    "$autoname": "event"
+   },
+   {
+    "name": "event_disease",
+    "$kuid": "k0110",
+    "type": "select_one",
+    "select_from_list_name": "event_disease",
+    "$xpath": "sec_f/event/event_disease",
+    "$autoname": "event_disease"
+   },
+   {
+    "name": "event_province",
+    "$kuid": "k0111",
+    "type": "select_one",
+    "select_from_list_name": "province",
+    "$xpath": "sec_f/event/event_province",
+    "$autoname": "event_province"
+   },
+   {
+    "name": "event_month",
+    "$kuid": "k0112",
+    "type": "select_one",
+    "select_from_list_name": "months",
+    "$xpath": "sec_f/event/event_month",
+    "$autoname": "event_month"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0113"
+   },
+   {
+    "name": "event_told_ah",
+    "$kuid": "k0114",
+    "type": "select_one",
+    "select_from_list_name": "told",
+    "$xpath": "sec_f/event_told_ah",
+    "$autoname": "event_told_ah"
+   },
+   {
+    "name": "event_told_ph",
+    "$kuid": "k0115",
+    "type": "select_one",
+    "select_from_list_name": "told",
+    "$xpath": "sec_f/event_told_ph",
+    "$autoname": "event_told_ph"
+   },
+   {
+    "name": "event_recs",
+    "$kuid": "k0116",
+    "type": "select_one",
+    "select_from_list_name": "records",
+    "$xpath": "sec_f/event_recs",
+    "$autoname": "event_recs"
+   },
+   {
+    "name": "unoff_freq",
+    "$kuid": "k0117",
+    "type": "select_one",
+    "select_from_list_name": "freq5",
+    "$xpath": "sec_f/unoff_freq",
+    "$autoname": "unoff_freq"
+   },
+   {
+    "name": "unoff_routes",
+    "$kuid": "k0118",
+    "type": "select_multiple",
+    "select_from_list_name": "unoff_routes",
+    "$xpath": "sec_f/unoff_routes",
+    "$autoname": "unoff_routes"
+   },
+   {
+    "name": "unoff_late",
+    "$kuid": "k0119",
+    "type": "select_one",
+    "select_from_list_name": "freq5",
+    "$xpath": "sec_f/unoff_late",
+    "$autoname": "unoff_late"
+   },
+   {
+    "name": "det_48h",
+    "$kuid": "k0120",
+    "type": "select_multiple",
+    "select_from_list_name": "det_cond",
+    "$xpath": "sec_f/det_48h",
+    "$autoname": "det_48h"
+   },
+   {
+    "name": "det_late",
+    "$kuid": "k0121",
+    "type": "select_one",
+    "select_from_list_name": "det_late",
+    "$xpath": "sec_f/det_late",
+    "$autoname": "det_late"
+   },
+   {
+    "name": "fb_freq",
+    "$kuid": "k0122",
+    "type": "select_one",
+    "select_from_list_name": "fb_freq",
+    "$xpath": "sec_f/fb_freq",
+    "$autoname": "fb_freq"
+   },
+   {
+    "name": "fb_type",
+    "$kuid": "k0123",
+    "type": "select_multiple",
+    "select_from_list_name": "fb_type",
+    "$xpath": "sec_f/fb_type",
+    "$autoname": "fb_type"
+   },
+   {
+    "name": "zero_report",
+    "$kuid": "k0124",
+    "type": "begin_group",
+    "$xpath": "sec_f/zero_report",
+    "$autoname": "zero_report"
+   },
+   {
+    "name": "zero_routine",
+    "$kuid": "k0125",
+    "type": "select_one",
+    "select_from_list_name": "zero",
+    "$xpath": "sec_f/zero_report/zero_routine",
+    "$autoname": "zero_routine"
+   },
+   {
+    "name": "zero_ebs",
+    "$kuid": "k0126",
+    "type": "select_one",
+    "select_from_list_name": "zero",
+    "$xpath": "sec_f/zero_report/zero_ebs",
+    "$autoname": "zero_ebs"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0127"
+   },
+   {
+    "name": "report_reward",
+    "$kuid": "k0128",
+    "type": "select_multiple",
+    "select_from_list_name": "report_reward",
+    "$xpath": "sec_f/report_reward",
+    "$autoname": "report_reward"
+   },
+   {
+    "name": "routine_exch",
+    "$kuid": "k0129",
+    "type": "select_multiple",
+    "select_from_list_name": "routine_exch",
+    "$xpath": "sec_f/routine_exch",
+    "$autoname": "routine_exch"
+   },
+   {
+    "name": "joint_ra",
+    "$kuid": "k0130",
+    "type": "select_one",
+    "select_from_list_name": "joint_ra",
+    "$xpath": "sec_f/joint_ra",
+    "$autoname": "joint_ra"
+   },
+   {
+    "name": "deaths_out",
+    "$kuid": "k0131",
+    "type": "select_one",
+    "select_from_list_name": "deaths_out",
+    "$xpath": "sec_f/deaths_out",
+    "$autoname": "deaths_out"
+   },
+   {
+    "name": "comm_chan",
+    "$kuid": "k0132",
+    "type": "select_multiple",
+    "select_from_list_name": "comm_chan",
+    "$xpath": "sec_f/comm_chan",
+    "$autoname": "comm_chan"
+   },
+   {
+    "name": "comm_how",
+    "$kuid": "k0133",
+    "type": "select_multiple",
+    "select_from_list_name": "comm_how",
+    "$xpath": "sec_f/comm_how",
+    "$autoname": "comm_how"
+   },
+   {
+    "name": "underreached",
+    "$kuid": "k0134",
+    "type": "select_multiple",
+    "select_from_list_name": "underreached",
+    "$xpath": "sec_f/underreached",
+    "$autoname": "underreached"
+   },
+   {
+    "name": "under_why",
+    "$kuid": "k0135",
+    "type": "select_multiple",
+    "select_from_list_name": "under_why",
+    "$xpath": "sec_f/under_why",
+    "$autoname": "under_why"
+   },
+   {
+    "name": "priv_heard",
+    "$kuid": "k0136",
+    "type": "select_one",
+    "select_from_list_name": "freq5",
+    "$xpath": "sec_f/priv_heard",
+    "$autoname": "priv_heard"
+   },
+   {
+    "name": "priv_route",
+    "$kuid": "k0137",
+    "type": "select_multiple",
+    "select_from_list_name": "priv_route",
+    "$xpath": "sec_f/priv_route",
+    "$autoname": "priv_route"
+   },
+   {
+    "name": "priv_block",
+    "$kuid": "k0138",
+    "type": "select_multiple",
+    "select_from_list_name": "priv_block",
+    "$xpath": "sec_f/priv_block",
+    "$autoname": "priv_block"
+   },
+   {
+    "name": "priv_block_self",
+    "$kuid": "k0139",
+    "type": "select_multiple",
+    "select_from_list_name": "priv_block_self",
+    "$xpath": "sec_f/priv_block_self",
+    "$autoname": "priv_block_self"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0140"
+   },
+   {
+    "name": "sec_g",
+    "$kuid": "k0141",
+    "type": "begin_group",
+    "$xpath": "sec_g",
+    "$autoname": "sec_g"
+   },
+   {
+    "name": "views_intro",
+    "$kuid": "k0142",
+    "type": "note",
+    "$xpath": "sec_g/views_intro",
+    "$autoname": "views_intro"
+   },
+   {
+    "name": "g_vertical",
+    "$kuid": "k0143",
+    "type": "begin_group",
+    "$xpath": "sec_g/g_vertical",
+    "$autoname": "g_vertical"
+   },
+   {
+    "name": "trust_in",
+    "$kuid": "k0144",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_vertical/trust_in",
+    "$autoname": "trust_in"
+   },
+   {
+    "name": "benefit_in",
+    "$kuid": "k0145",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_vertical/benefit_in",
+    "$autoname": "benefit_in"
+   },
+   {
+    "name": "hesitate_in",
+    "$kuid": "k0146",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_vertical/hesitate_in",
+    "$autoname": "hesitate_in"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0147"
+   },
+   {
+    "name": "g_horizontal",
+    "$kuid": "k0148",
+    "type": "begin_group",
+    "$xpath": "sec_g/g_horizontal",
+    "$autoname": "g_horizontal"
+   },
+   {
+    "name": "trust_out",
+    "$kuid": "k0149",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_horizontal/trust_out",
+    "$autoname": "trust_out"
+   },
+   {
+    "name": "benefit_out",
+    "$kuid": "k0150",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_horizontal/benefit_out",
+    "$autoname": "benefit_out"
+   },
+   {
+    "name": "view_mgrs",
+    "$kuid": "k0151",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_horizontal/view_mgrs",
+    "$autoname": "view_mgrs"
+   },
+   {
+    "name": "view_contact",
+    "$kuid": "k0152",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_horizontal/view_contact",
+    "$autoname": "view_contact"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0153"
+   },
+   {
+    "name": "g_general",
+    "$kuid": "k0154",
+    "type": "begin_group",
+    "$xpath": "sec_g/g_general",
+    "$autoname": "g_general"
+   },
+   {
+    "name": "view_conseq",
+    "$kuid": "k0155",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_general/view_conseq",
+    "$autoname": "view_conseq"
+   },
+   {
+    "name": "view_datause",
+    "$kuid": "k0156",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_general/view_datause",
+    "$autoname": "view_datause"
+   },
+   {
+    "name": "view_digital",
+    "$kuid": "k0157",
+    "type": "select_one",
+    "select_from_list_name": "agree",
+    "$xpath": "sec_g/g_general/view_digital",
+    "$autoname": "view_digital"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0158"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0159"
+   },
+   {
+    "name": "sec_h",
+    "$kuid": "k0160",
+    "type": "begin_group",
+    "$xpath": "sec_h",
+    "$autoname": "sec_h"
+   },
+   {
+    "name": "internet",
+    "$kuid": "k0161",
+    "type": "select_one",
+    "select_from_list_name": "internet",
+    "$xpath": "sec_h/internet",
+    "$autoname": "internet"
+   },
+   {
+    "name": "devices",
+    "$kuid": "k0162",
+    "type": "select_multiple",
+    "select_from_list_name": "devices",
+    "$xpath": "sec_h/devices",
+    "$autoname": "devices"
+   },
+   {
+    "name": "tools",
+    "$kuid": "k0163",
+    "type": "select_multiple",
+    "select_from_list_name": "tools",
+    "$xpath": "sec_h/tools",
+    "$autoname": "tools"
+   },
+   {
+    "name": "training",
+    "$kuid": "k0164",
+    "type": "select_multiple",
+    "select_from_list_name": "training",
+    "$xpath": "sec_h/training",
+    "$autoname": "training"
+   },
+   {
+    "name": "language",
+    "$kuid": "k0165",
+    "type": "select_one",
+    "select_from_list_name": "language",
+    "$xpath": "sec_h/language",
+    "$autoname": "language"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0166"
+   },
+   {
+    "name": "sec_i",
+    "$kuid": "k0167",
+    "type": "begin_group",
+    "$xpath": "sec_i",
+    "$autoname": "sec_i"
+   },
+   {
+    "name": "obstacles",
+    "$kuid": "k0168",
+    "type": "select_multiple",
+    "select_from_list_name": "obstacles",
+    "$xpath": "sec_i/obstacles",
+    "$autoname": "obstacles"
+   },
+   {
+    "name": "info_wanted",
+    "$kuid": "k0169",
+    "type": "select_multiple",
+    "select_from_list_name": "info_wanted",
+    "$xpath": "sec_i/info_wanted",
+    "$autoname": "info_wanted"
+   },
+   {
+    "name": "help_get",
+    "$kuid": "k0170",
+    "type": "select_multiple",
+    "select_from_list_name": "help_get",
+    "$xpath": "sec_i/help_get",
+    "$autoname": "help_get"
+   },
+   {
+    "name": "one_change",
+    "$kuid": "k0171",
+    "type": "text",
+    "$xpath": "sec_i/one_change",
+    "$autoname": "one_change"
+   },
+   {
+    "name": "interview_ok",
+    "$kuid": "k0172",
+    "type": "select_one",
+    "select_from_list_name": "yesno",
+    "$xpath": "sec_i/interview_ok",
+    "$autoname": "interview_ok"
+   },
+   {
+    "name": "contact",
+    "$kuid": "k0173",
+    "type": "begin_group",
+    "$xpath": "sec_i/contact",
+    "$autoname": "contact"
+   },
+   {
+    "name": "contact_note",
+    "$kuid": "k0174",
+    "type": "note",
+    "$xpath": "sec_i/contact/contact_note",
+    "$autoname": "contact_note"
+   },
+   {
+    "name": "contact_name",
+    "$kuid": "k0175",
+    "type": "text",
+    "$xpath": "sec_i/contact/contact_name",
+    "$autoname": "contact_name"
+   },
+   {
+    "name": "contact_phone",
+    "$kuid": "k0176",
+    "type": "text",
+    "$xpath": "sec_i/contact/contact_phone",
+    "$autoname": "contact_phone"
+   },
+   {
+    "name": "contact_email",
+    "$kuid": "k0177",
+    "type": "text",
+    "$xpath": "sec_i/contact/contact_email",
+    "$autoname": "contact_email"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0178"
+   },
+   {
+    "name": "referrals",
+    "$kuid": "k0179",
+    "type": "text",
+    "$xpath": "sec_i/referrals",
+    "$autoname": "referrals"
+   },
+   {
+    "name": "comments",
+    "$kuid": "k0180",
+    "type": "text",
+    "$xpath": "sec_i/comments",
+    "$autoname": "comments"
+   },
+   {
+    "type": "end_group",
+    "$kuid": "k0181"
+   },
+   {
+    "name": "end_note",
+    "$kuid": "k0182",
+    "type": "note",
+    "$xpath": "end_note",
+    "$autoname": "end_note"
+   }
+  ],
+  "choices": [
+   {
+    "list_name": "yesno",
+    "name": "yes",
+    "label": [
+     "Yes",
+     "بلی",
+     "هو"
+    ]
+   },
+   {
+    "list_name": "yesno",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "yes_no_dk",
+    "name": "yes",
+    "label": [
+     "Yes",
+     "بلی",
+     "هو"
+    ]
+   },
+   {
+    "list_name": "yes_no_dk",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "yes_no_dk",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "mode",
+    "name": "online",
+    "label": [
+     "On my own, online",
+     "به تنهایی، به شکل آنلاین",
+     "پخپله، آنلاین"
+    ]
+   },
+   {
+    "list_name": "mode",
+    "name": "phone",
+    "label": [
+     "With an interviewer, by phone",
+     "با مصاحبه‌کننده، از طریق تیلفون",
+     "د مرکه کوونکي سره، د تلیفون له لارې"
+    ]
+   },
+   {
+    "list_name": "mode",
+    "name": "in_person",
+    "label": [
+     "With an interviewer, in person",
+     "با مصاحبه‌کننده، به شکل حضوری",
+     "د مرکه کوونکي سره، په حضوري ډول"
+    ]
+   },
+   {
+    "list_name": "channel",
+    "name": "ministry",
+    "label": [
+     "Through my ministry or authority",
+     "از طریق وزارت یا اداره خودم",
+     "زما د وزارت یا ادارې له لارې"
+    ]
+   },
+   {
+    "list_name": "channel",
+    "name": "who_fao_unicef",
+    "label": [
+     "Through WHO, FAO or UNICEF",
+     "از طریق سازمان جهانی صحت (WHO)، سازمان خوراک و زراعت ملل متحد (FAO) یا یونیسف (UNICEF)",
+     "د روغتیا نړیوال سازمان (WHO)، د ملګرو ملتونو د خوړو او کرنې سازمان (FAO) یا یونیسف (UNICEF) له لارې"
+    ]
+   },
+   {
+    "list_name": "channel",
+    "name": "other_un_ngo",
+    "label": [
+     "Through another UN agency or an NGO",
+     "از طریق یک نهاد دیگر ملل متحد یا یک موسسه غیر دولتی",
+     "د ملګرو ملتونو د بلې ادارې یا یوې غیر دولتي موسسې له لارې"
+    ]
+   },
+   {
+    "list_name": "channel",
+    "name": "team",
+    "label": [
+     "Directly from the assessment team",
+     "مستقیماً از تیم ارزیابی",
+     "په مستقیم ډول د ارزونې ټیم له خوا"
+    ]
+   },
+   {
+    "list_name": "channel",
+    "name": "colleague",
+    "label": [
+     "From a colleague",
+     "از یک همکار",
+     "له یوه همکار څخه"
+    ]
+   },
+   {
+    "list_name": "channel",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "ministry_central",
+    "label": [
+     "Central office of a ministry or authority",
+     "دفتر مرکزی یک وزارت یا اداره",
+     "د یوه وزارت یا ادارې مرکزي دفتر"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "ministry_prov",
+    "label": [
+     "Provincial or district office of a ministry or authority",
+     "دفتر ولایتی یا ولسوالی یک وزارت یا اداره",
+     "د یوه وزارت یا ادارې ولایتي دفتر یا د ولسوالۍ دفتر"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "facility",
+    "label": [
+     "Hospital or health facility",
+     "شفاخانه یا مرکز صحی",
+     "روغتون یا روغتیايي مرکز"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "lab",
+    "label": [
+     "Laboratory",
+     "لابراتوار",
+     "لابراتوار"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "poe",
+    "label": [
+     "Point of entry (border crossing or airport)",
+     "نقطه ورودی (بندر سرحدی یا میدان هوایی)",
+     "د ننوتلو ځای (سرحدي بندر یا هوايي ډګر)"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "vfu",
+    "label": [
+     "Veterinary field unit (VFU) or veterinary clinic",
+     "واحد ساحوی وترنری (VFU) یا کلینیک وترنری",
+     "د وترنرۍ سیمه‌ییز واحد (VFU) یا وترنري کلینیک"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "un",
+    "label": [
+     "Office of a UN agency",
+     "دفتر یک نهاد ملل متحد",
+     "د ملګرو ملتونو د یوې ادارې دفتر"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "ngo",
+    "label": [
+     "Office of an NGO",
+     "دفتر یک موسسه غیر دولتی",
+     "د یوې غیر دولتي موسسې دفتر"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "private",
+    "label": [
+     "Private business (e.g., pharmacy, laboratory, farm, trader)",
+     "کسب و کار خصوصی (مانند دواخانه، لابراتوار، فارم، تاجر)",
+     "خصوصي کاروبار (لکه درملتون، لابراتوار، فارم، سوداګر)"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "university",
+    "label": [
+     "University or research institute",
+     "پوهنتون یا موسسه تحقیقاتی",
+     "پوهنتون یا څېړنیز انستیتوت"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "community",
+    "label": [
+     "In the community – no fixed workplace",
+     "در جامعه – بدون محل کار ثابت",
+     "په ټولنه کې – ثابت کاري ځای نه لرم"
+    ]
+   },
+   {
+    "list_name": "workplace",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "ministry",
+    "label": [
+     "Ministry or authority",
+     "وزارت یا اداره",
+     "وزارت یا اداره"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "un",
+    "label": [
+     "UN agency",
+     "نهاد ملل متحد",
+     "د ملګرو ملتونو اداره"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "ingo",
+    "label": [
+     "International NGO",
+     "موسسه غیر دولتی بین‌المللی",
+     "نړیواله غیر دولتي موسسه"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "nngo",
+    "label": [
+     "National NGO",
+     "موسسه غیر دولتی ملی",
+     "ملي غیر دولتي موسسه"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "private",
+    "label": [
+     "Private business",
+     "کسب و کار خصوصی",
+     "خصوصي کاروبار"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "university",
+    "label": [
+     "University or research institute",
+     "پوهنتون یا موسسه تحقیقاتی",
+     "پوهنتون یا څېړنیز انستیتوت"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "donor",
+    "label": [
+     "Donor",
+     "نهاد تمویل‌کننده",
+     "مرسته کوونکې اداره"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "volunteer",
+    "label": [
+     "None – I am a volunteer",
+     "هیچ‌کدام – من داوطلب هستم",
+     "هېڅ – زه رضاکار یم"
+    ]
+   },
+   {
+    "list_name": "employer",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "moph",
+    "label": [
+     "Ministry of Public Health (MoPH)",
+     "وزارت صحت عامه (MoPH)",
+     "د عامې روغتیا وزارت (MoPH)"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "mail",
+    "label": [
+     "Ministry of Agriculture, Irrigation and Livestock (MAIL)",
+     "وزارت زراعت، آبیاری و مالداری (MAIL)",
+     "د کرنې، اوبو لګولو او مالدارۍ وزارت (MAIL)"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "nepa",
+    "label": [
+     "Environmental Protection Agency (NEPA/GEPA)",
+     "اداره حفاظت محیط زیست (NEPA/GEPA)",
+     "د چاپېریال ساتنې اداره (NEPA/GEPA)"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "mrrd",
+    "label": [
+     "Ministry of Rural Rehabilitation and Development (MRRD)",
+     "وزارت احیا و انکشاف دهات (MRRD)",
+     "د کلیو د بیارغونې او پراختیا وزارت (MRRD)"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "andma",
+    "label": [
+     "Disaster management authority (ANDMA)",
+     "اداره ملی مبارزه با حوادث (ANDMA)",
+     "د پېښو سره د مبارزې ملي اداره (ANDMA)"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "amd",
+    "label": [
+     "Afghanistan Meteorological Department",
+     "ریاست هواشناسی افغانستان",
+     "د افغانستان د هوا پېژندنې ریاست"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "nsia",
+    "label": [
+     "National Statistics and Information Authority (NSIA)",
+     "اداره ملی احصائیه و معلومات (NSIA)",
+     "د احصایې او معلوماتو ملي اداره (NSIA)"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "municipality",
+    "label": [
+     "Municipality",
+     "شاروالی",
+     "ښاروالي"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "none",
+    "label": [
+     "None – a private, NGO or UN workplace",
+     "هیچ‌کدام – محل کار خصوصی، موسسه غیر دولتی یا ملل متحد",
+     "هېڅ – خصوصي، غیر دولتي یا د ملګرو ملتونو کاري ځای"
+    ]
+   },
+   {
+    "list_name": "ministry",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "human",
+    "label": [
+     "Human health",
+     "صحت انسان",
+     "د انسان روغتیا"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "animal",
+    "label": [
+     "Animal health (livestock and poultry)",
+     "صحت حیوانات (مواشی و مرغ‌های خانگی)",
+     "د څارویو روغتیا (مالونه او کورني چرګان)"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "wildlife",
+    "label": [
+     "Wildlife",
+     "حیات وحش",
+     "ځنګلي ژوي"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "env",
+    "label": [
+     "Environment or climate",
+     "محیط زیست یا اقلیم",
+     "چاپېریال یا اقلیم"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "wash",
+    "label": [
+     "Water and sanitation (WASH)",
+     "آب و حفظ‌الصحه (WASH)",
+     "اوبه او حفظ الصحه (WASH)"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "food",
+    "label": [
+     "Food safety",
+     "مصئونیت غذایی",
+     "د خوړو خوندیتوب"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "lab",
+    "label": [
+     "Laboratory",
+     "لابراتوار",
+     "لابراتوار"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "poe",
+    "label": [
+     "Points of entry and border health",
+     "نقاط ورودی و صحت سرحدی",
+     "د ننوتلو ځایونه او سرحدي روغتیا"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "emergency",
+    "label": [
+     "Emergency and disaster management",
+     "مدیریت حالات عاجل و آفات",
+     "د بېړنیو حالاتو او ناورینونو مدیریت"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "data",
+    "label": [
+     "Data, statistics or IT",
+     "معلومات، احصائیه یا تکنالوژی معلوماتی",
+     "معلومات، احصایه یا معلوماتي ټکنالوژي (IT)"
+    ]
+   },
+   {
+    "list_name": "sector",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "level",
+    "name": "national",
+    "label": [
+     "National",
+     "ملی",
+     "ملي کچه"
+    ]
+   },
+   {
+    "list_name": "level",
+    "name": "regional",
+    "label": [
+     "Regional",
+     "منطقوی",
+     "سیمه‌ییزه کچه"
+    ]
+   },
+   {
+    "list_name": "level",
+    "name": "provincial",
+    "label": [
+     "Provincial",
+     "ولایتی",
+     "ولایتي کچه"
+    ]
+   },
+   {
+    "list_name": "level",
+    "name": "district",
+    "label": [
+     "District",
+     "ولسوالی",
+     "د ولسوالۍ کچه"
+    ]
+   },
+   {
+    "list_name": "level",
+    "name": "field",
+    "label": [
+     "Facility, field or community",
+     "مرکز ارائه خدمات، ساحه یا جامعه",
+     "د خدماتو وړاندې کولو د مرکز، ساحې یا ټولنې کچه"
+    ]
+   },
+   {
+    "list_name": "level",
+    "name": "several",
+    "label": [
+     "Several levels",
+     "چندین سطح",
+     "څو کچې"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF01",
+    "label": [
+     "Kabul",
+     "کابل",
+     "کابل"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF32",
+    "label": [
+     "Herat",
+     "هرات",
+     "هرات"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF27",
+    "label": [
+     "Kandahar",
+     "کندهار",
+     "کندهار"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF06",
+    "label": [
+     "Nangarhar",
+     "ننگرهار",
+     "ننګرهار"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF19",
+    "label": [
+     "Kunduz",
+     "کندز",
+     "کندز"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF17",
+    "label": [
+     "Badakhshan",
+     "بدخشان",
+     "بدخشان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF31",
+    "label": [
+     "Badghis",
+     "بادغیس",
+     "بادغیس"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF09",
+    "label": [
+     "Baghlan",
+     "بغلان",
+     "بغلان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF21",
+    "label": [
+     "Balkh",
+     "بلخ",
+     "بلخ"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF10",
+    "label": [
+     "Bamyan",
+     "بامیان",
+     "بامیان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF24",
+    "label": [
+     "Daykundi",
+     "دایکندی",
+     "دایکندي"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF33",
+    "label": [
+     "Farah",
+     "فراه",
+     "فراه"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF29",
+    "label": [
+     "Faryab",
+     "فاریاب",
+     "فاریاب"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF11",
+    "label": [
+     "Ghazni",
+     "غزنی",
+     "غزني"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF23",
+    "label": [
+     "Ghor",
+     "غور",
+     "غور"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF30",
+    "label": [
+     "Helmand",
+     "هلمند",
+     "هلمند"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF28",
+    "label": [
+     "Jawzjan",
+     "جوزجان",
+     "جوزجان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF02",
+    "label": [
+     "Kapisa",
+     "کاپیسا",
+     "کاپیسا"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF14",
+    "label": [
+     "Khost",
+     "خوست",
+     "خوست"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF15",
+    "label": [
+     "Kunar",
+     "کنر",
+     "کونړ"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF07",
+    "label": [
+     "Laghman",
+     "لغمان",
+     "لغمان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF05",
+    "label": [
+     "Logar",
+     "لوگر",
+     "لوګر"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF34",
+    "label": [
+     "Nimroz",
+     "نیمروز",
+     "نیمروز"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF16",
+    "label": [
+     "Nuristan",
+     "نورستان",
+     "نورستان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF13",
+    "label": [
+     "Paktia",
+     "پکتیا",
+     "پکتیا"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF12",
+    "label": [
+     "Paktika",
+     "پکتیکا",
+     "پکتیکا"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF08",
+    "label": [
+     "Panjshir",
+     "پنجشیر",
+     "پنجشیر"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF03",
+    "label": [
+     "Parwan",
+     "پروان",
+     "پروان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF20",
+    "label": [
+     "Samangan",
+     "سمنگان",
+     "سمنګان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF22",
+    "label": [
+     "Sar-e Pul",
+     "سرپل",
+     "سرپل"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF18",
+    "label": [
+     "Takhar",
+     "تخار",
+     "تخار"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF25",
+    "label": [
+     "Uruzgan",
+     "ارزگان",
+     "اروزګان"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF04",
+    "label": [
+     "Wardak",
+     "وردک",
+     "وردګ"
+    ]
+   },
+   {
+    "list_name": "province",
+    "name": "AF26",
+    "label": [
+     "Zabul",
+     "زابل",
+     "زابل"
+    ]
+   },
+   {
+    "list_name": "function",
+    "name": "report",
+    "label": [
+     "I report cases or events from a facility, clinic or the field – e.g., doctor, nurse, veterinarian, para-veterinarian, VFU, pharmacy or point-of-entry staff",
+     "من واقعات یا حوادث را از یک مرکز ارائه خدمات، کلینیک یا ساحه گزارش می‌دهم – مانند داکتر، نرس، داکتر وترنر، پاراوترنر، یا کارمندان VFU، دواخانه یا نقطه ورودی",
+     "زه د خدماتو وړاندې کولو له یوه مرکز، کلینیک یا ساحې څخه د ناروغۍ د واقعو یا پېښو راپور ورکوم – لکه ډاکټر، نرس، وترنر ډاکټر، پاراوترنر، یا د VFU، درملتون یا د ننوتلو د ځای کارکوونکي"
+    ]
+   },
+   {
+    "list_name": "function",
+    "name": "community",
+    "label": [
+     "I report illness or unusual events from my community – e.g., community health worker or community focal point",
+     "من مریضی‌ها یا حوادث غیر معمول را از جامعه خود گزارش می‌دهم – مانند کارمند صحی جامعه یا مسئول رابط جامعه",
+     "زه له خپلې ټولنې څخه د ناروغۍ یا غیر عادي پېښو راپور ورکوم – لکه ټولنیز روغتیايي کارکوونکی یا د ټولنې د اړیکو مسوول"
+    ]
+   },
+   {
+    "list_name": "function",
+    "name": "enter",
+    "label": [
+     "I enter or compile data – e.g., data entry or records officer",
+     "من معلومات را ثبت یا جمع‌بندی می‌کنم – مانند کارمند ثبت معلومات یا مسئول اسناد",
+     "زه معلومات داخلوم یا تنظیموم – لکه د معلوماتو د داخلولو یا د ریکارډونو مسوول"
+    ]
+   },
+   {
+    "list_name": "function",
+    "name": "run",
+    "label": [
+     "I run surveillance, data or laboratory work – e.g., surveillance officer, epidemiologist, data manager, laboratory specialist, technical officer",
+     "من مسئول کارهای سرویلانس، معلومات یا لابراتوار هستم – مانند مسئول سرویلانس، اپیدمیولوژیست، مدیر معلومات، متخصص لابراتوار، مسئول تخنیکی",
+     "زه د سرویلانس، معلوماتو یا لابراتوار کار پرمخ وړم – لکه د سرویلانس مسوول، اپیډیمیولوجست، د معلوماتو مدیر، د لابراتوار متخصص، تخنیکي مسوول"
+    ]
+   },
+   {
+    "list_name": "function",
+    "name": "direct",
+    "label": [
+     "I direct a department or programme, or set policy",
+     "من یک بخش یا برنامه را رهبری می‌کنم، یا پالیسی وضع می‌کنم",
+     "زه د یوې څانګې یا پروګرام مشري کوم، یا پالیسي جوړوم"
+    ]
+   },
+   {
+    "list_name": "function",
+    "name": "other",
+    "label": [
+     "Something else",
+     "مورد دیگر",
+     "بل څه"
+    ]
+   },
+   {
+    "list_name": "gender",
+    "name": "woman",
+    "label": [
+     "Woman",
+     "زن",
+     "ښځه"
+    ]
+   },
+   {
+    "list_name": "gender",
+    "name": "man",
+    "label": [
+     "Man",
+     "مرد",
+     "سړی"
+    ]
+   },
+   {
+    "list_name": "gender",
+    "name": "prefer_not",
+    "label": [
+     "Prefer not to say",
+     "ترجیح می‌دهم نگویم",
+     "غوره ګڼم چې ونه وایم"
+    ]
+   },
+   {
+    "list_name": "com_report",
+    "name": "severe",
+    "label": [
+     "People with an unusual or severe illness",
+     "اشخاصی که مریضی غیر معمول یا شدید دارند",
+     "هغه خلک چې غیر عادي یا سخته ناروغي لري"
+    ]
+   },
+   {
+    "list_name": "com_report",
+    "name": "animals",
+    "label": [
+     "Sick or dead animals",
+     "حیوانات مریض یا مرده",
+     "ناروغ یا مړه څاروي"
+    ]
+   },
+   {
+    "list_name": "com_report",
+    "name": "wild",
+    "label": [
+     "Dead wild birds or wild animals",
+     "پرندگان وحشی یا حیوانات وحشی مرده",
+     "مړه ځنګلي مرغان یا ځنګلي څاروي"
+    ]
+   },
+   {
+    "list_name": "com_report",
+    "name": "rumours",
+    "label": [
+     "Rumours of unusual events",
+     "شایعات درباره حوادث غیر معمول",
+     "د غیر عادي پېښو اوازې"
+    ]
+   },
+   {
+    "list_name": "com_report",
+    "name": "routine",
+    "label": [
+     "Births, deaths or routine health information",
+     "تولدات، وفیات یا معلومات معمول صحی",
+     "زېږونونه، مړینې یا معمول روغتیايي معلومات"
+    ]
+   },
+   {
+    "list_name": "com_report",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "com_to",
+    "name": "supervisor",
+    "label": [
+     "My supervisor (e.g., community health supervisor)",
+     "سوپروایزر من (مانند سوپروایزر صحی جامعه)",
+     "زما سوپروایزر (لکه د ټولنیزې روغتیا سوپروایزر)"
+    ]
+   },
+   {
+    "list_name": "com_to",
+    "name": "facility",
+    "label": [
+     "Staff at a health facility",
+     "کارمندان یک مرکز صحی",
+     "د روغتیايي مرکز کارکوونکي"
+    ]
+   },
+   {
+    "list_name": "com_to",
+    "name": "vet",
+    "label": [
+     "A veterinary worker or VFU",
+     "یک کارمند وترنری یا واحد ساحوی وترنری (VFU)",
+     "وترنري کارکوونکی یا د وترنرۍ سیمه‌ییز واحد (VFU)"
+    ]
+   },
+   {
+    "list_name": "com_to",
+    "name": "elders",
+    "label": [
+     "Village elders or the shura",
+     "ریش‌سفیدان قریه یا شورای محل",
+     "د کلي سپین ږیري یا شورا"
+    ]
+   },
+   {
+    "list_name": "com_to",
+    "name": "religious",
+    "label": [
+     "A religious leader",
+     "یک عالم دینی",
+     "دیني مشر"
+    ]
+   },
+   {
+    "list_name": "com_to",
+    "name": "ngo",
+    "label": [
+     "NGO staff",
+     "کارمندان موسسه غیر دولتی",
+     "د غیر دولتي موسسې کارکوونکي"
+    ]
+   },
+   {
+    "list_name": "com_to",
+    "name": "hotline",
+    "label": [
+     "A telephone hotline",
+     "یک خط تیلفونی خاص (هاتلاین)",
+     "ځانګړې تلیفوني لیکه"
+    ]
+   },
+   {
+    "list_name": "com_to",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "com_how",
+    "name": "paper",
+    "label": [
+     "Paper form or register",
+     "فورم یا راجستر کاغذی",
+     "کاغذي فورمه یا راجستر"
+    ]
+   },
+   {
+    "list_name": "com_how",
+    "name": "phone",
+    "label": [
+     "Phone call",
+     "تماس تیلفونی",
+     "تلیفوني زنګ"
+    ]
+   },
+   {
+    "list_name": "com_how",
+    "name": "msg",
+    "label": [
+     "A messaging app (e.g., WhatsApp or Telegram)",
+     "یک اپلیکیشن پیام‌رسان (مانند WhatsApp یا Telegram)",
+     "د پیغام رسولو اپلیکېشن (لکه WhatsApp یا Telegram)"
+    ]
+   },
+   {
+    "list_name": "com_how",
+    "name": "in_person",
+    "label": [
+     "In person",
+     "به شکل حضوری",
+     "په حضوري ډول"
+    ]
+   },
+   {
+    "list_name": "com_how",
+    "name": "app",
+    "label": [
+     "A reporting app on a phone (e.g., Kobo)",
+     "یک اپلیکیشن گزارش‌دهی در موبایل (مانند Kobo)",
+     "په تلیفون کې د راپور ورکولو اپلیکېشن (لکه Kobo)"
+    ]
+   },
+   {
+    "list_name": "com_how",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "com_social",
+    "name": "share",
+    "label": [
+     "I share health news or warnings this way",
+     "من اخبار صحی یا هشدارها را از این طریق شریک می‌سازم",
+     "زه په دې ډول روغتیايي خبرونه یا خبرداري شریکوم"
+    ]
+   },
+   {
+    "list_name": "com_social",
+    "name": "hear",
+    "label": [
+     "I hear about illness or unusual events this way",
+     "من از این طریق درباره مریضی‌ها یا حوادث غیر معمول می‌شنوم",
+     "زه په دې ډول د ناروغیو یا غیر عادي پېښو په اړه خبرېږم"
+    ]
+   },
+   {
+    "list_name": "com_social",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "com_social",
+    "name": "prefer_not",
+    "label": [
+     "Prefer not to answer",
+     "ترجیح می‌دهم پاسخ ندهم",
+     "غوره ګڼم چې ځواب ورنه کړم"
+    ]
+   },
+   {
+    "list_name": "com_speed",
+    "name": "same_day",
+    "label": [
+     "The same day",
+     "در همان روز",
+     "په هماغه ورځ"
+    ]
+   },
+   {
+    "list_name": "com_speed",
+    "name": "d1_3",
+    "label": [
+     "Within 1–3 days",
+     "در ظرف ۱–۳ روز",
+     "د ۱–۳ ورځو په ترڅ کې"
+    ]
+   },
+   {
+    "list_name": "com_speed",
+    "name": "later",
+    "label": [
+     "Later",
+     "دیرتر",
+     "وروسته"
+    ]
+   },
+   {
+    "list_name": "com_speed",
+    "name": "would_not",
+    "label": [
+     "I would not report it",
+     "آن را گزارش نمی‌دهم",
+     "زه به یې راپور ورنه کړم"
+    ]
+   },
+   {
+    "list_name": "com_speed",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "freq6",
+    "name": "always",
+    "label": [
+     "Always",
+     "همیشه",
+     "تل"
+    ]
+   },
+   {
+    "list_name": "freq6",
+    "name": "usually",
+    "label": [
+     "Usually",
+     "معمولاً",
+     "معمولاً"
+    ]
+   },
+   {
+    "list_name": "freq6",
+    "name": "sometimes",
+    "label": [
+     "Sometimes",
+     "گاهی",
+     "کله ناکله"
+    ]
+   },
+   {
+    "list_name": "freq6",
+    "name": "rarely",
+    "label": [
+     "Rarely",
+     "به ندرت",
+     "ډېر لږ"
+    ]
+   },
+   {
+    "list_name": "freq6",
+    "name": "never",
+    "label": [
+     "Never",
+     "هرگز",
+     "هېڅکله"
+    ]
+   },
+   {
+    "list_name": "freq6",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "asn_dk",
+    "name": "always",
+    "label": [
+     "Always",
+     "همیشه",
+     "تل"
+    ]
+   },
+   {
+    "list_name": "asn_dk",
+    "name": "sometimes",
+    "label": [
+     "Sometimes",
+     "گاهی",
+     "کله ناکله"
+    ]
+   },
+   {
+    "list_name": "asn_dk",
+    "name": "never",
+    "label": [
+     "Never",
+     "هرگز",
+     "هېڅکله"
+    ]
+   },
+   {
+    "list_name": "asn_dk",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "com_reward",
+    "name": "extra",
+    "label": [
+     "An extra payment or incentive",
+     "پرداخت اضافی یا تشویقیه",
+     "اضافي پیسې یا تشویقي امتیاز"
+    ]
+   },
+   {
+    "list_name": "com_reward",
+    "name": "credit",
+    "label": [
+     "Phone credit or transport support",
+     "کریدت تیلفون یا کمک ترانسپورتی",
+     "د تلیفون کارت یا د ټرانسپورټ مرسته"
+    ]
+   },
+   {
+    "list_name": "com_reward",
+    "name": "recognition",
+    "label": [
+     "Recognition – for example feedback or a certificate",
+     "قدردانی – به طور مثال عکس العمل یا تقدیرنامه",
+     "ستاینه – د بېلګې په توګه غبرګون یا تقدیرنامه"
+    ]
+   },
+   {
+    "list_name": "com_reward",
+    "name": "nothing",
+    "label": [
+     "Nothing",
+     "هیچ چیز",
+     "هېڅ شی"
+    ]
+   },
+   {
+    "list_name": "com_reward",
+    "name": "prefer_not",
+    "label": [
+     "Prefer not to answer",
+     "ترجیح می‌دهم پاسخ ندهم",
+     "غوره ګڼم چې ځواب ورنه کړم"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "phone",
+    "label": [
+     "No phone, credit or network",
+     "نبود تیلفون، کریدت یا شبکه",
+     "تلیفون، کارت یا شبکه نشته"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "travel",
+    "label": [
+     "Requires long-distance travel",
+     "نیاز به سفر طولانی",
+     "اوږد سفر ته اړتیا ده"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "unsure",
+    "label": [
+     "Not sure what should be reported",
+     "مطمئن نبودن از این‌که چه چیزی باید گزارش شود",
+     "ډاډه نه یم چې د څه شي راپور باید ورکړل شي"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "families",
+    "label": [
+     "Families do not want illness reported",
+     "خانواده‌ها نمی‌خواهند مریضی گزارش شود",
+     "کورنۍ نه غواړي چې د ناروغۍ راپور ورکړل شي"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "fear",
+    "label": [
+     "Fear of blame or trouble",
+     "ترس از ملامتی یا دچار مشکل شدن",
+     "د ملامتېدو یا ستونزې وېره"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "no_response",
+    "label": [
+     "Nobody responds to reports",
+     "هیچ کس به گزارش‌ها پاسخ نمی‌دهد",
+     "هېڅوک راپورونو ته ځواب نه ورکوي"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "cost",
+    "label": [
+     "No support for the cost of reporting",
+     "نبود حمایت برای مصارف گزارش‌دهی",
+     "د راپور ورکولو د لګښت لپاره مرسته نشته"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "women",
+    "label": [
+     "Illness among women is harder to learn about",
+     "آگاه شدن از مریضی در میان زنان دشوارتر است",
+     "د ښځو د ناروغۍ په اړه خبرېدل ډېر ستونزمن دي"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "com_barriers",
+    "name": "nothing",
+    "label": [
+     "Nothing makes it difficult",
+     "هیچ چیز آن را دشوار نمی‌سازد",
+     "هېڅ شی یې ستونزمن نه کوي"
+    ]
+   },
+   {
+    "list_name": "agree",
+    "name": "strongly_agree",
+    "label": [
+     "Strongly agree",
+     "کاملاً موافقم",
+     "بشپړ موافق یم"
+    ]
+   },
+   {
+    "list_name": "agree",
+    "name": "agree",
+    "label": [
+     "Agree",
+     "موافقم",
+     "موافق یم"
+    ]
+   },
+   {
+    "list_name": "agree",
+    "name": "neutral",
+    "label": [
+     "Neither agree nor disagree",
+     "نه موافقم نه مخالفم",
+     "نه موافق یم نه مخالف"
+    ]
+   },
+   {
+    "list_name": "agree",
+    "name": "disagree",
+    "label": [
+     "Disagree",
+     "مخالفم",
+     "مخالف یم"
+    ]
+   },
+   {
+    "list_name": "agree",
+    "name": "strongly_disagree",
+    "label": [
+     "Strongly disagree",
+     "کاملاً مخالفم",
+     "بشپړ مخالف یم"
+    ]
+   },
+   {
+    "list_name": "agree",
+    "name": "na",
+    "label": [
+     "Does not apply",
+     "قابل تطبیق نیست",
+     "تطبیق نه لري"
+    ]
+   },
+   {
+    "list_name": "agree",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "agree",
+    "name": "prefer_not",
+    "label": [
+     "Prefer not to answer",
+     "ترجیح می‌دهم پاسخ ندهم",
+     "غوره ګڼم چې ځواب ورنه کړم"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "investigate",
+    "label": [
+     "Whether to investigate a possible disease event",
+     "این‌که آیا یک حادثه احتمالی مرض (سیگنال) تحقیق شود یا نه",
+     "دا چې د ناروغۍ احتمالي پېښه (سیګنال) وڅېړل شي که نه"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "inform",
+    "label": [
+     "Whether to inform another sector or a higher level",
+     "این‌که آیا سکتور دیگر یا سطح بالاتر آگاه ساخته شود یا نه",
+     "دا چې بل سکتور یا لوړې کچې ته خبر ورکړل شي که نه"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "send_team",
+    "label": [
+     "Sending a team to investigate or respond",
+     "فرستادن یک تیم برای تحقیق یا پاسخ‌دهی",
+     "د څېړنې یا غبرګون لپاره د ټیم لېږل"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "animal_control",
+    "label": [
+     "Control measures in animals (e.g., vaccination, movement control, quarantine, culling)",
+     "اقدامات کنترولی در حیوانات (مانند واکسیناسیون، کنترول نقل و انتقال، قرنطین، معدوم‌سازی)",
+     "په څارویو کې د کنټرول اقدامات (لکه واکسین کول، د خوځښت کنټرول، قرنطین، له منځه وړل)"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "ph_measures",
+    "label": [
+     "Public health measures (e.g., treatment, isolation, follow-up of contacts)",
+     "اقدامات صحت عامه (مانند تداوی، تجرید، پیگیری اشخاص در تماس)",
+     "د عامې روغتیا اقدامات (لکه درملنه، تجرید، د تماس لرونکو کسانو تعقیب)"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "warnings",
+    "label": [
+     "Warnings or advice to the public",
+     "هشدارها یا مشوره‌ها برای مردم",
+     "خلکو ته خبرداری یا مشوره"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "allocate",
+    "label": [
+     "Allocating vaccines, medicines, supplies or staff",
+     "تخصیص واکسین، ادویه، لوازم یا کارمندان",
+     "د واکسینونو، درملو، توکو یا کارکوونکو وېش"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "plan_surv",
+    "label": [
+     "Planning routine surveillance, sampling or vaccination",
+     "برنامه‌ریزی سرویلانس معمول، نمونه‌گیری یا واکسیناسیون",
+     "د معمول سرویلانس، نمونه اخیستنې یا واکسین کولو پلان جوړول"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "priorities",
+    "label": [
+     "Priorities, plans or budgets",
+     "اولویت‌ها، پلان‌ها یا بودجه‌ها",
+     "لومړیتوبونه، پلانونه یا بودیجې"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "ihr_woah",
+    "label": [
+     "Reporting to WHO (IHR) or WOAH",
+     "گزارش‌دهی به سازمان جهانی صحت (WHO) در چارچوب IHR (مقررات صحی بین‌المللی)، یا به سازمان جهانی صحت حیوانات (WOAH)",
+     "د روغتیا نړیوال سازمان (WHO) ته د IHR (نړیوال روغتیايي مقررات) له مخې، یا د څارویو روغتیا نړیوال سازمان (WOAH) ته راپور ورکول"
+    ]
+   },
+   {
+    "list_name": "decisions",
+    "name": "none",
+    "label": [
+     "None of these",
+     "هیچ‌کدام",
+     "هېڅ یو"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "lower",
+    "label": [
+     "Reports from lower levels (provinces, districts, facilities)",
+     "گزارش‌ها از سطوح پایین‌تر (ولایات، ولسوالی‌ها، مراکز ارائه خدمات)",
+     "له ټیټو کچو راپورونه (ولایتونه، ولسوالۍ، د خدماتو وړاندې کولو مرکزونه)"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "other_sector",
+    "label": [
+     "Information from another sector (e.g., animal data for a human health decision, or the reverse)",
+     "معلومات از سکتور دیگر (مانند معلومات مربوط به حیوانات برای یک تصمیم در زمینه صحت انسان، یا برعکس)",
+     "له بل سکتور څخه معلومات (لکه د انسان روغتیا د پرېکړې لپاره د څارویو معلومات، یا برعکس)"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "lab",
+    "label": [
+     "Laboratory testing or results",
+     "آزمایش لابراتواری یا نتایج آن",
+     "لابراتواري ازموینه یا پایلې"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "location",
+    "label": [
+     "Exact location of cases or events",
+     "موقعیت دقیق واقعات یا حوادث",
+     "د ناروغۍ د واقعو یا پېښو دقیق ځای"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "population",
+    "label": [
+     "Human or animal population numbers",
+     "ارقام جمعیت انسان‌ها یا حیوانات",
+     "د انسانانو یا څارویو شمېر"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "environment",
+    "label": [
+     "Weather, water or environmental information",
+     "معلومات مربوط به وضعیت هوا، آب یا محیط زیست",
+     "د هوا، اوبو یا چاپېریال معلومات"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "response",
+    "label": [
+     "What response was taken, and its result",
+     "این‌که چه اقدام پاسخ‌دهی صورت گرفت، و نتیجه آن",
+     "کوم غبرګون وښودل شو، او پایله یې څه وه"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "private",
+    "label": [
+     "Information from private clinics, veterinarians, pharmacies or laboratories",
+     "معلومات از کلینیک‌های خصوصی، داکتران وترنر، دواخانه‌ها یا لابراتوارها",
+     "له خصوصي کلینیکونو، وترنر ډاکټرانو، درملتونونو یا لابراتوارونو معلومات"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "un_ngo",
+    "label": [
+     "Information from UN agencies or NGOs",
+     "معلومات از نهادهای ملل متحد یا موسسات غیر دولتی",
+     "د ملګرو ملتونو له ادارو یا غیر دولتي موسسو معلومات"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "border",
+    "label": [
+     "Information from border points or neighbouring countries",
+     "معلومات از بنادر سرحدی یا کشورهای همسایه",
+     "له سرحدي بندرونو یا ګاونډیو هېوادونو معلومات"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "nothing",
+    "label": [
+     "Nothing – I usually have what I need",
+     "هیچ چیز – معمولاً آنچه را نیاز دارم در اختیار دارم",
+     "هېڅ شی – معمولاً هغه څه لرم چې اړتیا ورته لرم"
+    ]
+   },
+   {
+    "list_name": "info_gaps",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "lab_time",
+    "name": "h24",
+    "label": [
+     "Within 24 hours",
+     "در ظرف ۲۴ ساعت",
+     "د ۲۴ ساعتونو په ترڅ کې"
+    ]
+   },
+   {
+    "list_name": "lab_time",
+    "name": "d1_3",
+    "label": [
+     "1–3 days",
+     "۱–۳ روز",
+     "۱–۳ ورځې"
+    ]
+   },
+   {
+    "list_name": "lab_time",
+    "name": "d4_7",
+    "label": [
+     "4–7 days",
+     "۴–۷ روز",
+     "۴–۷ ورځې"
+    ]
+   },
+   {
+    "list_name": "lab_time",
+    "name": "more_week",
+    "label": [
+     "More than a week",
+     "بیشتر از یک هفته",
+     "له یوې اونۍ زیات"
+    ]
+   },
+   {
+    "list_name": "lab_time",
+    "name": "not_reach",
+    "label": [
+     "The result usually does not reach us",
+     "نتیجه معمولاً به ما نمی‌رسد",
+     "پایله معمولاً موږ ته نه رارسېږي"
+    ]
+   },
+   {
+    "list_name": "lab_time",
+    "name": "not_relevant",
+    "label": [
+     "My decisions do not depend on laboratory results",
+     "تصامیم من به نتایج لابراتوار بستگی ندارد",
+     "زما پرېکړې د لابراتوار په پایلو پورې تړلې نه دي"
+    ]
+   },
+   {
+    "list_name": "lab_time",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "clim_review",
+    "name": "routine",
+    "label": [
+     "Yes – routinely (e.g., every week or month)",
+     "بلی – به طور منظم (مانند هر هفته یا هر ماه)",
+     "هو – په منظم ډول (لکه هره اونۍ یا میاشت)"
+    ]
+   },
+   {
+    "list_name": "clim_review",
+    "name": "emergency_only",
+    "label": [
+     "Yes – only during an outbreak or a disaster (e.g., a flood or drought)",
+     "بلی – تنها در جریان شیوع مرض یا یک آفت (مانند سیلاب یا خشکسالی)",
+     "هو – یوازې د ناروغۍ د خپرېدو یا ناورین پر مهال (لکه سېلاب یا وچکالي)"
+    ]
+   },
+   {
+    "list_name": "clim_review",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "clim_review",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "clim_trigger",
+    "name": "written",
+    "label": [
+     "Yes – a written threshold or trigger",
+     "بلی – حد یا معیار هشدار که به صورت کتبی مشخص شده باشد",
+     "هو – هغه حد یا معیار چې په لیکلي ډول مشخص شوی وي"
+    ]
+   },
+   {
+    "list_name": "clim_trigger",
+    "name": "case_by_case",
+    "label": [
+     "Yes – case by case, with no written threshold",
+     "بلی – مورد به مورد، بدون حد کتبی",
+     "هو – د هر حالت سره سم، پرته له لیکل شوي حد"
+    ]
+   },
+   {
+    "list_name": "clim_trigger",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "clim_trigger",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "n_systems",
+    "name": "0",
+    "label": [
+     "None",
+     "هیچ",
+     "هېڅ"
+    ]
+   },
+   {
+    "list_name": "n_systems",
+    "name": "1",
+    "label": [
+     "1",
+     "۱",
+     "۱"
+    ]
+   },
+   {
+    "list_name": "n_systems",
+    "name": "2",
+    "label": [
+     "2",
+     "۲",
+     "۲"
+    ]
+   },
+   {
+    "list_name": "n_systems",
+    "name": "3",
+    "label": [
+     "3",
+     "۳",
+     "۳"
+    ]
+   },
+   {
+    "list_name": "n_systems",
+    "name": "4",
+    "label": [
+     "4 or more",
+     "۴ یا بیشتر",
+     "۴ یا زیات"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "ndsr_ibs",
+    "label": [
+     "NDSR weekly surveillance (IBS, sentinel sites, DEWS/IDSR)",
+     "سرویلانس هفته‌وار NDSR (سیستم ملی سرویلانس و پاسخ‌دهی امراض) – IBS (سرویلانس مبتنی بر شاخص)، مراکز منتخب مراقبت و نظارت صحی، DEWS/IDSR (سیستم هشدار اولیه امراض / سرویلانس و پاسخ‌دهی مدغم امراض)",
+     "د NDSR (د ناروغیو د سرویلانس او غبرګون ملي سیسټم) اونیز سرویلانس – IBS (د شاخص پر بنسټ سرویلانس)، د روغتیايي څارنې ټاکل شوي مرکزونه، DEWS/IDSR (د ناروغیو د وختي خبرتیا سیسټم / د ناروغیو مدغم سرویلانس او غبرګون)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "ndsr_ebs",
+    "label": [
+     "NDSR event-based surveillance (EBS), alerts and outbreak reports",
+     "سرویلانس مبتنی بر حوادث NDSR (EBS)، هشدارها و گزارش‌های شیوع امراض",
+     "د NDSR د پېښو پر بنسټ سرویلانس (EBS)، خبرتیاوې او د ناروغیو د خپرېدو راپورونه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "eios",
+    "label": [
+     "EIOS media monitoring",
+     "نظارت رسانه‌ای EIOS",
+     "د EIOS له لارې د رسنیو څارنه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "dhis2",
+    "label": [
+     "HMIS – MoPH DHIS2 national data warehouse",
+     "سیستم معلوماتی مدیریت صحی (HMIS) – ذخیره‌گاه ملی معلومات DHIS2 وزارت صحت عامه (MoPH)",
+     "د روغتیايي مدیریت د معلوماتو سیسټم (HMIS) – د MoPH د DHIS2 د معلوماتو ملي زېرمتون"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "herams",
+    "label": [
+     "HeRAMS (health facility availability)",
+     "موجودیت مراکز صحی (HeRAMS)",
+     "د روغتیايي مرکزونو شتون (HeRAMS)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "polio",
+    "label": [
+     "Polio AFP or environmental (wastewater) surveillance",
+     "سرویلانس فلج اطفال (پولیو) از نوع AFP (فلج شل حاد) یا محیطی (فاضلاب)",
+     "د پولیو AFP (حاد شل فلج) یا چاپېریالي (د فاضله اوبو) سرویلانس"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "vbd",
+    "label": [
+     "Malaria or leishmaniasis programme data",
+     "معلومات برنامه ملاریا یا لشمانیا",
+     "د ملاریا یا لشمانیا د پروګرام معلومات"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "prog_other",
+    "label": [
+     "Other disease-programme database (e.g., TB, measles, rabies post-exposure treatment)",
+     "دیتابیس دیگر برنامه‌های امراض (مانند TB (توبرکلوز)، سرخکان، تداوی پس از تماس با مرض هاری)",
+     "د ناروغیو د نورو پروګرامونو ډیټابیس (لکه TB (توبرکلوز)، شری، له تماس وروسته د لېوني سپي ناروغۍ درملنه)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "lab_ph",
+    "label": [
+     "Public health laboratory records or system (CPHL, hospital or regional laboratory)",
+     "اسناد یا سیستم لابراتوار صحت عامه (CPHL (لابراتوار مرکزی صحت عامه)، لابراتوار شفاخانه یا لابراتوار منطقوی)",
+     "د عامې روغتیا د لابراتوار ریکارډونه یا سیسټم (CPHL (د عامې روغتیا مرکزي لابراتوار)، د روغتون یا سیمه‌ییز لابراتوار)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "amr",
+    "label": [
+     "AMR or antimicrobial-use data (e.g., WHONET)",
+     "معلومات AMR (مقاومت ضد میکروبی) یا استفاده از ادویه ضد میکروبی (مانند WHONET)",
+     "د AMR (د میکروبونو د درملو پر وړاندې مقاومت) یا د میکروبونو د درملو د کارونې معلومات (لکه WHONET)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "rrt",
+    "label": [
+     "Rapid response team or outbreak investigation records",
+     "اسناد تیم پاسخ‌دهی سریع یا تحقیق شیوع مرض",
+     "د چټک غبرګون ټیم یا د ناروغۍ د خپرېدو د څېړنې ریکارډونه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "poe",
+    "label": [
+     "Point-of-entry health screening records",
+     "اسناد معاینات صحی در نقاط ورودی",
+     "د ننوتلو په ځایونو کې د روغتیايي معاینې ریکارډونه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "eoc",
+    "label": [
+     "Emergency operations centre records (e.g., polio EOC network)",
+     "اسناد مرکز عملیات اضطراری، مانند شبکه EOC فلج اطفال (پولیو)",
+     "د بېړنیو عملیاتو د مرکز ریکارډونه (لکه د پولیو د EOC شبکه)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "ved",
+    "label": [
+     "Animal disease reporting to MAIL veterinary services (VED)",
+     "گزارش‌دهی امراض حیوانی به خدمات وترنری (VED) وزارت زراعت، آبیاری و مالداری (MAIL)",
+     "د MAIL وترنري خدمتونو (VED) ته د څارویو د ناروغیو راپور ورکول"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "vfu",
+    "label": [
+     "VFU monthly or disease reports",
+     "گزارش‌های ماهوار یا گزارش‌های امراض واحدهای ساحوی وترنری (VFU)",
+     "د VFU میاشتني یا د ناروغیو راپورونه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "vfu_digital",
+    "label": [
+     "FAO-supported digital VFU reporting",
+     "گزارش‌دهی دیجیتال واحدهای ساحوی وترنری (VFU) با حمایت سازمان خوراک و زراعت ملل متحد (FAO)",
+     "د ملګرو ملتونو د خوړو او کرنې سازمان (FAO) په ملاتړ د VFU ډیجیټل راپور ورکول"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "vacc",
+    "label": [
+     "Vaccination-campaign or disease-programme data (e.g., PPR, FMD, HPAI, brucellosis, rabies)",
+     "معلومات کمپاین‌های واکسیناسیون یا برنامه‌های امراض (مانند PPR (طاعون نشخوارکنندگان کوچک)، FMD (تب برفکی)، HPAI (انفلونزای پرندگان)، بروسلوز، مرض هاری)",
+     "د واکسین د کمپاین یا د ناروغۍ د پروګرام معلومات (لکه PPR (د پسونو او وزو طاعون)، FMD (د خولې او پښو ناروغي)، HPAI (د مرغانو انفلونزا)، بروسلوز، د لېوني سپي ناروغي)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "lab_vet",
+    "label": [
+     "Veterinary laboratory records (CVDRL or provincial veterinary laboratory)",
+     "اسناد لابراتوار وترنری (CVDRL (لابراتوار مرکزی تشخیصیه و تحقیقات وترنری) یا لابراتوار وترنری ولایتی)",
+     "د وترنري لابراتوار ریکارډونه (CVDRL (د وترنري تشخیص او څېړنې مرکزي لابراتوار) یا ولایتي وترنري لابراتوار)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "vet_clinic",
+    "label": [
+     "Veterinary hospital or clinic records",
+     "اسناد شفاخانه یا کلینیک وترنری",
+     "د وترنري روغتون یا کلینیک ریکارډونه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "slaughter",
+    "label": [
+     "Slaughterhouse or meat-inspection records",
+     "اسناد مسلخ یا معاینه گوشت",
+     "د مسلخ یا د غوښې د معاینې ریکارډونه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "lvst_pop",
+    "label": [
+     "Livestock population or movement data",
+     "معلومات جمعیت یا نقل و انتقال مواشی",
+     "د مالونو د شمېر یا خوځښت معلومات"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "wahis",
+    "label": [
+     "Reporting to WOAH (WAHIS)",
+     "گزارش‌دهی به سازمان جهانی صحت حیوانات (WOAH) از طریق WAHIS",
+     "د څارویو روغتیا نړیوال سازمان (WOAH) ته راپور ورکول (WAHIS)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "wildlife",
+    "label": [
+     "Wildlife death or disease reports",
+     "گزارش‌های تلفات یا امراض حیات وحش",
+     "د ځنګلي ژویو د مړینې یا ناروغۍ راپورونه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "vector",
+    "label": [
+     "Vector data (ticks, sandflies, mosquitoes)",
+     "معلومات ناقلین (کنه، پشه خاکی، پشه)",
+     "د ناقلینو معلومات (کنې، پشه خاکي، غوماشې)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "wash",
+    "label": [
+     "Water quality or WASH monitoring",
+     "نظارت بر کیفیت آب یا WASH",
+     "د اوبو د کیفیت یا WASH څارنه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "met",
+    "label": [
+     "Weather and climate data (Afghanistan Meteorological Department)",
+     "معلومات وضعیت هوا و اقلیم (ریاست هواشناسی افغانستان)",
+     "د هوا او اقلیم معلومات (د افغانستان د هوا پېژندنې ریاست)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "disaster",
+    "label": [
+     "Disaster and hazard data (ANDMA)",
+     "معلومات آفات و مخاطرات (ANDMA)",
+     "د ناورینونو او خطرونو معلومات (ANDMA)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "fews",
+    "label": [
+     "Drought, vegetation or food-security data (e.g., FEWS NET)",
+     "معلومات خشکسالی، پوشش نباتی یا امنیت غذایی (مانند FEWS NET)",
+     "د وچکالۍ، نباتي پوښښ یا خوراکي امنیت معلومات (لکه FEWS NET)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "pop",
+    "label": [
+     "Population, returnee or displacement data (e.g., NSIA, IOM, UNHCR)",
+     "معلومات جمعیت، عودت‌کنندگان یا بیجاشدگان (مانند NSIA، IOM (سازمان بین‌المللی مهاجرت)، UNHCR (کمیشنری عالی سازمان ملل متحد در امور پناهندگان))",
+     "د نفوس، راستنېدونکو یا بې ځایه شویو خلکو معلومات (لکه NSIA، IOM (د مهاجرت نړیوال سازمان)، UNHCR (د کډوالو لپاره د ملګرو ملتونو عالي کمیشنري))"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "logistics",
+    "label": [
+     "Logistics, stock or cold-chain records",
+     "اسناد لوژستیک، ذخایر یا زنجیر سرد",
+     "د لوژستیک، زېرمو یا سړې زنځیرې ریکارډونه"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "food",
+    "label": [
+     "Food-safety inspection or testing data",
+     "معلومات تفتیش یا آزمایش مصئونیت غذایی",
+     "د خوړو د خوندیتوب د معاینې یا ازموینې معلومات"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "spreadsheet",
+    "label": [
+     "Spreadsheet kept by my office (e.g., Excel)",
+     "جدول الکترونیکی که توسط دفتر من نگهداری می‌شود (مانند Excel)",
+     "زما د دفتر لخوا ساتل شوی برېښنايي جدول (لکه Excel)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "paper",
+    "label": [
+     "Paper register or forms",
+     "راجستر یا فورم‌های کاغذی",
+     "کاغذي راجستر یا فورمې"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "msg_group",
+    "label": [
+     "Messaging group used for reporting, in a messaging app (e.g., WhatsApp or Telegram)",
+     "گروپی که در یک اپلیکیشن پیام‌رسان (مانند WhatsApp یا Telegram) برای گزارش‌دهی استفاده می‌شود",
+     "د راپور ورکولو لپاره کارېدونکی د پیغام رسولو ګروپ، د پیغام رسولو په اپلیکېشن کې (لکه WhatsApp یا Telegram)"
+    ]
+   },
+   {
+    "list_name": "sources",
+    "name": "other",
+    "label": [
+     "Other (specify)",
+     "دیگر (مشخص کنید)",
+     "نور (مشخص یې کړئ)"
+    ]
+   },
+   {
+    "list_name": "sys_role",
+    "name": "manage",
+    "label": [
+     "I manage or administer it",
+     "من آن را مدیریت یا اداره می‌کنم",
+     "زه یې مدیریت یا اداره کوم"
+    ]
+   },
+   {
+    "list_name": "sys_role",
+    "name": "enter",
+    "label": [
+     "I enter or report data into it",
+     "من معلومات را در آن ثبت می‌کنم یا از طریق آن گزارش می‌دهم",
+     "زه پکې معلومات داخلوم یا ورته د معلوماتو راپور ورکوم"
+    ]
+   },
+   {
+    "list_name": "sys_role",
+    "name": "supervise",
+    "label": [
+     "I supervise people who report into it",
+     "من بر کار کسانی که به آن گزارش می‌دهند نظارت می‌کنم",
+     "زه د هغو کسانو څارنه کوم چې دې ته راپور ورکوي"
+    ]
+   },
+   {
+    "list_name": "sys_role",
+    "name": "use",
+    "label": [
+     "I use its data or reports",
+     "من از معلومات یا گزارش‌های آن استفاده می‌کنم",
+     "زه یې معلومات یا راپورونه کاروم"
+    ]
+   },
+   {
+    "list_name": "sys_status",
+    "name": "as_intended",
+    "label": [
+     "Yes – as often as intended",
+     "بلی – به تعداد دفعات مقرر",
+     "هو – د ټاکل شوي مهالوېش سره سم"
+    ]
+   },
+   {
+    "list_name": "sys_status",
+    "name": "less_often",
+    "label": [
+     "Yes – but less often than intended",
+     "بلی – اما کمتر از دفعات مقرر",
+     "هو – خو د ټاکل شوي مهالوېش په پرتله لږ ځله"
+    ]
+   },
+   {
+    "list_name": "sys_status",
+    "name": "not_recent",
+    "label": [
+     "No – not in the last three months, though it still exists",
+     "نخیر – در سه ماه گذشته نه، هرچند هنوز وجود دارد",
+     "نه – په تېرو درېیو میاشتو کې نه، که څه هم لا تر اوسه شتون لري"
+    ]
+   },
+   {
+    "list_name": "sys_status",
+    "name": "discontinued",
+    "label": [
+     "No – it has been discontinued",
+     "نخیر – فعالیت آن متوقف شده است",
+     "نه – بند شوی دی"
+    ]
+   },
+   {
+    "list_name": "sys_status",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "moph",
+    "label": [
+     "MoPH",
+     "وزارت صحت عامه (MoPH)",
+     "د عامې روغتیا وزارت (MoPH)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "mail",
+    "label": [
+     "MAIL",
+     "وزارت زراعت، آبیاری و مالداری (MAIL)",
+     "د کرنې، اوبو لګولو او مالدارۍ وزارت (MAIL)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "nepa",
+    "label": [
+     "NEPA/GEPA",
+     "اداره حفاظت محیط زیست (NEPA/GEPA)",
+     "د چاپېریال ساتنې اداره (NEPA/GEPA)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "mrrd",
+    "label": [
+     "MRRD",
+     "وزارت احیا و انکشاف دهات (MRRD)",
+     "د کلیو د بیارغونې او پراختیا وزارت (MRRD)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "andma",
+    "label": [
+     "ANDMA",
+     "اداره ملی مبارزه با حوادث (ANDMA)",
+     "د پېښو سره د مبارزې ملي اداره (ANDMA)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "amd",
+    "label": [
+     "Meteorological Department",
+     "ریاست هواشناسی",
+     "د هوا پېژندنې ریاست"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "nsia",
+    "label": [
+     "NSIA",
+     "اداره ملی احصائیه و معلومات (NSIA)",
+     "د احصایې او معلوماتو ملي اداره (NSIA)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "who",
+    "label": [
+     "WHO",
+     "سازمان جهانی صحت (WHO)",
+     "د روغتیا نړیوال سازمان (WHO)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "fao",
+    "label": [
+     "FAO",
+     "سازمان خوراک و زراعت ملل متحد (FAO)",
+     "د ملګرو ملتونو د خوړو او کرنې سازمان (FAO)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "unicef",
+    "label": [
+     "UNICEF",
+     "یونیسف (UNICEF)",
+     "یونیسف (UNICEF)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "iom",
+    "label": [
+     "IOM",
+     "سازمان بین‌المللی مهاجرت (IOM)",
+     "د مهاجرت نړیوال سازمان (IOM)"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "other_un",
+    "label": [
+     "Other UN agency",
+     "نهاد دیگر ملل متحد",
+     "د ملګرو ملتونو بله اداره"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "ngo",
+    "label": [
+     "NGO",
+     "موسسه غیر دولتی",
+     "غیر دولتي موسسه"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "private",
+    "label": [
+     "Private company",
+     "شرکت خصوصی",
+     "خصوصي شرکت"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "orgs",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "sys_format",
+    "name": "online",
+    "label": [
+     "Online system",
+     "سیستم آنلاین",
+     "آنلاین سیسټم"
+    ]
+   },
+   {
+    "list_name": "sys_format",
+    "name": "mobile_offline",
+    "label": [
+     "Mobile app that works offline and sends later (e.g., Kobo, ODK, DHIS2 Capture)",
+     "اپلیکیشن موبایل که بدون انترنت کار می‌کند و معلومات را بعداً می‌فرستد (مانند Kobo، ODK، DHIS2 Capture)",
+     "موبایل اپلیکېشن چې پرته له انټرنېټه کار کوي او وروسته یې لېږي (لکه Kobo، ODK، DHIS2 Capture)"
+    ]
+   },
+   {
+    "list_name": "sys_format",
+    "name": "spreadsheet",
+    "label": [
+     "Spreadsheet (e.g., Excel) sent by email or messaging app",
+     "جدول الکترونیکی (مانند Excel) که از طریق ایمیل یا اپلیکیشن پیام‌رسان فرستاده می‌شود",
+     "برېښنايي جدول (لکه Excel) چې د برېښنالیک یا د پیغام رسولو د اپلیکېشن له لارې لېږل کېږي"
+    ]
+   },
+   {
+    "list_name": "sys_format",
+    "name": "paper",
+    "label": [
+     "Paper forms or registers",
+     "فورم‌ها یا راجسترهای کاغذی",
+     "کاغذي فورمې یا راجسترونه"
+    ]
+   },
+   {
+    "list_name": "sys_format",
+    "name": "msg",
+    "label": [
+     "A messaging app (e.g., WhatsApp or Telegram)",
+     "یک اپلیکیشن پیام‌رسان (مانند WhatsApp یا Telegram)",
+     "د پیغام رسولو اپلیکېشن (لکه WhatsApp یا Telegram)"
+    ]
+   },
+   {
+    "list_name": "sys_format",
+    "name": "phone",
+    "label": [
+     "Phone calls",
+     "تماس‌های تیلفونی",
+     "تلیفوني زنګونه"
+    ]
+   },
+   {
+    "list_name": "sys_format",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "sys_freq",
+    "name": "realtime",
+    "label": [
+     "As soon as an event happens",
+     "به محض وقوع یک حادثه",
+     "سمدستي، کله چې پېښه رامنځته شي"
+    ]
+   },
+   {
+    "list_name": "sys_freq",
+    "name": "daily",
+    "label": [
+     "Daily",
+     "روزانه",
+     "هره ورځ"
+    ]
+   },
+   {
+    "list_name": "sys_freq",
+    "name": "weekly",
+    "label": [
+     "Weekly",
+     "هفته‌وار",
+     "هره اونۍ"
+    ]
+   },
+   {
+    "list_name": "sys_freq",
+    "name": "monthly",
+    "label": [
+     "Monthly",
+     "ماهوار",
+     "هره میاشت"
+    ]
+   },
+   {
+    "list_name": "sys_freq",
+    "name": "quarterly",
+    "label": [
+     "Quarterly or less often",
+     "ربعوار یا کمتر از آن",
+     "هرې درې میاشتې یا تر هغه لږ ځله"
+    ]
+   },
+   {
+    "list_name": "sys_freq",
+    "name": "campaigns",
+    "label": [
+     "Only during campaigns or outbreaks",
+     "تنها در جریان کمپاین‌ها یا شیوع امراض",
+     "یوازې د کمپاینونو یا د ناروغیو د خپرېدو پر مهال"
+    ]
+   },
+   {
+    "list_name": "sys_freq",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "human_cases",
+    "label": [
+     "Human cases or deaths",
+     "واقعات یا وفیات انسانی",
+     "د انسانانو پېښې یا مړینې"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "animal_cases",
+    "label": [
+     "Animal cases or deaths",
+     "واقعات یا تلفات حیوانی",
+     "د څارویو پېښې یا مړینې"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "wild_deaths",
+    "label": [
+     "Wild animal or bird deaths",
+     "تلفات حیوانات یا پرندگان وحشی",
+     "د ځنګلي څارویو یا مرغانو مړینې"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "lab",
+    "label": [
+     "Laboratory samples and results",
+     "نمونه‌ها و نتایج لابراتوار",
+     "د لابراتوار نمونې او پایلې"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "vectors",
+    "label": [
+     "Ticks, mosquitoes or sandflies",
+     "کنه، پشه یا پشه خاکی",
+     "کنې، غوماشې یا پشه خاکي"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "environment",
+    "label": [
+     "Water, weather or environment",
+     "آب، وضعیت هوا یا محیط زیست",
+     "اوبه، هوا یا چاپېریال"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "food",
+    "label": [
+     "Food safety",
+     "مصئونیت غذایی",
+     "د خوړو خوندیتوب"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "rumours",
+    "label": [
+     "Reports or rumours of unusual events",
+     "گزارش‌ها یا شایعات درباره حوادث غیر معمول",
+     "د غیر عادي پېښو راپورونه یا اوازې"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "vaccination",
+    "label": [
+     "Vaccination or treatment",
+     "واکسیناسیون یا تداوی",
+     "واکسین کول یا درملنه"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "population",
+    "label": [
+     "Human or animal population, or movement",
+     "جمعیت انسانی یا حیوانی، یا نقل و انتقال آن‌ها",
+     "د انسانانو یا څارویو شمېر، یا خوځښت"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "stocks",
+    "label": [
+     "Stocks, supplies or staff",
+     "ذخایر، لوازم یا کارمندان",
+     "زېرمې، توکي یا کارکوونکي"
+    ]
+   },
+   {
+    "list_name": "sys_content",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "sys_access",
+    "name": "internal",
+    "label": [
+     "Other units in my organisation",
+     "واحدهای دیگر در اداره من",
+     "زما په اداره کې نور واحدونه"
+    ]
+   },
+   {
+    "list_name": "sys_access",
+    "name": "ministries",
+    "label": [
+     "Other ministries or authorities",
+     "وزارت‌ها یا ادارات دیگر",
+     "نور وزارتونه یا ادارې"
+    ]
+   },
+   {
+    "list_name": "sys_access",
+    "name": "un_ngo",
+    "label": [
+     "UN agencies or NGOs",
+     "نهادهای ملل متحد یا موسسات غیر دولتی",
+     "د ملګرو ملتونو ادارې یا غیر دولتي موسسې"
+    ]
+   },
+   {
+    "list_name": "sys_access",
+    "name": "international",
+    "label": [
+     "International bodies (e.g., WHO, WOAH or FAO, regional or global)",
+     "نهادهای بین‌المللی منطقوی یا جهانی (مانند WHO، WOAH یا FAO)",
+     "نړیوالې ادارې (لکه WHO، WOAH یا FAO، په سیمه‌ییزه یا نړیواله کچه)"
+    ]
+   },
+   {
+    "list_name": "sys_access",
+    "name": "public",
+    "label": [
+     "The public (e.g., a published bulletin or dashboard)",
+     "عامه مردم (مانند بولتن یا داشبورد نشر شده)",
+     "عام خلک (لکه خپره شوې خبرپاڼه یا ډشبورډ)"
+    ]
+   },
+   {
+    "list_name": "sys_access",
+    "name": "no_one",
+    "label": [
+     "No one outside my unit",
+     "هیچ کس خارج از واحد من",
+     "زما له واحد بهر هېڅوک"
+    ]
+   },
+   {
+    "list_name": "sys_access",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "sys_use",
+    "name": "verify",
+    "label": [
+     "Checking (verifying) reports of possible events",
+     "بررسی (تأیید) گزارش‌های حوادث احتمالی مرض",
+     "د ناروغۍ د احتمالي پېښو د راپورونو کتنه (تایید)"
+    ]
+   },
+   {
+    "list_name": "sys_use",
+    "name": "analysis",
+    "label": [
+     "Regular analysis or bulletins",
+     "تحلیل منظم یا بولتن‌ها",
+     "منظم تحلیل یا خبرپاڼې"
+    ]
+   },
+   {
+    "list_name": "sys_use",
+    "name": "alerts",
+    "label": [
+     "Triggering alerts or investigations",
+     "صدور هشدار یا آغاز تحقیقات",
+     "د خبرتیاوو یا څېړنو پیلول"
+    ]
+   },
+   {
+    "list_name": "sys_use",
+    "name": "response",
+    "label": [
+     "Planning or guiding a response",
+     "برنامه‌ریزی یا رهنمایی پاسخ‌دهی",
+     "د غبرګون پلان جوړول یا لارښوونه"
+    ]
+   },
+   {
+    "list_name": "sys_use",
+    "name": "donors",
+    "label": [
+     "Reports to donors or partners",
+     "گزارش‌ها به تمویل‌کنندگان یا شرکا",
+     "مرسته کوونکو یا همکارانو ته راپورونه"
+    ]
+   },
+   {
+    "list_name": "sys_use",
+    "name": "not_used",
+    "label": [
+     "Collected but not used, as far as I know",
+     "جمع‌آوری می‌شود اما تا جایی که می‌دانم استفاده نمی‌شود",
+     "راټولېږي خو، تر کومه ځایه چې زه خبر یم، نه کارول کېږي"
+    ]
+   },
+   {
+    "list_name": "sys_use",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "internet",
+    "label": [
+     "Internet or connectivity",
+     "انترنت یا اتصال به شبکه",
+     "انټرنېټ یا د شبکې اړیکه"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "power",
+    "label": [
+     "Power cuts",
+     "قطع برق",
+     "د برېښنا پرې کېدل"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "staff",
+    "label": [
+     "Too few trained staff, or staff turnover",
+     "کمبود کارمندان آموزش‌دیده، یا تغییر مکرر کارمندان",
+     "د روزل شویو کارکوونکو کمښت، یا د کارکوونکو ژر ژر بدلېدل"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "duplicate",
+    "label": [
+     "The same data must also be reported to other systems",
+     "همین معلومات باید به سیستم‌های دیگر نیز گزارش شود",
+     "همدا معلومات باید نورو سیسټمونو ته هم ولېږل شي"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "late",
+    "label": [
+     "Late or incomplete reporting",
+     "گزارش‌دهی با تأخیر یا ناقص",
+     "ناوخته یا نیمګړی راپور ورکول"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "quality",
+    "label": [
+     "Poor data quality",
+     "کیفیت پایین معلومات",
+     "د معلوماتو ټیټ کیفیت"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "no_feedback",
+    "label": [
+     "No feedback to those who report",
+     "نبود عکس العمل برای کسانی که گزارش می‌دهند",
+     "راپور ورکوونکو ته غبرګون نه ورکول کېږي"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "software",
+    "label": [
+     "Software or equipment problems",
+     "مشکلات نرم‌افزار یا تجهیزات",
+     "د سافټویر یا تجهیزاتو ستونزې"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "funding",
+    "label": [
+     "Funding or support stopped or uncertain",
+     "تمویل یا حمایت متوقف شده یا نامعلوم است",
+     "تمویل یا ملاتړ بند شوی یا ناڅرګند دی"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "rules",
+    "label": [
+     "Rules or approvals limit sharing",
+     "مقررات یا منظوری‌ها شریک‌سازی را محدود می‌سازد",
+     "مقررات یا منظوري شریکول محدودوي"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "none",
+    "label": [
+     "No major problems",
+     "مشکل عمده‌ای وجود ندارد",
+     "کومه لویه ستونزه نشته"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "sys_problems",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "share_docs",
+    "name": "upload_now",
+    "label": [
+     "Yes – I will upload them now",
+     "بلی – همین حالا آن‌ها را آپلود می‌کنم",
+     "هو – همدا اوس یې اپلوډ کوم"
+    ]
+   },
+   {
+    "list_name": "share_docs",
+    "name": "later",
+    "label": [
+     "Yes – I will send them later",
+     "بلی – آن‌ها را بعداً می‌فرستم",
+     "هو – وروسته به یې ولېږم"
+    ]
+   },
+   {
+    "list_name": "share_docs",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "cchf",
+    "label": [
+     "CCHF",
+     "تب خونریزی‌دهنده کریمه کانگو (CCHF)",
+     "د کریمیا کانګو وینه بهېدونکې تبه (CCHF)"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "ai",
+    "label": [
+     "Avian influenza (e.g., H5N1)",
+     "انفلونزای پرندگان (مانند H5N1)",
+     "د مرغانو انفلونزا (لکه H5N1)"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "brucellosis",
+    "label": [
+     "Brucellosis",
+     "بروسلوز",
+     "بروسلوز"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "rabies",
+    "label": [
+     "Rabies",
+     "مرض هاری",
+     "د لېوني سپي ناروغي"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "anthrax",
+    "label": [
+     "Anthrax",
+     "سیاه زخم (انتراکس)",
+     "انتراکس"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "leish",
+    "label": [
+     "Leishmaniasis",
+     "لشمانیا",
+     "لشمانیا"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "btb",
+    "label": [
+     "Bovine tuberculosis",
+     "توبرکلوز گاوی",
+     "د غواګانو توبرکلوز"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "hydatid",
+    "label": [
+     "Hydatid disease (echinococcosis)",
+     "مرض کیست هایداتید (اکینوکوکوزیس)",
+     "د هایډاټیډ کیست ناروغي (اکینوکوکوزس)"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "foodborne",
+    "label": [
+     "Food-borne infections",
+     "انتانات ناشی از مواد غذایی",
+     "د خوړو له لارې لېږدېدونکي انتانونه"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "cholera",
+    "label": [
+     "Cholera or acute watery diarrhoea",
+     "کولرا یا اسهال حاد آبگین",
+     "کولرا یا حاد اوبلن نس ناستی"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "measles",
+    "label": [
+     "Measles",
+     "سرخکان",
+     "شری"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "polio",
+    "label": [
+     "Polio",
+     "فلج اطفال (پولیو)",
+     "پولیو"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "dengue",
+    "label": [
+     "Dengue",
+     "تب دنگی",
+     "ډېنګي تبه"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "malaria",
+    "label": [
+     "Malaria",
+     "ملاریا",
+     "ملاریا"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "amr",
+    "label": [
+     "Antimicrobial resistance",
+     "مقاومت ضد میکروبی",
+     "د میکروبونو د درملو پر وړاندې مقاومت"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "covid",
+    "label": [
+     "COVID-19",
+     "COVID-19",
+     "COVID-19"
+    ]
+   },
+   {
+    "list_name": "hazards",
+    "name": "pneumonia",
+    "label": [
+     "Clusters of unexplained pneumonia, or a new respiratory disease",
+     "واقعات گروهی سینه بغل با علت نامعلوم، یا یک مرض تنفسی جدید",
+     "د ناڅرګند علت سینه بغل ډله‌ییزې پېښې، یا نوې تنفسي ناروغي"
+    ]
+   },
+   {
+    "list_name": "casedef",
+    "name": "national",
+    "label": [
+     "Yes – national (MoPH or MAIL)",
+     "بلی – ملی (MoPH یا MAIL)",
+     "هو – ملي (MoPH یا MAIL)"
+    ]
+   },
+   {
+    "list_name": "casedef",
+    "name": "international",
+    "label": [
+     "Yes – international (WHO, WOAH or FAO)",
+     "بلی – بین‌المللی (WHO، WOAH یا FAO)",
+     "هو – نړیوال (WHO، WOAH یا FAO)"
+    ]
+   },
+   {
+    "list_name": "casedef",
+    "name": "own_partner",
+    "label": [
+     "Yes – our own or a partner’s",
+     "بلی – از خود ما یا از یک نهاد همکار",
+     "هو – زموږ خپل یا د یوه همکار"
+    ]
+   },
+   {
+    "list_name": "casedef",
+    "name": "yes_unknown",
+    "label": [
+     "Yes – but I don’t know who issued it",
+     "بلی – اما نمی‌دانم چه کسی آن را صادر کرده است",
+     "هو – خو نه پوهېږم چې چا صادر کړی دی"
+    ]
+   },
+   {
+    "list_name": "casedef",
+    "name": "none",
+    "label": [
+     "No written definition",
+     "تعریف کتبی وجود ندارد",
+     "لیکلی تعریف نشته"
+    ]
+   },
+   {
+    "list_name": "casedef",
+    "name": "not_relevant",
+    "label": [
+     "Not relevant to my work",
+     "به کار من ارتباط ندارد",
+     "زما له کار سره اړه نه لري"
+    ]
+   },
+   {
+    "list_name": "casedef",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "own_supervisor",
+    "label": [
+     "Our own supervisor or higher level in the same organisation",
+     "آمر خود ما یا سطح بالاتر در همان اداره",
+     "زموږ خپل آمر یا په همدې اداره کې لوړه کچه"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "prov_ph",
+    "label": [
+     "Provincial public health directorate (surveillance officer)",
+     "ریاست صحت عامه ولایت (مسئول سرویلانس)",
+     "د عامې روغتیا ولایتي ریاست (د سرویلانس مسوول)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "prov_ag",
+    "label": [
+     "Provincial agriculture and livestock directorate (veterinary officer)",
+     "ریاست زراعت و مالداری ولایت (مسئول وترنری)",
+     "د کرنې او مالدارۍ ولایتي ریاست (د وترنرۍ مسوول)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "governor",
+    "label": [
+     "Provincial governor’s office",
+     "دفتر والی",
+     "د ولایت د والي دفتر"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "ndsr_ihr",
+    "label": [
+     "National surveillance (NDSR) or IHR focal point, MoPH",
+     "سرویلانس ملی (NDSR) یا مسئول رابط IHR (مقررات صحی بین‌المللی) در وزارت صحت عامه (MoPH)",
+     "د MoPH ملي سرویلانس (NDSR) یا د IHR (نړیوال روغتیايي مقررات) د اړیکو مسوول"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "nat_vet",
+    "label": [
+     "National veterinary services, MAIL",
+     "خدمات ملی وترنری وزارت زراعت، آبیاری و مالداری (MAIL)",
+     "د MAIL ملي وترنري خدمتونه"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "cphl",
+    "label": [
+     "Central Public Health Laboratory (CPHL)",
+     "لابراتوار مرکزی صحت عامه (CPHL)",
+     "د عامې روغتیا مرکزي لابراتوار (CPHL)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "cvdrl",
+    "label": [
+     "Central Veterinary Diagnostic and Research Laboratory (CVDRL)",
+     "لابراتوار مرکزی تشخیصیه و تحقیقات وترنری (CVDRL)",
+     "د وترنري تشخیص او څېړنې مرکزي لابراتوار (CVDRL)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "nepa",
+    "label": [
+     "Environmental Protection Agency (NEPA/GEPA)",
+     "اداره حفاظت محیط زیست (NEPA/GEPA)",
+     "د چاپېریال ساتنې اداره (NEPA/GEPA)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "vfu",
+    "label": [
+     "Veterinary field unit (VFU)",
+     "واحد ساحوی وترنری (VFU)",
+     "د وترنرۍ سیمه‌ییز واحد (VFU)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "municipality",
+    "label": [
+     "Municipality (e.g., slaughterhouse)",
+     "شاروالی (مانند مسلخ)",
+     "ښاروالي (لکه مسلخ)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "who",
+    "label": [
+     "WHO",
+     "سازمان جهانی صحت (WHO)",
+     "د روغتیا نړیوال سازمان (WHO)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "fao",
+    "label": [
+     "FAO",
+     "سازمان خوراک و زراعت ملل متحد (FAO)",
+     "د ملګرو ملتونو د خوړو او کرنې سازمان (FAO)"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "un_ngo",
+    "label": [
+     "Another UN agency or an NGO",
+     "یک نهاد دیگر ملل متحد یا یک موسسه غیر دولتی",
+     "د ملګرو ملتونو بله اداره یا یوه غیر دولتي موسسه"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "elders",
+    "label": [
+     "Community elders or the local shura",
+     "ریش‌سفیدان یا شورای محل",
+     "سپین ږیري یا ځایي شورا"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "nobody",
+    "label": [
+     "Nobody outside my unit",
+     "هیچ کس خارج از واحد من",
+     "زما له واحد بهر هېڅوک"
+    ]
+   },
+   {
+    "list_name": "inform_whom",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "speed",
+    "name": "h24",
+    "label": [
+     "Within 24 hours",
+     "در ظرف ۲۴ ساعت",
+     "د ۲۴ ساعتونو په ترڅ کې"
+    ]
+   },
+   {
+    "list_name": "speed",
+    "name": "d1_3",
+    "label": [
+     "1–3 days",
+     "۱–۳ روز",
+     "۱–۳ ورځې"
+    ]
+   },
+   {
+    "list_name": "speed",
+    "name": "d4_7",
+    "label": [
+     "4–7 days",
+     "۴–۷ روز",
+     "۴–۷ ورځې"
+    ]
+   },
+   {
+    "list_name": "speed",
+    "name": "more_week",
+    "label": [
+     "More than a week",
+     "بیشتر از یک هفته",
+     "له یوې اونۍ زیات"
+    ]
+   },
+   {
+    "list_name": "speed",
+    "name": "never",
+    "label": [
+     "Probably never",
+     "احتمالاً هرگز",
+     "شاید هېڅکله"
+    ]
+   },
+   {
+    "list_name": "speed",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "travel",
+    "name": "form_letter",
+    "label": [
+     "Official form or letter",
+     "فورم یا مکتوب رسمی",
+     "رسمي فورمه یا مکتوب"
+    ]
+   },
+   {
+    "list_name": "travel",
+    "name": "electronic",
+    "label": [
+     "Electronic system",
+     "سیستم الکترونیکی",
+     "برېښنايي سیسټم"
+    ]
+   },
+   {
+    "list_name": "travel",
+    "name": "phone",
+    "label": [
+     "Phone call",
+     "تماس تیلفونی",
+     "تلیفوني زنګ"
+    ]
+   },
+   {
+    "list_name": "travel",
+    "name": "msg",
+    "label": [
+     "A messaging app (e.g., WhatsApp or Telegram)",
+     "یک اپلیکیشن پیام‌رسان (مانند WhatsApp یا Telegram)",
+     "د پیغام رسولو اپلیکېشن (لکه WhatsApp یا Telegram)"
+    ]
+   },
+   {
+    "list_name": "travel",
+    "name": "email",
+    "label": [
+     "Email",
+     "ایمیل",
+     "برېښنالیک"
+    ]
+   },
+   {
+    "list_name": "travel",
+    "name": "meeting",
+    "label": [
+     "At a meeting",
+     "در یک جلسه",
+     "په غونډه کې"
+    ]
+   },
+   {
+    "list_name": "travel",
+    "name": "un_ngo",
+    "label": [
+     "Through a UN agency or NGO",
+     "از طریق یک نهاد ملل متحد یا موسسه غیر دولتی",
+     "د ملګرو ملتونو د یوې ادارې یا غیر دولتي موسسې له لارې"
+    ]
+   },
+   {
+    "list_name": "travel",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "sop",
+    "name": "followed",
+    "label": [
+     "Yes – and it is followed in practice",
+     "بلی – و در عمل از آن پیروی می‌شود",
+     "هو – او په عمل کې پلي کېږي"
+    ]
+   },
+   {
+    "list_name": "sop",
+    "name": "not_followed",
+    "label": [
+     "Yes – but it is not usually followed",
+     "بلی – اما معمولاً از آن پیروی نمی‌شود",
+     "هو – خو معمولاً پلي نه کېږي"
+    ]
+   },
+   {
+    "list_name": "sop",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "sop",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "approval",
+    "name": "none",
+    "label": [
+     "None – my unit can decide",
+     "هیچ کس – واحد من می‌تواند تصمیم بگیرد",
+     "هېڅ – زما واحد پخپله پرېکړه کولای شي"
+    ]
+   },
+   {
+    "list_name": "approval",
+    "name": "director",
+    "label": [
+     "Our director",
+     "رئیس ما",
+     "زموږ رئیس"
+    ]
+   },
+   {
+    "list_name": "approval",
+    "name": "national",
+    "label": [
+     "The national level of our ministry or organisation",
+     "سطح ملی وزارت یا اداره ما",
+     "زموږ د وزارت یا ادارې ملي کچه"
+    ]
+   },
+   {
+    "list_name": "approval",
+    "name": "governor",
+    "label": [
+     "The provincial governor’s office",
+     "دفتر والی",
+     "د ولایت د والي دفتر"
+    ]
+   },
+   {
+    "list_name": "approval",
+    "name": "partner",
+    "label": [
+     "A partner organisation (UN agency or NGO)",
+     "یک نهاد همکار (نهاد ملل متحد یا موسسه غیر دولتی)",
+     "یوه همکاره اداره (د ملګرو ملتونو اداره یا غیر دولتي موسسه)"
+    ]
+   },
+   {
+    "list_name": "approval",
+    "name": "unclear",
+    "label": [
+     "It is not clear who decides",
+     "روشن نیست که چه کسی تصمیم می‌گیرد",
+     "څرګنده نه ده چې څوک پرېکړه کوي"
+    ]
+   },
+   {
+    "list_name": "approval",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "approval",
+    "name": "prefer_not",
+    "label": [
+     "Prefer not to answer",
+     "ترجیح می‌دهم پاسخ ندهم",
+     "غوره ګڼم چې ځواب ورنه کړم"
+    ]
+   },
+   {
+    "list_name": "wild_signal",
+    "name": "yes_days",
+    "label": [
+     "Yes – within a few days",
+     "بلی – در ظرف چند روز",
+     "هو – د څو ورځو په ترڅ کې"
+    ]
+   },
+   {
+    "list_name": "wild_signal",
+    "name": "yes_late",
+    "label": [
+     "Yes – but usually late",
+     "بلی – اما معمولاً با تأخیر",
+     "هو – خو معمولاً ناوخته"
+    ]
+   },
+   {
+    "list_name": "wild_signal",
+    "name": "probably_not",
+    "label": [
+     "Probably not",
+     "احتمالاً نه",
+     "شاید نه"
+    ]
+   },
+   {
+    "list_name": "wild_signal",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "env_link",
+    "name": "to_ph",
+    "label": [
+     "We send results that suggest a risk to public health services",
+     "ما نتایجی را که نشان‌دهنده خطر است، به خدمات صحت عامه می‌فرستیم",
+     "موږ هغه پایلې چې د خطر نښه ښيي، د عامې روغتیا خدمتونو ته لېږو"
+    ]
+   },
+   {
+    "list_name": "env_link",
+    "name": "to_ah",
+    "label": [
+     "We send results that suggest a risk to animal health services",
+     "ما نتایجی را که نشان‌دهنده خطر است، به خدمات صحت حیوانات می‌فرستیم",
+     "موږ هغه پایلې چې د خطر نښه ښيي، د څارویو د روغتیا خدمتونو ته لېږو"
+    ]
+   },
+   {
+    "list_name": "env_link",
+    "name": "asked",
+    "label": [
+     "Health services ask us where or what to test",
+     "خدمات صحی از ما می‌خواهند که در کجا یا چه چیزی را آزمایش کنیم",
+     "روغتیايي خدمتونه له موږ غوښتنه کوي چې چېرته یا څه وازمویو"
+    ]
+   },
+   {
+    "list_name": "env_link",
+    "name": "joint",
+    "label": [
+     "We plan testing or sampling together",
+     "ما آزمایش یا نمونه‌گیری را به طور مشترک برنامه‌ریزی می‌کنیم",
+     "موږ ازموینه یا نمونه اخیستنه په ګډه پلانوو"
+    ]
+   },
+   {
+    "list_name": "env_link",
+    "name": "no_link",
+    "label": [
+     "No regular link",
+     "ارتباط منظم وجود ندارد",
+     "منظمه اړیکه نشته"
+    ]
+   },
+   {
+    "list_name": "env_link",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "cchf",
+    "label": [
+     "CCHF",
+     "تب خونریزی‌دهنده کریمه کانگو (CCHF)",
+     "د کریمیا کانګو وینه بهېدونکې تبه (CCHF)"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "ai",
+    "label": [
+     "Avian influenza (e.g., H5N1)",
+     "انفلونزای پرندگان (مانند H5N1)",
+     "د مرغانو انفلونزا (لکه H5N1)"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "brucellosis",
+    "label": [
+     "Brucellosis",
+     "بروسلوز",
+     "بروسلوز"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "rabies",
+    "label": [
+     "Rabies",
+     "مرض هاری",
+     "د لېوني سپي ناروغي"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "anthrax",
+    "label": [
+     "Anthrax",
+     "سیاه زخم (انتراکس)",
+     "انتراکس"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "leish",
+    "label": [
+     "Leishmaniasis",
+     "لشمانیا",
+     "لشمانیا"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "btb",
+    "label": [
+     "Bovine tuberculosis",
+     "توبرکلوز گاوی",
+     "د غواګانو توبرکلوز"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "hydatid",
+    "label": [
+     "Hydatid disease (echinococcosis)",
+     "مرض کیست هایداتید (اکینوکوکوزیس)",
+     "د هایډاټیډ کیست ناروغي (اکینوکوکوزس)"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "foodborne",
+    "label": [
+     "Food-borne infection",
+     "انتان ناشی از مواد غذایی",
+     "د خوړو له لارې لېږدېدونکی انتان"
+    ]
+   },
+   {
+    "list_name": "event_disease",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_09",
+    "label": [
+     "Qaws 1405 / Nov–Dec 2026",
+     "قوس ۱۴۰۵ / نومبر–دسمبر ۲۰۲۶",
+     "لیندۍ ۱۴۰۵ / نومبر–دسمبر ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_08",
+    "label": [
+     "Aqrab 1405 / Oct–Nov 2026",
+     "عقرب ۱۴۰۵ / اکتوبر–نومبر ۲۰۲۶",
+     "لړم ۱۴۰۵ / اکتوبر–نومبر ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_07",
+    "label": [
+     "Mizan 1405 / Sep–Oct 2026",
+     "میزان ۱۴۰۵ / سپتمبر–اکتوبر ۲۰۲۶",
+     "تله ۱۴۰۵ / سپټمبر–اکتوبر ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_06",
+    "label": [
+     "Sunbula 1405 / Aug–Sep 2026",
+     "سنبله ۱۴۰۵ / اگست–سپتمبر ۲۰۲۶",
+     "وږی ۱۴۰۵ / اګست–سپټمبر ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_05",
+    "label": [
+     "Asad 1405 / Jul–Aug 2026",
+     "اسد ۱۴۰۵ / جولای–اگست ۲۰۲۶",
+     "زمری ۱۴۰۵ / جولای–اګست ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_04",
+    "label": [
+     "Saratan 1405 / Jun–Jul 2026",
+     "سرطان ۱۴۰۵ / جون–جولای ۲۰۲۶",
+     "چنګاښ ۱۴۰۵ / جون–جولای ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_03",
+    "label": [
+     "Jawza 1405 / May–Jun 2026",
+     "جوزا ۱۴۰۵ / می–جون ۲۰۲۶",
+     "غبرګولی ۱۴۰۵ / مۍ–جون ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_02",
+    "label": [
+     "Sawr 1405 / Apr–May 2026",
+     "ثور ۱۴۰۵ / اپریل–می ۲۰۲۶",
+     "غویی ۱۴۰۵ / اپرېل–مۍ ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1405_01",
+    "label": [
+     "Hamal 1405 / Mar–Apr 2026",
+     "حمل ۱۴۰۵ / مارچ–اپریل ۲۰۲۶",
+     "وری ۱۴۰۵ / مارچ–اپرېل ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1404_12",
+    "label": [
+     "Hut 1404 / Feb–Mar 2026",
+     "حوت ۱۴۰۴ / فبروری–مارچ ۲۰۲۶",
+     "کب ۱۴۰۴ / فبروري–مارچ ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1404_11",
+    "label": [
+     "Dalw 1404 / Jan–Feb 2026",
+     "دلو ۱۴۰۴ / جنوری–فبروری ۲۰۲۶",
+     "سلواغه ۱۴۰۴ / جنوري–فبروري ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1404_10",
+    "label": [
+     "Jadi 1404 / Dec 2025–Jan 2026",
+     "جدی ۱۴۰۴ / دسمبر ۲۰۲۵–جنوری ۲۰۲۶",
+     "مرغومی ۱۴۰۴ / دسمبر ۲۰۲۵–جنوري ۲۰۲۶"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1404_09",
+    "label": [
+     "Qaws 1404 / Nov–Dec 2025",
+     "قوس ۱۴۰۴ / نومبر–دسمبر ۲۰۲۵",
+     "لیندۍ ۱۴۰۴ / نومبر–دسمبر ۲۰۲۵"
+    ]
+   },
+   {
+    "list_name": "months",
+    "name": "sh1404_08",
+    "label": [
+     "Aqrab 1404 / Oct–Nov 2025",
+     "عقرب ۱۴۰۴ / اکتوبر–نومبر ۲۰۲۵",
+     "لړم ۱۴۰۴ / اکتوبر–نومبر ۲۰۲۵"
+    ]
+   },
+   {
+    "list_name": "told",
+    "name": "yes_24h",
+    "label": [
+     "Yes – within 24 hours",
+     "بلی – در ظرف ۲۴ ساعت",
+     "هو – د ۲۴ ساعتونو په ترڅ کې"
+    ]
+   },
+   {
+    "list_name": "told",
+    "name": "yes_later",
+    "label": [
+     "Yes – but later",
+     "بلی – اما دیرتر",
+     "هو – خو وروسته"
+    ]
+   },
+   {
+    "list_name": "told",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "told",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "records",
+    "name": "yes",
+    "label": [
+     "Yes",
+     "بلی",
+     "هو"
+    ]
+   },
+   {
+    "list_name": "records",
+    "name": "partly",
+    "label": [
+     "Partly",
+     "تا حدی",
+     "تر یوه حده"
+    ]
+   },
+   {
+    "list_name": "records",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "records",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "freq5",
+    "name": "often",
+    "label": [
+     "Often",
+     "اکثراً",
+     "ډېری وخت"
+    ]
+   },
+   {
+    "list_name": "freq5",
+    "name": "sometimes",
+    "label": [
+     "Sometimes",
+     "گاهی",
+     "کله ناکله"
+    ]
+   },
+   {
+    "list_name": "freq5",
+    "name": "rarely",
+    "label": [
+     "Rarely",
+     "به ندرت",
+     "ډېر لږ"
+    ]
+   },
+   {
+    "list_name": "freq5",
+    "name": "never",
+    "label": [
+     "Never",
+     "هرگز",
+     "هېڅکله"
+    ]
+   },
+   {
+    "list_name": "freq5",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "unoff_routes",
+    "name": "word",
+    "label": [
+     "Word of mouth",
+     "از زبان مردم",
+     "خوله په خوله"
+    ]
+   },
+   {
+    "list_name": "unoff_routes",
+    "name": "rumours",
+    "label": [
+     "Community rumours",
+     "شایعات در جامعه",
+     "د ټولنې اوازې"
+    ]
+   },
+   {
+    "list_name": "unoff_routes",
+    "name": "social",
+    "label": [
+     "Social media or messaging groups",
+     "رسانه‌های اجتماعی یا گروپ‌های پیام‌رسان",
+     "ټولنیزې رسنۍ یا د پیغام رسولو ګروپونه"
+    ]
+   },
+   {
+    "list_name": "unoff_routes",
+    "name": "news",
+    "label": [
+     "News media",
+     "رسانه‌های خبری",
+     "خبري رسنۍ"
+    ]
+   },
+   {
+    "list_name": "unoff_routes",
+    "name": "distant",
+    "label": [
+     "Unconfirmed reports from distant districts",
+     "گزارش‌های تأیید نشده از ولسوالی‌های دوردست",
+     "له لرې پرتو ولسوالیو تایید نه شوي راپورونه"
+    ]
+   },
+   {
+    "list_name": "unoff_routes",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "unoff_routes",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "h_ari",
+    "label": [
+     "Acute respiratory infection (ARI), including pneumonia",
+     "انتان حاد تنفسی (ARI)، به شمول سینه بغل",
+     "حاد تنفسي انتان (ARI)، د سینه بغل په ګډون"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "h_awd",
+    "label": [
+     "Acute watery diarrhoea (AWD) or suspected cholera",
+     "اسهال حاد آبگین (AWD) یا کولرای مشکوک",
+     "حاد اوبلن نس ناستی (AWD) یا مشکوکه کولرا"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "h_measles",
+    "label": [
+     "Measles",
+     "سرخکان",
+     "شری"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "h_cchf",
+    "label": [
+     "CCHF",
+     "تب خونریزی‌دهنده کریمه کانگو (CCHF)",
+     "د کریمیا کانګو وینه بهېدونکې تبه (CCHF)"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "h_dengue",
+    "label": [
+     "Dengue",
+     "تب دنگی",
+     "ډېنګي تبه"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "h_malaria",
+    "label": [
+     "Malaria",
+     "ملاریا",
+     "ملاریا"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "a_sudden",
+    "label": [
+     "Sudden deaths of cattle, sheep or goats (e.g., anthrax)",
+     "تلفات ناگهانی گاو، گوسفند یا بز، مانند سیاه زخم (انتراکس)",
+     "د غواګانو، پسونو یا وزو ناڅاپي مړینه (لکه انتراکس)"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "a_poultry",
+    "label": [
+     "Deaths of poultry (e.g., avian influenza)",
+     "تلفات مرغ‌های خانگی (مانند انفلونزای پرندگان)",
+     "د کورنیو چرګانو مړینه (لکه د مرغانو انفلونزا)"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "a_wild",
+    "label": [
+     "Deaths of wild birds or other wild animals",
+     "تلفات پرندگان وحشی یا سایر حیوانات وحشی",
+     "د ځنګلي مرغانو یا نورو ځنګلي څارویو مړینه"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "a_rabid",
+    "label": [
+     "Suspected rabid dogs or other animals",
+     "سگ‌ها یا حیوانات دیگر مشکوک به مرض هاری",
+     "شکمن لېوني سپي یا نور څاروي"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "a_abortion",
+    "label": [
+     "Abortions in livestock (e.g., brucellosis)",
+     "سقط جنین در مواشی (مانند بروسلوز)",
+     "په مالونو کې سقط (لکه بروسلوز)"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "a_spread",
+    "label": [
+     "A spreading livestock disease (e.g., PPR, FMD or lumpy skin disease)",
+     "یک مرض در حال انتشار در مواشی (مانند PPR، FMD یا مرض جلدی غده‌یی)",
+     "د مالونو خپرېدونکې ناروغي (لکه PPR، FMD یا د پوستکي د غوټو ناروغي)"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "none",
+    "label": [
+     "None of these",
+     "هیچ‌کدام",
+     "هېڅ یو"
+    ]
+   },
+   {
+    "list_name": "det_cond",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "h_ari",
+    "label": [
+     "Acute respiratory infection (ARI), including pneumonia",
+     "انتان حاد تنفسی (ARI)، به شمول سینه بغل",
+     "حاد تنفسي انتان (ARI)، د سینه بغل په ګډون"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "h_awd",
+    "label": [
+     "Acute watery diarrhoea (AWD) or suspected cholera",
+     "اسهال حاد آبگین (AWD) یا کولرای مشکوک",
+     "حاد اوبلن نس ناستی (AWD) یا مشکوکه کولرا"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "h_measles",
+    "label": [
+     "Measles",
+     "سرخکان",
+     "شری"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "h_cchf",
+    "label": [
+     "CCHF",
+     "تب خونریزی‌دهنده کریمه کانگو (CCHF)",
+     "د کریمیا کانګو وینه بهېدونکې تبه (CCHF)"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "h_dengue",
+    "label": [
+     "Dengue",
+     "تب دنگی",
+     "ډېنګي تبه"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "h_malaria",
+    "label": [
+     "Malaria",
+     "ملاریا",
+     "ملاریا"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "a_sudden",
+    "label": [
+     "Sudden deaths of cattle, sheep or goats (e.g., anthrax)",
+     "تلفات ناگهانی گاو، گوسفند یا بز، مانند سیاه زخم (انتراکس)",
+     "د غواګانو، پسونو یا وزو ناڅاپي مړینه (لکه انتراکس)"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "a_poultry",
+    "label": [
+     "Deaths of poultry (e.g., avian influenza)",
+     "تلفات مرغ‌های خانگی (مانند انفلونزای پرندگان)",
+     "د کورنیو چرګانو مړینه (لکه د مرغانو انفلونزا)"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "a_wild",
+    "label": [
+     "Deaths of wild birds or other wild animals",
+     "تلفات پرندگان وحشی یا سایر حیوانات وحشی",
+     "د ځنګلي مرغانو یا نورو ځنګلي څارویو مړینه"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "a_rabid",
+    "label": [
+     "Suspected rabid dogs or other animals",
+     "سگ‌ها یا حیوانات دیگر مشکوک به مرض هاری",
+     "شکمن لېوني سپي یا نور څاروي"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "a_abortion",
+    "label": [
+     "Abortions in livestock (e.g., brucellosis)",
+     "سقط جنین در مواشی (مانند بروسلوز)",
+     "په مالونو کې سقط (لکه بروسلوز)"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "a_spread",
+    "label": [
+     "A spreading livestock disease (e.g., PPR, FMD or lumpy skin disease)",
+     "یک مرض در حال انتشار در مواشی (مانند PPR، FMD یا مرض جلدی غده‌یی)",
+     "د مالونو خپرېدونکې ناروغي (لکه PPR، FMD یا د پوستکي د غوټو ناروغي)"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "none_on_time",
+    "label": [
+     "None – all are usually investigated on time",
+     "هیچ‌کدام – همه معمولاً به موقع تحقیق می‌شوند",
+     "هېڅ – ټول معمولاً په وخت څېړل کېږي"
+    ]
+   },
+   {
+    "list_name": "det_late",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "fb_freq",
+    "name": "always",
+    "label": [
+     "Always",
+     "همیشه",
+     "تل"
+    ]
+   },
+   {
+    "list_name": "fb_freq",
+    "name": "usually",
+    "label": [
+     "Usually",
+     "معمولاً",
+     "معمولاً"
+    ]
+   },
+   {
+    "list_name": "fb_freq",
+    "name": "sometimes",
+    "label": [
+     "Sometimes",
+     "گاهی",
+     "کله ناکله"
+    ]
+   },
+   {
+    "list_name": "fb_freq",
+    "name": "rarely",
+    "label": [
+     "Rarely",
+     "به ندرت",
+     "ډېر لږ"
+    ]
+   },
+   {
+    "list_name": "fb_freq",
+    "name": "never",
+    "label": [
+     "Never",
+     "هرگز",
+     "هېڅکله"
+    ]
+   },
+   {
+    "list_name": "fb_freq",
+    "name": "no_report",
+    "label": [
+     "We do not report data",
+     "ما معلومات گزارش نمی‌دهیم",
+     "موږ د معلوماتو راپور نه ورکوو"
+    ]
+   },
+   {
+    "list_name": "fb_type",
+    "name": "lab",
+    "label": [
+     "Laboratory results",
+     "نتایج لابراتوار",
+     "د لابراتوار پایلې"
+    ]
+   },
+   {
+    "list_name": "fb_type",
+    "name": "received",
+    "label": [
+     "Confirmation that the report arrived",
+     "تأیید رسیدن گزارش",
+     "د راپور د رسېدو تایید"
+    ]
+   },
+   {
+    "list_name": "fb_type",
+    "name": "request",
+    "label": [
+     "Request for further information",
+     "درخواست معلومات بیشتر",
+     "د نورو معلوماتو غوښتنه"
+    ]
+   },
+   {
+    "list_name": "fb_type",
+    "name": "decision",
+    "label": [
+     "The decision or action taken",
+     "تصمیم گرفته شده یا اقدام انجام شده",
+     "شوې پرېکړه یا ترسره شوی اقدام"
+    ]
+   },
+   {
+    "list_name": "fb_type",
+    "name": "closure",
+    "label": [
+     "Closure of the event",
+     "ختم حادثه",
+     "د پېښې تړل"
+    ]
+   },
+   {
+    "list_name": "fb_type",
+    "name": "bulletin",
+    "label": [
+     "Analysis or bulletin",
+     "تحلیل یا بولتن",
+     "تحلیل یا خبرپاڼه"
+    ]
+   },
+   {
+    "list_name": "fb_type",
+    "name": "corrections",
+    "label": [
+     "Corrections to our data",
+     "اصلاحات در معلومات ما",
+     "زموږ په معلوماتو کې سمونې"
+    ]
+   },
+   {
+    "list_name": "fb_type",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "zero",
+    "name": "always",
+    "label": [
+     "Always",
+     "همیشه",
+     "تل"
+    ]
+   },
+   {
+    "list_name": "zero",
+    "name": "sometimes",
+    "label": [
+     "Sometimes",
+     "گاهی",
+     "کله ناکله"
+    ]
+   },
+   {
+    "list_name": "zero",
+    "name": "never",
+    "label": [
+     "Never",
+     "هرگز",
+     "هېڅکله"
+    ]
+   },
+   {
+    "list_name": "zero",
+    "name": "not_our_work",
+    "label": [
+     "Not part of our work",
+     "جزء کار ما نیست",
+     "زموږ د کار برخه نه ده"
+    ]
+   },
+   {
+    "list_name": "zero",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "report_reward",
+    "name": "salary",
+    "label": [
+     "It is part of my salary",
+     "این بخشی از معاش من است",
+     "دا زما د معاش برخه ده"
+    ]
+   },
+   {
+    "list_name": "report_reward",
+    "name": "extra",
+    "label": [
+     "An extra payment or incentive",
+     "پرداخت اضافی یا تشویقیه",
+     "اضافي پیسې یا تشویقي امتیاز"
+    ]
+   },
+   {
+    "list_name": "report_reward",
+    "name": "credit",
+    "label": [
+     "Phone credit or transport support",
+     "کریدت تیلفون یا کمک ترانسپورتی",
+     "د تلیفون کارت یا د ټرانسپورټ مرسته"
+    ]
+   },
+   {
+    "list_name": "report_reward",
+    "name": "recognition",
+    "label": [
+     "Recognition – for example feedback or a certificate",
+     "قدردانی – به طور مثال عکس العمل یا تقدیرنامه",
+     "ستاینه – د بېلګې په توګه غبرګون یا تقدیرنامه"
+    ]
+   },
+   {
+    "list_name": "report_reward",
+    "name": "nothing",
+    "label": [
+     "Nothing",
+     "هیچ چیز",
+     "هېڅ شی"
+    ]
+   },
+   {
+    "list_name": "report_reward",
+    "name": "prefer_not",
+    "label": [
+     "Prefer not to answer",
+     "ترجیح می‌دهم پاسخ ندهم",
+     "غوره ګڼم چې ځواب ورنه کړم"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "shared_system",
+    "label": [
+     "Shared electronic system",
+     "سیستم الکترونیکی مشترک",
+     "ګډ برېښنايي سیسټم"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "reports",
+    "label": [
+     "Official reports or letters",
+     "گزارش‌ها یا مکاتیب رسمی",
+     "رسمي راپورونه یا مکتوبونه"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "meetings",
+    "label": [
+     "Joint meetings or committees",
+     "جلسات یا کمیته‌های مشترک",
+     "ګډې غونډې یا کمېټې"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "phone",
+    "label": [
+     "Phone calls",
+     "تماس‌های تیلفونی",
+     "تلیفوني زنګونه"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "msg",
+    "label": [
+     "A messaging app (e.g., WhatsApp or Telegram)",
+     "یک اپلیکیشن پیام‌رسان (مانند WhatsApp یا Telegram)",
+     "د پیغام رسولو اپلیکېشن (لکه WhatsApp یا Telegram)"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "email",
+    "label": [
+     "Email",
+     "ایمیل",
+     "برېښنالیک"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "un_ngo",
+    "label": [
+     "Through UN agencies or NGOs",
+     "از طریق نهادهای ملل متحد یا موسسات غیر دولتی",
+     "د ملګرو ملتونو د ادارو یا غیر دولتي موسسو له لارې"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "none",
+    "label": [
+     "None – we have not exchanged routine information with other sectors",
+     "هیچ‌کدام – ما معلومات معمول را با سکتورهای دیگر تبادله نکرده‌ایم",
+     "هېڅ – موږ له نورو سکتورونو سره معمول معلومات نه دي تبادله کړي"
+    ]
+   },
+   {
+    "list_name": "routine_exch",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "joint_ra",
+    "name": "regularly",
+    "label": [
+     "Yes – regularly",
+     "بلی – به طور منظم",
+     "هو – په منظم ډول"
+    ]
+   },
+   {
+    "list_name": "joint_ra",
+    "name": "once_twice",
+    "label": [
+     "Yes – once or twice",
+     "بلی – یک یا دو بار",
+     "هو – یو یا دوه ځله"
+    ]
+   },
+   {
+    "list_name": "joint_ra",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "joint_ra",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "deaths_out",
+    "name": "regular",
+    "label": [
+     "Yes – through a regular, agreed route",
+     "بلی – از طریق یک مسیر منظم و توافق‌شده",
+     "هو – له یوې منظمې، موافقه شوې لارې"
+    ]
+   },
+   {
+    "list_name": "deaths_out",
+    "name": "informal",
+    "label": [
+     "Yes – but only informally",
+     "بلی – اما تنها به طور غیر رسمی",
+     "هو – خو یوازې په غیر رسمي ډول"
+    ]
+   },
+   {
+    "list_name": "deaths_out",
+    "name": "no_missed",
+    "label": [
+     "No – although they know of deaths we miss",
+     "نخیر – هرچند آن‌ها از وفیاتی آگاهی دارند که ما از آن بی‌خبر می‌مانیم",
+     "نه – که څه هم دوی له داسې مړینو خبر وي چې موږ ترې بې خبره پاتې کېږو"
+    ]
+   },
+   {
+    "list_name": "deaths_out",
+    "name": "no",
+    "label": [
+     "No",
+     "نخیر",
+     "نه"
+    ]
+   },
+   {
+    "list_name": "deaths_out",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "chw",
+    "label": [
+     "Community health workers",
+     "کارمندان صحی جامعه",
+     "ټولنیز روغتیايي کارکوونکي"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "elders",
+    "label": [
+     "Community elders or shura",
+     "ریش‌سفیدان یا شورای محل",
+     "سپین ږیري یا ځایي شورا"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "religious",
+    "label": [
+     "Religious leaders",
+     "علمای دینی",
+     "دیني مشران"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "female",
+    "label": [
+     "Female health workers or women’s networks",
+     "کارمندان صحی زن یا شبکه‌های زنان",
+     "ښځینه روغتیايي کارکوونکې یا د ښځو شبکې"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "kuchi",
+    "label": [
+     "Kuchi (nomadic) focal points",
+     "مسئولین رابط کوچی (کوچ‌نشین)",
+     "د کوچیانو (ګرځنده ټولنو) د اړیکو مسوولین"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "farmers",
+    "label": [
+     "Farmers or livestock owners directly",
+     "دهقانان یا مالداران، به طور مستقیم",
+     "بزګران یا د مالونو خاوندان په مستقیم ډول"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "private",
+    "label": [
+     "Private veterinarians, pharmacies or drug sellers",
+     "داکتران وترنر خصوصی، دواخانه‌ها یا دوافروشان",
+     "خصوصي وترنر ډاکټران، درملتونونه یا درمل پلورونکي"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "hotline",
+    "label": [
+     "Telephone hotline",
+     "خط تیلفونی خاص (هاتلاین)",
+     "ځانګړې تلیفوني لیکه"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "none",
+    "label": [
+     "None of these",
+     "هیچ‌کدام",
+     "هېڅ یو"
+    ]
+   },
+   {
+    "list_name": "comm_chan",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "comm_how",
+    "name": "phone",
+    "label": [
+     "Phone call",
+     "تماس تیلفونی",
+     "تلیفوني زنګ"
+    ]
+   },
+   {
+    "list_name": "comm_how",
+    "name": "in_person",
+    "label": [
+     "In person",
+     "به شکل حضوری",
+     "په حضوري ډول"
+    ]
+   },
+   {
+    "list_name": "comm_how",
+    "name": "paper",
+    "label": [
+     "Paper form",
+     "فورم کاغذی",
+     "کاغذي فورمه"
+    ]
+   },
+   {
+    "list_name": "comm_how",
+    "name": "msg",
+    "label": [
+     "A messaging app (e.g., WhatsApp or Telegram)",
+     "یک اپلیکیشن پیام‌رسان (مانند WhatsApp یا Telegram)",
+     "د پیغام رسولو اپلیکېشن (لکه WhatsApp یا Telegram)"
+    ]
+   },
+   {
+    "list_name": "comm_how",
+    "name": "facility",
+    "label": [
+     "Through a health facility or VFU",
+     "از طریق مرکز صحی یا واحد ساحوی وترنری (VFU)",
+     "د روغتیايي مرکز یا د وترنرۍ سیمه‌ییز واحد (VFU) له لارې"
+    ]
+   },
+   {
+    "list_name": "comm_how",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "comm_how",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "underreached",
+    "name": "women",
+    "label": [
+     "Women",
+     "زنان",
+     "ښځې"
+    ]
+   },
+   {
+    "list_name": "underreached",
+    "name": "kuchi",
+    "label": [
+     "Kuchi (nomadic) communities",
+     "جوامع کوچی (کوچ‌نشین)",
+     "کوچي (ګرځنده) ټولنې"
+    ]
+   },
+   {
+    "list_name": "underreached",
+    "name": "remote",
+    "label": [
+     "Remote villages",
+     "قریه‌های دوردست",
+     "لرې پراته کلي"
+    ]
+   },
+   {
+    "list_name": "underreached",
+    "name": "returnees",
+    "label": [
+     "Returnees or displaced people",
+     "عودت‌کنندگان یا بیجاشدگان",
+     "راستنېدونکي یا بې ځایه شوي خلک"
+    ]
+   },
+   {
+    "list_name": "underreached",
+    "name": "border",
+    "label": [
+     "Border communities",
+     "جوامع سرحدی",
+     "سرحدي ټولنې"
+    ]
+   },
+   {
+    "list_name": "underreached",
+    "name": "private_clients",
+    "label": [
+     "Clients of private clinics, veterinarians or pharmacies",
+     "مراجعین کلینیک‌های خصوصی، داکتران وترنر یا دواخانه‌ها",
+     "د خصوصي کلینیکونو، وترنر ډاکټرانو یا درملتونونو مراجعین"
+    ]
+   },
+   {
+    "list_name": "underreached",
+    "name": "none",
+    "label": [
+     "None of these",
+     "هیچ‌کدام",
+     "هېڅ یو"
+    ]
+   },
+   {
+    "list_name": "underreached",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "far",
+    "label": [
+     "They live far from health or veterinary services",
+     "آن‌ها دور از خدمات صحی یا وترنری زندگی می‌کنند",
+     "دوی له روغتیايي یا وترنري خدمتونو لرې اوسېږي"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "move",
+    "label": [
+     "They move often (e.g., nomads, returnees)",
+     "آن‌ها زیاد جابجا می‌شوند (مانند کوچی‌ها، عودت‌کنندگان)",
+     "دوی ډېر ځله ځای بدلوي (لکه کوچیان، راستنېدونکي)"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "dont_know_how",
+    "label": [
+     "They do not know where or how to report",
+     "آن‌ها نمی‌دانند در کجا یا چگونه گزارش دهند",
+     "دوی نه پوهېږي چې چېرته یا څنګه راپور ورکړي"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "women_seen",
+    "label": [
+     "Women are less often seen by health workers",
+     "زنان کمتر توسط کارمندان صحی معاینه می‌شوند",
+     "ښځې لږ ځله د روغتیايي کارکوونکو له خوا لیدل کېږي"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "distrust",
+    "label": [
+     "They distrust officials or fear the consequences",
+     "آن‌ها به مقامات اعتماد ندارند یا از پیامدها می‌ترسند",
+     "دوی په چارواکو باور نه لري یا له پایلو وېرېږي"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "private",
+    "label": [
+     "They use private providers who do not report",
+     "آن‌ها از ارائه‌کنندگان خصوصی خدمات استفاده می‌کنند که گزارش نمی‌دهند",
+     "دوی له هغو خصوصي خدمت وړاندې کوونکو ګټه اخلي چې راپور نه ورکوي"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "phone",
+    "label": [
+     "No phone or network",
+     "نبود تیلفون یا شبکه",
+     "تلیفون یا شبکه نشته"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "language",
+    "label": [
+     "Language barriers",
+     "موانع زبانی",
+     "ژبني خنډونه"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "under_why",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "priv_route",
+    "name": "official",
+    "label": [
+     "Through an official report or reporting system",
+     "از طریق یک گزارش رسمی یا سیستم گزارش‌دهی",
+     "د رسمي راپور یا د راپور ورکولو د سیسټم له لارې"
+    ]
+   },
+   {
+    "list_name": "priv_route",
+    "name": "provider_calls",
+    "label": [
+     "The provider phones or messages our staff",
+     "ارائه‌کننده خدمات به کارمندان ما تیلفون می‌کند یا پیام می‌فرستد",
+     "خدمت وړاندې کوونکی زموږ کارکوونکو ته زنګ وهي یا پیغام لېږي"
+    ]
+   },
+   {
+    "list_name": "priv_route",
+    "name": "patient",
+    "label": [
+     "The patient or animal owner tells us",
+     "مریض یا مالک حیوان به ما اطلاع می‌دهد",
+     "ناروغ یا د څاروي خاوند موږ ته وایي"
+    ]
+   },
+   {
+    "list_name": "priv_route",
+    "name": "intermediary",
+    "label": [
+     "Through a community health worker, health facility or VFU",
+     "از طریق کارمند صحی جامعه، مرکز صحی یا واحد ساحوی وترنری (VFU)",
+     "د ټولنیز روغتیايي کارکوونکي، روغتیايي مرکز یا د وترنرۍ سیمه‌ییز واحد (VFU) له لارې"
+    ]
+   },
+   {
+    "list_name": "priv_route",
+    "name": "personal",
+    "label": [
+     "Through personal contacts",
+     "از طریق روابط شخصی",
+     "د شخصي اړیکو له لارې"
+    ]
+   },
+   {
+    "list_name": "priv_route",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "priv_route",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "no_requirement",
+    "label": [
+     "No requirement or request to report",
+     "نبود الزام یا درخواست برای گزارش‌دهی",
+     "د راپور ورکولو مکلفیت یا غوښتنه نشته"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "unsure",
+    "label": [
+     "Not sure what or how to report",
+     "مطمئن نبودن از این‌که چه چیزی را و چگونه باید گزارش داد",
+     "څرګنده نه ده چې څه یا څنګه راپور ورکړل شي"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "no_channel",
+    "label": [
+     "No form, system or contact person to report to",
+     "نبود فورم، سیستم یا شخص تماس برای گزارش‌دهی",
+     "د راپور ورکولو لپاره فورمه، سیسټم یا د اړیکې کس نشته"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "fear_inspection",
+    "label": [
+     "Fear of inspection, fines or licence problems",
+     "ترس از تفتیش، جریمه یا مشکلات جواز",
+     "د تفتیش، جریمو یا د جواز د ستونزو وېره"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "fear_customers",
+    "label": [
+     "Fear of losing customers",
+     "ترس از دست دادن مشتریان",
+     "د پېرودونکو د له لاسه ورکولو وېره"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "cost",
+    "label": [
+     "Reporting takes time or costs money",
+     "گزارش‌دهی وقت‌گیر یا پرهزینه است",
+     "راپور ورکول وخت نیسي یا پیسې لګوي"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "no_feedback",
+    "label": [
+     "No feedback or benefit from reporting",
+     "نبود عکس العمل یا فایده از گزارش‌دهی",
+     "له راپور ورکولو هېڅ غبرګون یا ګټه نشته"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "unregistered",
+    "label": [
+     "Not registered with the authorities",
+     "عدم ثبت نزد مقامات",
+     "له دولتي ادارو سره د ثبت نشتوالی"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "nothing",
+    "label": [
+     "Nothing – they already report",
+     "هیچ چیز – آن‌ها در حال حاضر گزارش می‌دهند",
+     "هېڅ شی – دوی لا دمخه راپور ورکوي"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "priv_block",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "no_requirement",
+    "label": [
+     "No requirement or request to report",
+     "نبود الزام یا درخواست برای گزارش‌دهی",
+     "د راپور ورکولو مکلفیت یا غوښتنه نشته"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "unsure",
+    "label": [
+     "Not sure what or how to report",
+     "مطمئن نبودن از این‌که چه چیزی را و چگونه باید گزارش داد",
+     "څرګنده نه ده چې څه یا څنګه راپور ورکړل شي"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "no_channel",
+    "label": [
+     "No form, system or contact person to report to",
+     "نبود فورم، سیستم یا شخص تماس برای گزارش‌دهی",
+     "د راپور ورکولو لپاره فورمه، سیسټم یا د اړیکې کس نشته"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "fear_inspection",
+    "label": [
+     "Fear of inspection, fines or licence problems",
+     "ترس از تفتیش، جریمه یا مشکلات جواز",
+     "د تفتیش، جریمو یا د جواز د ستونزو وېره"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "fear_customers",
+    "label": [
+     "Fear of losing customers",
+     "ترس از دست دادن مشتریان",
+     "د پېرودونکو د له لاسه ورکولو وېره"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "cost",
+    "label": [
+     "Reporting takes time or costs money",
+     "گزارش‌دهی وقت‌گیر یا پرهزینه است",
+     "راپور ورکول وخت نیسي یا پیسې لګوي"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "no_feedback",
+    "label": [
+     "No feedback or benefit from reporting",
+     "نبود عکس العمل یا فایده از گزارش‌دهی",
+     "له راپور ورکولو هېڅ غبرګون یا ګټه نشته"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "unregistered",
+    "label": [
+     "Not registered with the authorities",
+     "عدم ثبت نزد مقامات",
+     "له دولتي ادارو سره د ثبت نشتوالی"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "nothing",
+    "label": [
+     "Nothing – I already report",
+     "هیچ چیز – من در حال حاضر گزارش می‌دهم",
+     "هېڅ شی – زه لا دمخه راپور ورکوم"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "priv_block_self",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "internet",
+    "name": "reliable",
+    "label": [
+     "Reliable most of the day",
+     "در بیشتر اوقات روز قابل اعتماد است",
+     "د ورځې په ډېره برخه کې باوري دی"
+    ]
+   },
+   {
+    "list_name": "internet",
+    "name": "interrupted",
+    "label": [
+     "Available, but often interrupted",
+     "موجود است، اما اکثراً قطع می‌شود",
+     "شته، خو ډېری وخت قطع کېږي"
+    ]
+   },
+   {
+    "list_name": "internet",
+    "name": "mobile_only",
+    "label": [
+     "Only through mobile data on personal phones",
+     "تنها از طریق انترنت موبایل در تیلفون‌های شخصی",
+     "یوازې په شخصي تلیفونونو کې د موبایل انټرنېټ له لارې"
+    ]
+   },
+   {
+    "list_name": "internet",
+    "name": "none",
+    "label": [
+     "No internet access",
+     "دسترسی به انترنت وجود ندارد",
+     "انټرنېټ ته لاسرسی نشته"
+    ]
+   },
+   {
+    "list_name": "devices",
+    "name": "office_pc",
+    "label": [
+     "Office computer or laptop",
+     "کمپیوتر یا لپ‌تاپ دفتر",
+     "د دفتر کمپیوټر یا لپټاپ"
+    ]
+   },
+   {
+    "list_name": "devices",
+    "name": "office_mobile",
+    "label": [
+     "Office tablet or smartphone",
+     "تبلت یا موبایل هوشمند دفتر",
+     "د دفتر ټابلېټ یا سمارټ فون"
+    ]
+   },
+   {
+    "list_name": "devices",
+    "name": "personal_phone",
+    "label": [
+     "Personal smartphone",
+     "موبایل هوشمند شخصی",
+     "شخصي سمارټ فون"
+    ]
+   },
+   {
+    "list_name": "devices",
+    "name": "personal_pc",
+    "label": [
+     "Personal computer or laptop",
+     "کمپیوتر یا لپ‌تاپ شخصی",
+     "شخصي کمپیوټر یا لپټاپ"
+    ]
+   },
+   {
+    "list_name": "devices",
+    "name": "none",
+    "label": [
+     "None",
+     "هیچ",
+     "هېڅ"
+    ]
+   },
+   {
+    "list_name": "tools",
+    "name": "excel",
+    "label": [
+     "Excel",
+     "Excel",
+     "Excel"
+    ]
+   },
+   {
+    "list_name": "tools",
+    "name": "dhis2",
+    "label": [
+     "DHIS2 dashboards",
+     "داشبوردهای DHIS2",
+     "د DHIS2 ډشبورډونه"
+    ]
+   },
+   {
+    "list_name": "tools",
+    "name": "stats",
+    "label": [
+     "Epi Info, R, Stata or SPSS",
+     "Epi Info، R، Stata یا SPSS",
+     "Epi Info، R، Stata یا SPSS"
+    ]
+   },
+   {
+    "list_name": "tools",
+    "name": "gis",
+    "label": [
+     "Mapping software (e.g., QGIS or ArcGIS)",
+     "نرم‌افزار نقشه‌سازی (مانند QGIS یا ArcGIS)",
+     "د نقشه جوړونې سافټویر (لکه QGIS یا ArcGIS)"
+    ]
+   },
+   {
+    "list_name": "tools",
+    "name": "powerbi",
+    "label": [
+     "Power BI or similar",
+     "Power BI یا مشابه آن",
+     "Power BI یا ورته سافټویر"
+    ]
+   },
+   {
+    "list_name": "tools",
+    "name": "ai",
+    "label": [
+     "AI chatbots (e.g., ChatGPT)",
+     "چت‌بات‌های هوش مصنوعی (مانند ChatGPT)",
+     "د مصنوعي ځیرکتیا (AI) چټبوټونه (لکه ChatGPT)"
+    ]
+   },
+   {
+    "list_name": "tools",
+    "name": "none",
+    "label": [
+     "None",
+     "هیچ",
+     "هېڅ"
+    ]
+   },
+   {
+    "list_name": "tools",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "training",
+    "name": "collection",
+    "label": [
+     "Data collection tools (e.g., Kobo, ODK, DHIS2)",
+     "ابزارهای جمع‌آوری معلومات (مانند Kobo، ODK، DHIS2)",
+     "د معلوماتو د راټولولو اوزار (لکه Kobo، ODK، DHIS2)"
+    ]
+   },
+   {
+    "list_name": "training",
+    "name": "analysis",
+    "label": [
+     "Data analysis",
+     "تحلیل معلومات",
+     "د معلوماتو تحلیل"
+    ]
+   },
+   {
+    "list_name": "training",
+    "name": "fetp",
+    "label": [
+     "Outbreak investigation or field epidemiology (e.g., FETP)",
+     "تحقیق شیوع مرض یا اپیدمیولوژی ساحوی (مانند FETP (برنامه آموزش اپیدمیولوژی ساحوی))",
+     "د ناروغۍ د خپرېدو څېړنه یا ساحوي اپیډیمیولوژي (لکه FETP (د ساحوي اپیډیمیولوژۍ د روزنې پروګرام))"
+    ]
+   },
+   {
+    "list_name": "training",
+    "name": "lims",
+    "label": [
+     "Laboratory information systems",
+     "سیستم‌های معلوماتی لابراتوار",
+     "د لابراتوار معلوماتي سیسټمونه"
+    ]
+   },
+   {
+    "list_name": "training",
+    "name": "gis",
+    "label": [
+     "Mapping (GIS)",
+     "نقشه‌سازی (GIS)",
+     "نقشه جوړونه (GIS)"
+    ]
+   },
+   {
+    "list_name": "training",
+    "name": "protection",
+    "label": [
+     "Data protection and confidentiality",
+     "حفاظت معلومات و محرمیت",
+     "د معلوماتو ساتنه او محرمیت"
+    ]
+   },
+   {
+    "list_name": "training",
+    "name": "none",
+    "label": [
+     "None",
+     "هیچ",
+     "هېڅ"
+    ]
+   },
+   {
+    "list_name": "language",
+    "name": "dari",
+    "label": [
+     "Dari",
+     "دری",
+     "دري"
+    ]
+   },
+   {
+    "list_name": "language",
+    "name": "pashto",
+    "label": [
+     "Pashto",
+     "پشتو",
+     "پښتو"
+    ]
+   },
+   {
+    "list_name": "language",
+    "name": "english",
+    "label": [
+     "English",
+     "انگلیسی",
+     "انګلیسي"
+    ]
+   },
+   {
+    "list_name": "language",
+    "name": "no_pref",
+    "label": [
+     "No preference",
+     "ترجیح خاصی ندارم",
+     "ترجیح نه لرم"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "no_sop",
+    "label": [
+     "No agreed procedure (SOP) for sharing",
+     "نبود طرزالعمل عملیاتی معیاری (SOP) توافق‌شده برای شریک‌سازی",
+     "د شریکولو لپاره موافقه شوې معیاري عملیاتي کړنلاره (SOP) نشته"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "authority",
+    "label": [
+     "Unclear authority or permission to share",
+     "روشن نبودن صلاحیت یا اجازه شریک‌سازی",
+     "د شریکولو صلاحیت یا اجازه روښانه نه ده"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "fear",
+    "label": [
+     "Fear of blame or other consequences for reporting",
+     "ترس از ملامتی یا پیامدهای دیگر گزارش‌دهی",
+     "د راپور ورکولو له امله د ملامتېدو یا نورو پایلو وېره"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "control",
+    "label": [
+     "Each office wants to keep control of its own data",
+     "هر دفتر می‌خواهد کنترول معلومات خود را در دست داشته باشد",
+     "هر دفتر غواړي خپل معلومات د خپل کنټرول لاندې وساتي"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "definitions",
+    "label": [
+     "Different case definitions or data formats",
+     "تفاوت در تعاریف واقعه یا فارمت‌های معلومات",
+     "د پېښې بېلابېل تعریفونه یا د معلوماتو بېلابېل شکلونه"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "it_systems",
+    "label": [
+     "IT systems cannot exchange data",
+     "سیستم‌های تکنالوژی معلوماتی نمی‌توانند با یکدیگر معلومات تبادله کنند",
+     "د معلوماتي ټکنالوژۍ (IT) سیسټمونه نشي کولای په خپل منځ کې معلومات تبادله کړي"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "duplicates",
+    "label": [
+     "Sharing creates duplicate records",
+     "شریک‌سازی باعث ثبت تکراری معلومات می‌شود",
+     "شریکول دوه ګوني ریکارډونه رامنځته کوي"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "infrastructure",
+    "label": [
+     "Poor internet, power or equipment",
+     "ضعف انترنت، برق یا تجهیزات",
+     "کمزوری انټرنېټ، برېښنا یا تجهیزات"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "staff",
+    "label": [
+     "Too few trained staff",
+     "کمبود کارمندان آموزش‌دیده",
+     "د روزل شویو کارکوونکو کمښت"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "trust",
+    "label": [
+     "Lack of trust between sectors",
+     "نبود اعتماد میان سکتورها",
+     "د سکتورونو ترمنځ د باور نشتوالی"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "no_benefit",
+    "label": [
+     "No feedback or benefit from sharing",
+     "نبود عکس العمل یا فایده از شریک‌سازی",
+     "له شریکولو هېڅ غبرګون یا ګټه نشته"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "funding",
+    "label": [
+     "Uncertain funding or support",
+     "نامعلوم بودن تمویل یا حمایت",
+     "ناڅرګند تمویل یا ملاتړ"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "obstacles",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "alerts",
+    "label": [
+     "Early alerts about possible events in my area",
+     "هشدارهای اولیه درباره حوادث احتمالی مرض در منطقه من",
+     "زما په سیمه کې د ناروغۍ د احتمالي پېښو په اړه وختي خبرتیاوې"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "lab",
+    "label": [
+     "Laboratory results from human or animal laboratories",
+     "نتایج لابراتوارهای صحت انسان یا صحت حیوانات",
+     "د انسانانو یا څارویو د لابراتوارونو پایلې"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "maps",
+    "label": [
+     "Maps of cases and events across sectors",
+     "نقشه‌های واقعات و حوادث در همه سکتورها",
+     "په ټولو سکتورونو کې د ناروغۍ د واقعو او پېښو نقشې"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "briefs",
+    "label": [
+     "Regular joint risk briefs or bulletins",
+     "خلاصه‌گزارش‌ها یا بولتن‌های منظم و مشترک درباره خطر",
+     "د خطر په اړه منظم ګډ لنډیزونه یا خبرپاڼې"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "animal_pop",
+    "label": [
+     "Animal population and movement data",
+     "معلومات جمعیت و نقل و انتقال حیوانات",
+     "د څارویو د شمېر او خوځښت معلومات"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "human_pop",
+    "label": [
+     "Human population and movement data (e.g., returnees)",
+     "معلومات جمعیت و نقل و انتقال انسان‌ها (مانند عودت‌کنندگان)",
+     "د انسانانو د نفوس او خوځښت معلومات (لکه راستنېدونکي)"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "environment",
+    "label": [
+     "Weather, water or environmental data",
+     "معلومات وضعیت هوا، آب یا محیط زیست",
+     "د هوا، اوبو یا چاپېریال معلومات"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "response",
+    "label": [
+     "What response other sectors have taken",
+     "اقدامات پاسخ‌دهی که سکتورهای دیگر انجام داده‌اند",
+     "نورو سکتورونو کوم غبرګون ښودلی دی"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "info_wanted",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "procedure",
+    "label": [
+     "An agreed procedure for who informs whom",
+     "یک طرزالعمل توافق‌شده درباره این‌که چه کسی چه کسی را آگاه سازد",
+     "یوه موافقه شوې کړنلاره چې څوک چا ته خبر ورکوي"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "contacts",
+    "label": [
+     "An up-to-date contact list for other sectors",
+     "یک فهرست به‌روز معلومات تماس سکتورهای دیگر",
+     "په نورو سکتورونو کې د اړیکو تازه لیست"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "meetings",
+    "label": [
+     "Regular joint meetings",
+     "جلسات منظم مشترک",
+     "منظمې ګډې غونډې"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "mobile_system",
+    "label": [
+     "A shared system that works on a mobile phone and offline",
+     "یک سیستم مشترک که در موبایل و بدون انترنت کار کند",
+     "یو ګډ سیسټم چې په موبایل تلیفون کې او پرته له انټرنېټه کار کوي"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "local_language",
+    "label": [
+     "Tools in Dari and Pashto",
+     "ابزارها به زبان‌های دری و پشتو",
+     "په دري او پښتو ژبو کې اوزار"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "enter_once",
+    "label": [
+     "Entering data once instead of in several systems",
+     "ثبت معلومات تنها یک بار، به جای ثبت در چندین سیستم",
+     "یو ځل د معلوماتو داخلول، د څو سیسټمونو پر ځای"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "rules",
+    "label": [
+     "Clear rules on who sees which data",
+     "مقررات روشن درباره این‌که چه کسی کدام معلومات را ببیند",
+     "روښانه مقررات چې څوک کوم معلومات ویني"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "approval",
+    "label": [
+     "Approval from my managers to share",
+     "منظوری آمرین من برای شریک‌سازی",
+     "د شریکولو لپاره زما د آمرانو منظوري"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "dk",
+    "label": [
+     "Don’t know",
+     "نمی‌دانم",
+     "نه پوهېږم"
+    ]
+   },
+   {
+    "list_name": "help_get",
+    "name": "other",
+    "label": [
+     "Other",
+     "دیگر",
+     "نور"
+    ]
+   }
+  ],
+  "settings": {
+   "id_string": "afg_oh_mapping_survey",
+   "default_language": "English (en)",
+   "style": "pages"
+  },
+  "translated": [
+   "label",
+   "hint",
+   "constraint_message"
+  ],
+  "translations": [
+   "English (en)",
+   "Dari (prs)",
+   "Pashto (ps)"
+  ]
+ }
+}

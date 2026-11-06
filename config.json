@@ -1,0 +1,46 @@
+{
+  "kobo_server": "https://kf.kobotoolbox.org",
+  "form_id": "afg_oh_mapping_survey",
+  "asset_uid": null,
+
+  "count_from": null,
+  "close_date": "2026-11-19",
+  "exclude_validation_status": ["validation_status_not_approved"],
+  "quick_minutes": 10,
+
+  "fields": {
+    "start": "start",
+    "end": "end",
+    "consent": "consent",
+    "mode": "mode",
+    "workplace": "workplace",
+    "employer": "employer",
+    "ministry": "ministry",
+    "sectors": "sectors",
+    "sector_main": "sector_main",
+    "main_sector": "main_sector",
+    "level": "level",
+    "provinces": "provinces",
+    "function": "function",
+    "gender": "gender",
+    "main_path": "main_path",
+    "f0_path": "f0_path",
+    "scen": "scen",
+    "n_systems": "n_systems",
+    "systems": "systems",
+    "sys_name": "sys_name",
+    "share_docs": "share_docs",
+    "interview_ok": "interview_ok"
+  },
+
+  "scenario_labels": {
+    "human": "Health facility – suspected CCHF",
+    "poe": "Point of entry – suspected CCHF",
+    "animal": "Livestock deaths – suspected anthrax",
+    "env": "Wild bird deaths – suspected avian influenza",
+    "lab_mail": "Veterinary laboratory – anthrax confirmed",
+    "lab_other": "Public health laboratory – anthrax confirmed"
+  },
+
+  "targets": null
+}

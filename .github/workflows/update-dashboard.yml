@@ -1,0 +1,95 @@
+name: Update dashboard
+
+on:
+  schedule:
+    # Hourly from 07:05 to 20:05 Kabul time (UTC+04:30).  GitHub reads cron in UTC, so this is 02:35 to
+    # 15:35 UTC.  Scheduled runs can start some minutes late when GitHub is busy.
+    - cron: "35 2-15 * * *"
+  workflow_dispatch:
+    inputs:
+      list_returns:
+        description: "Also print one line per submission in the log (ID, time, version and status only)"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dashboard
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: write        # used only by the keep-alive step at the end
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Test the update script
+        if: github.event_name != 'schedule'
+        run: python3 -m unittest discover -s tests
+
+      - name: Read the returns from KoboToolbox and encrypt the figures
+        env:
+          KOBO_TOKEN: ${{ secrets.KOBO_TOKEN }}
+          DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
+          KOBO_SERVER: ${{ vars.KOBO_SERVER }}
+          KOBO_ASSET_UID: ${{ vars.KOBO_ASSET_UID }}
+          LIST_RETURNS: ${{ inputs.list_returns }}
+        run: |
+          if [ "$LIST_RETURNS" = "true" ]; then
+            python3 scripts/update.py --list
+          else
+            python3 scripts/update.py
+          fi
+
+      - name: Check that nothing readable is published
+        run: |
+          # The site folder may hold only the page and the encrypted data file.
+          extra=$(find site -type f ! -name index.html ! -name status.json.enc)
+          if [ -n "$extra" ]; then echo "::error::Unexpected files in site/: $extra"; exit 1; fi
+          head -c 6 site/data/status.json.enc | grep -q AFGOH1 || { echo "::error::The data file is not encrypted."; exit 1; }
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      - name: Keep the hourly schedule alive
+        # GitHub suspends scheduled workflows in a public repository after 60 days without repository
+        # activity.  Re-enabling the workflow through the API resets that clock.  A failure here never
+        # blocks the update.
+        if: always() && github.event_name == 'schedule'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/update-dashboard.yml/enable"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

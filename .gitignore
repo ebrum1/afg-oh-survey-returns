@@ -1,0 +1,6 @@
+# Generated on every run by scripts/update.py; never committed.
+site/data/
+tests/_out*
+__pycache__/
+*.pyc
+.DS_Store
